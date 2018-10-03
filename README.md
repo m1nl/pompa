@@ -39,7 +39,7 @@ You will need the following things properly installed on your computer:
 * [Ember CLI](https://ember-cli.com/)
 
 ## License
-`pompa` is released under the [LGPL](LICENSE).
+`pompa` is released under the terms of [lgpl-3.0](LICENSE).
 
 ## Author
 

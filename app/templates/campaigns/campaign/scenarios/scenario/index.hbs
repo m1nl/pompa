@@ -1,0 +1,79 @@
+<div class="row pad">
+  <div class="col-sm-7 col-md-7 hidden-xs small vertical-align">
+    Pending&nbsp;<span class="badge">{{report.victims.pending}}</span>
+    Queued&nbsp;<span class="badge">{{report.victims.queued}}</span>
+    Sent&nbsp;<span class="badge">{{report.victims.sent}}</span>
+    Error&nbsp;<span class="badge">{{report.victims.error}}</span>
+    Total&nbsp;<span class="badge">{{report.victims.total}}</span>
+  </div><!--
+  --><div class="col-sm-5 col-md-5 col-xs-12 small vertical-align">
+    <ul class="nav nav-pills pull-right">
+      <li role="presentation" class="active"><a data-toggle="pill" href="#details">Details</a></li>
+      <li role="presentation"><a data-toggle="pill" href="#timeseries">Time series</a></li>
+    </ul>
+  </div>
+</div>
+<hr/>
+<div class="tab-content">
+  <div id="details" class="tab-pane fade in active">
+    <div class="row pad-bottom">
+      <div class="col-sm-5 col-md-4 col-xs-12 small vertical-align">
+        <div class="btn-group-justified relative">
+          {{input value=quicksearch class="form-control input-sm" placeholder="quicksearch"}}
+          {{fa-icon "times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
+        </div>
+        <div class="checkbox">
+          <label>
+            {{#bootstrap-toggle size="mini" width="50" checked=requestedJoinEvents changed=(action "joinEventsChanged")}} Hide victims with no events recorded{{/bootstrap-toggle}}
+          </label>
+        </div>
+      </div><!--
+      --><div class="col-sm-7 col-md-8 col-xs-12 vertical-align text-right">
+        {{bootstrap-pagination
+            totalPages=totalPages
+            page=currentPage
+            pageChanged=(action "pageChanged")
+            disabled=busy}}
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="col-md-2 hidden-sm hidden-xs">First name</th>
+          <th class="col-md-2 hidden-sm hidden-xs">Last name</th>
+          <th class="col-md-2 col-sm-4 col-xs-6">Email</th>
+          <th class="col-md-1 col-sm-2 col-xs-3 text-center">State</th>
+          <th class="col-md-3 col-sm-4 hidden-xs">Details</th>
+          <th class="col-md-1 col-sm-1 col-xs-1 text-center">Score</th>
+          <th class="col-md-1 col-sm-1 col-xs-2 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#each victims as |victim|}}
+        <tr>
+          <td class="col-md-2 hidden-sm hidden-xs">{{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.index" victim}}{{victim.firstName}}{{/link-to}}</td>
+          <td class="col-md-2 hidden-sm hidden-xs">{{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.index" victim}}{{victim.lastName}}{{/link-to}}</td>
+          <td class="col-md-3 col-sm-4 col-xs-6">{{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.index" victim}}{{victim.email}}{{/link-to}}</td>
+          <td class="col-md-1 col-sm-2 col-xs-3 text-center"><div class={{victim-state-class victim.state}}>{{victim.state}}</div></td>
+          <td class="col-md-3 col-sm-4 hidden-xs">{{when-empty victim.details "None"}}</td>
+          <td class="col-md-1 col-sm-1 col-xs-1 text-center">{{victim.report.total_score}}</td>
+          <td class="col-md-1 col-sm-1 col-xs-2 text-center">
+            <a href {{action "resetVictimState" victim}}>{{fa-icon "repeat"}}</a>
+            {{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.delete" victim}}{{fa-icon "trash"}}{{/link-to}}
+          </td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div id="timeseries" class="tab-pane fade">
+    <div class="pad text-center text-muted">
+      <a href {{action 'seriesDelta' -1}}>{{fa-icon "arrow-left" tagName="span"}}</a>
+      &nbsp;<strong>{{chartDate}}</strong>&nbsp;
+      <a href {{action 'seriesDelta' 1}}>{{fa-icon "arrow-right" tagName="span"}}</a>
+    </div>
+    <div class="chart-series-container">
+      {{#chart-series series=chartSeries data=chartData xMin=chartXMin xMax=chartXMax}}{{/chart-series}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+{{#bootstrap-modal title="Edit scenario" actionTitle="Save" cancel=(action "cancel") action=(action "save") close=(route-action "back")}}
+  {{#scenario-form model=model templates=templates mailers=mailers groups=groups}}
+  {{/scenario-form}}
+{{/bootstrap-modal}}

@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-sm-8 col-xs-12">
+    <h1>
+      Mailers
+    </h1>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <h1>
+      {{#link-to "mailers.new" class="btn btn-primary pull-right-sm"}}New mailer{{/link-to}}
+    </h1>
+  </div>
+</div>
+<hr/>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class="col-sm-4 col-xs-6">Name</th>
+      <th class="col-sm-3 col-xs-4">Host</th>
+      <th class="col-sm-1 hidden-xs">Port</th>
+      <th class="col-sm-3 hidden-xs">Sender e-mail</th>
+      <th class="col-sm-1 col-xs-2 text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each (persisted-records model) as |mailer|}}
+    <tr>
+      <td class="col-sm-4 col-xs-6">{{mailer.name}}</td>
+      <td class="col-sm-3 col-xs-4">{{mailer.host}}</td>
+      <td class="col-sm-1 hidden-xs">{{mailer.port}}</td>
+      <td class="col-sm-3 hidden-xs">{{when-empty mailer.senderEmail "None"}}</td>
+      <td class="col-sm-1 col-xs-2 text-center">
+        {{#link-to "mailers.mailer.edit" mailer}}{{fa-icon "edit"}}{{/link-to}}
+        {{#link-to "mailers.mailer.delete" mailer}}{{fa-icon "trash"}}{{/link-to}}
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>

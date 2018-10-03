@@ -1,0 +1,23 @@
+{{! app/templates/components/nav-bar.hbs}}
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      {{#link-to "index" class="navbar-brand"}}<img src="{{rootURL}}assets/images/pump.svg"/>{{/link-to}}
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        {{#link-to "campaigns.index" tagName="li"}}<a href>Campaigns</a>{{/link-to}}
+        {{#link-to "templates.index" tagName="li"}}<a href>Templates</a>{{/link-to}}
+        {{#link-to "groups.index" tagName="li"}}<a href>Groups</a>{{/link-to}}
+        {{#link-to "mailers.index" tagName="li"}}<a href>Mailers</a>{{/link-to}}
+      </ul>
+    </div>
+  </div>
+</nav>

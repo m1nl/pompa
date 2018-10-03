@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-sm-8 col-xs-12">
+    <h1>
+      Templates
+    </h1>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <h1>
+      {{#link-to "templates.new" class="btn btn-primary pull-right-sm"}}New template{{/link-to}}
+    </h1>
+  </div>
+</div>
+<hr/>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class="col-sm-5 col-xs-10">Name</th>
+      <th class="col-sm-6 hidden-xs">Description</th>
+      <th class="col-sm-1 col-xs-2 text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each (persisted-records model) as |template|}}
+    <tr>
+      <td class="col-sm-5 col-xs-10">{{#link-to "templates.template.index" template}}{{template.name}}{{/link-to}}</td>
+      <td class="col-sm-6 hidden-xs">{{when-empty template.description "None"}}</td>
+      <td class="col-sm-1 col-xs-2 text-center">
+        {{#link-to "templates.template.edit" template}}{{fa-icon "edit"}}{{/link-to}}
+        {{#link-to "templates.template.delete" template}}{{fa-icon "trash"}}{{/link-to}}
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>

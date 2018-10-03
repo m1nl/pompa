@@ -1,0 +1,55 @@
+{{#bootstrap-modal title="Victim report" actionHidden=true cancelTitle="Close" close=(route-action "back")}}
+  <div class="form">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="control-label" for="displayName">Display name</label>
+          <p id="displayName" class="form-control-static">{{model.displayName}}</p>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="control-label" for="email">E-mail</label>
+          <p id="email" class="form-control-static">{{model.email}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="control-label" for="code">Code</label>
+          <p id="code" class="form-control-static text-mono">{{model.code}}</p>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="control-label" for="messageId">Message ID</label>
+          <p id="messageId" class="form-control-static text-mono">{{when-empty model.messageId "-"}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{#if model.details}}
+  <hr/>
+  <div class="form">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label class="control-label" for="details">Detailed State</label>
+          <p id="details" class="form-control-static">{{model.details}}&nbsp;<div class={{victim-state-class model.state}}>{{model.state}}</div></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+  <hr/>
+  <div class="pull-right">
+    <a href {{action "refresh"}}>{{fa-icon "refresh" spin=busy size="lg"}}</a>
+  </div>
+  {{#if events}}
+  <h4>Events</h4>
+  {{event-list model=events}}
+  {{else}}
+  <h4 class="text-muted">No events</h4>
+  {{/if}}
+{{/bootstrap-modal}}

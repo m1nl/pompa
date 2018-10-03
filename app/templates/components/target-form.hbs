@@ -1,0 +1,49 @@
+<div class="form">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="control-label" for="firstName">First name</label>
+        {{input value=model.firstName id="firstName" class="form-control"}}
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="control-label" for="lastName">Last name</label>
+        {{input value=model.lastName id="lastName" class="form-control"}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="control-label" for="email">E-mail</label>
+        {{input value=model.email id="email" class="form-control"}}
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="control-label" for="department">Department</label>
+        {{input value=model.department id="department" class="form-control" placeholder="optional"}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="control-label" for="gender">Gender</label>
+        <select class="form-control" id="gender" onchange={{action "genderChanged" value="target.value"}}>
+          <option value="null" selected={{eq model.gender null}}>-- not specified --</option>
+          {{#each genderList as |gender|}}
+          <option value={{gender}} selected={{eq model.gender gender}}>{{gender}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="control-label" for="comment">Comment</label>
+        {{input value=model.comment id="comment" class="form-control" placeholder="optional"}}
+      </div>
+    </div>
+  </div>
+</div>

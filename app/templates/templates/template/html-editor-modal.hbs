@@ -1,0 +1,4 @@
+{{#bootstrap-modal title="Edit HTML template" dialogClass="modal-lg" actionTitle="Save" action=(action "saveHtml") cancel=(action "discardHtml") close=(route-action "removeModal")}}
+  {{ember-ace lines=30 value=model.html update=(action "updateHtml") mode="ace/mode/liquid" highlightActiveLine=false showPrintMargin=false useSoftTabs=true tabSize=2 useWrapMode=true}}
+  <div class="text-right text-muted"><small>This field accepts <b>liquid</b> syntax.</small></div>
+{{/bootstrap-modal}}

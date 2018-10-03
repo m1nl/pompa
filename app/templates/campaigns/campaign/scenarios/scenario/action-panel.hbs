@@ -1,0 +1,19 @@
+<div class="btn-group pull-right-sm">
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Scenario&nbsp;{{fa-icon "caret-down"}}</button>
+    <ul class="dropdown-menu">
+      <li><a href={{scenario.victimsSummaryUrl}} target="_blank">{{fa-icon "pie-chart" fixedWidth=true}}&nbsp;Download summary</a></li>
+      <li role="separator" class="divider"></li>
+      <li>{{#link-to "campaigns.campaign.scenarios.scenario.edit" scenario}}{{fa-icon "edit" fixedWidth=true}}&nbsp;Edit scenario{{/link-to}}</li>
+      <li><a href {{action "showConfirmation" "Synchronize group" "Are you sure you want to <b>sychronize</b> the scenario victims with the current group?<br/>This may remove pending victims from current the scenario queue." (action "synchronizeGroup")}}>{{fa-icon "exchange" fixedWidth=true}}&nbsp;Synchronize group</a></li>
+      <li>{{#link-to "campaigns.campaign.scenarios.scenario.delete" scenario}}{{fa-icon "trash" fixedWidth=true}}&nbsp;Delete scenario{{/link-to}}</li>
+    </ul>
+  </div>
+  <div class="btn-group">
+    <button type="button" class="btn btn-default {{if busy 'disabled' ''}}" {{action "refresh"}} disabled={{busy}}>Refresh</button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{fa-icon "caret-down"}}</button>
+    <ul class="dropdown-menu dropdown-menu-right-sm" role="menu">
+      <li><a href {{action "toggleAutoRefresh"}}>{{fa-icon (if autoRefresh "check" "check-empty") fixedWidth=true}}&nbsp;Auto-refresh</a></li>
+    </ul>
+  </div>
+</div>

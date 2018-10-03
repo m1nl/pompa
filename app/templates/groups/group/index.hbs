@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-sm-8 col-xs-12">
+    <h2 class="ellipsis">
+      {{group.name}}
+      <br />
+      <small>{{when-empty group.description "No description"}}</small>
+    </h2>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <h2>
+      <div class="btn-group pull-right-sm">
+        {{#link-to "groups.group.targets.new" class="btn btn-primary"}}New target{{/link-to}}
+        {{#link-to "groups.group.targets.upload" class="btn btn-warning"}}Upload{{/link-to}}
+      </div>
+    </h2>
+  </div>
+</div>
+<hr/>
+<div class="row pad-bottom">
+  <div class="col-sm-5 col-md-4 col-xs-12 small pad vertical-align">
+    <div class="btn-group-justified relative">
+      {{input value=quicksearch class="form-control input-sm" placeholder="quicksearch"}}
+      {{fa-icon "times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
+    </div>
+  </div><!--
+  --><div class="col-sm-7 col-md-8 col-xs-12 vertical-align text-right">
+    {{bootstrap-pagination
+        totalPages=totalPages
+        page=currentPage
+        pageChanged=(action "pageChanged")
+        disabled=busy}}
+  </div>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class="col-md-2 col-sm-3 hidden-xs">First name</th>
+      <th class="col-md-2 col-sm-3 hidden-xs">Last name</th>
+      <th class="col-md-3 col-sm-5 col-xs-10">Email</th>
+      <th class="col-md-1 hidden-sm hidden-xs text-center">Gender</th>
+      <th class="col-md-3 hidden-sm hidden-xs">Department</th>
+      <th class="col-md-1 col-sm-1 col-xs-2 text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each (persisted-records targets) as |target|}}
+    <tr>
+      <td class="col-md-2 col-sm-3 hidden-xs">{{target.firstName}}</td>
+      <td class="col-md-2 col-sm-3 hidden-xs">{{target.lastName}}</td>
+      <td class="col-md-3 col-sm-5 col-xs-10">{{target.email}}</td>
+      <td class="col-md-1 hidden-sm hidden-xs text-center">{{when-empty target.gender "-"}}</td>
+      <td class="col-md-3 hidden-sm hidden-xs">{{when-empty target.department "None"}}</td>
+      <td class="col-md-1 col-sm-1 col-xs-2 text-center">
+        {{#link-to "groups.group.targets.target.edit" target}}{{fa-icon "edit"}}{{/link-to}}
+        {{#link-to "groups.group.targets.target.delete" target}}{{fa-icon "trash"}}{{/link-to}}
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+

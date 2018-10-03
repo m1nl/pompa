@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-sm-8 col-xs-12">
+    <h2 class="ellipsis">
+      {{model.name}}
+      <br />
+      <small>{{when-empty model.description "No description"}}</small>
+    </h2>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <h2>
+      <div class="btn-group pull-right-sm">
+        <button class={{if model.hasDirtyAttributes "btn btn-primary" "btn btn-primary disabled"}} {{action "save"}} disabled={{not model.hasDirtyAttributes}}>Save template</button>
+        <button class="btn btn-default" {{action "cancel"}}>Cancel</button>
+      </div>
+    </h2>
+  </div>
+</div>
+<hr/>
+<ul class="nav nav-tabs">
+  {{#link-to "templates.template.index" tagName="li"}}<a href>E-mail</a>{{/link-to}}
+  {{#link-to "templates.template.goals" tagName="li"}}<a href>Goals</a>{{/link-to}}
+  {{#link-to "templates.template.resources" tagName="li"}}<a href>Resources</a>{{/link-to}}
+  {{#link-to "templates.template.attachments" tagName="li"}}<a href>Attachments</a>{{/link-to}}
+</ul>
+<div class="form">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="senderEmail">Sender e-mail</label>
+        {{input value=model.senderEmail id="senderEmail" class="form-control" placeholder="leave blank for default value"}}
+      </div>
+      <div class="form-group">
+        <label for="senderName">Sender name</label>
+        {{input value=model.senderName id="senderName" class="form-control" placeholder="leave blank for default value"}}
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <div class="pull-right text-muted"><small>This field accepts <b>liquid</b> syntax.</small></div>
+        {{input value=model.subject id="subject" class="form-control text-mono" placeholder="optional"}}
+      </div>
+      <div class="form-group">
+        <label for="baseUrl">Base URL</label>
+        {{input value=model.baseUrl id="baseUrl" class="form-control" placeholder="leave blank for this instance's default value"}}
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="landingUrl">Landing URL</label>
+        <div class="pull-right text-muted"><small>This field accepts <b>liquid</b> syntax.</small></div>
+        {{input value=model.landingUrl id="landingUrl" class="form-control text-mono" placeholder="optional"}} 
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <b>Plaintext e-mail template</b>
+          <div class="pull-right">
+            <a href {{action "showModal" "templates.template.plaintext-editor-modal" model "templates.template.index"}}>
+              {{fa-icon "edit"}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <b>HTML e-mail template</b>
+          <div class="pull-right">
+            <a href {{action "showModal" "templates.template.html-editor-modal" model "templates.template.index"}}>
+              {{fa-icon "edit"}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

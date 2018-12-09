@@ -36,6 +36,7 @@ Router.map(function() {
     this.route('template', { path: '/:template_id' }, function() {
       this.route('edit');
       this.route('delete');
+
       this.route('goals', { path: '/goals' }, function() {
         this.route('goal', { path: '/:goal_id' }, function() {
           this.route('edit');
@@ -43,6 +44,7 @@ Router.map(function() {
         });
         this.route('new');
       });
+
       this.route('resources', { path: '/resources' }, function() {
         this.route('resource', { path: '/:resource_id' }, function() {
           this.route('edit');
@@ -51,6 +53,7 @@ Router.map(function() {
         });
         this.route('new');
       });
+
       this.route('attachments', { path: '/attachments' }, function() {
         this.route('attachment', { path: '/:attachment_id' }, function() {
           this.route('edit');
@@ -66,10 +69,12 @@ Router.map(function() {
     this.route('campaign', { path: '/:campaign_id' }, function() {
       this.route('edit');
       this.route('delete');
+
       this.route('victims', { path: '/victims' }, function() {
           this.route('victim', { path: '/:victim_id' }, function() {
         });
       });
+
       this.route('scenarios', { path: '/scenarios' }, function() {
         this.route('scenario', { path: '/:scenario_id' }, function() {
           this.route('edit');

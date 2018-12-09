@@ -12,7 +12,7 @@
   "repository": "",
   "scripts": {
     "build": "ember build",
-    "lint:js": "eslint ./*.js app config lib server tests",
+    "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test"
   },
@@ -34,7 +34,7 @@
     "ember-cli-babel": "^6.17.2",
     "ember-cli-cjs-transform": "^1.2.0",
     "ember-cli-dependency-checker": "^3.0.0",
-    "ember-cli-eslint": "^4.2.1",
+    "ember-cli-eslint": "^4.2.3",
     "ember-cli-htmlbars": "^3.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.5",
     "ember-cli-inject-live-reload": "^1.10.2",
@@ -43,17 +43,17 @@
     "ember-cli-qunit": "^4.4.0",
     "ember-cli-sass": "^7.2.0",
     "ember-cli-shims": "^1.2.0",
-    "ember-cli-sri": "^2.1.0",
-    "ember-cli-uglify": "^2.0.0",
-    "ember-concurrency": "^0.8.22",
-    "ember-data": "^3.5.0",
+    "ember-cli-sri": "^2.1.1",
+    "ember-cli-uglify": "^2.1.0",
+    "ember-concurrency": "^0.8.23",
+    "ember-data": "^3.5.2",
     "ember-export-application-global": "^2.0.0",
     "ember-file-upload": "^2.5.3",
     "ember-font-awesome": "^3.0.5",
     "ember-load-initializers": "^1.1.0",
     "ember-resolver": "^5.0.1",
     "ember-route-action-helper": "^2.0.6",
-    "ember-source": "^3.5.1",
+    "ember-source": "^3.6.0",
     "ember-truth-helpers": "^2.1.0",
     "eonasdan-bootstrap-datetimepicker": "github:Eonasdan/bootstrap-datetimepicker",
     "eslint-plugin-ember": "^5.4.0",
@@ -66,6 +66,6 @@
     "uglify-es": "^3.3.9"
   },
   "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
+    "node": "6.* || 8.* || >= 10.*"
   }
 }

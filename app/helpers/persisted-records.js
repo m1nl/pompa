@@ -6,7 +6,7 @@ import { observer } from '@ember/object';
 export default Helper.extend({
   compute(params) {
     this.set('records', params[0]);
-    return this.get('content');
+    return this.content;
   },
   isNewObserver: observer('records', function() {
     defineProperty(this, 'content', filter('records.@each.isNew', record => !record.isNew));

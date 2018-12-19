@@ -2,7 +2,7 @@
   <div class="col-sm-8 col-xs-12">
     <h2 class="ellipsis">
       {{model.name}}
-      <br />
+      <br>
       <small>
         {{when-empty model.description "No description"}} <div class={{campaign-state-class model.state}}>{{model.state}}</div>
       </small>
@@ -14,7 +14,7 @@
     </h2>
   </div>
 </div>
-<hr/>
+<hr>
 <ul class="nav nav-tabs small">
   {{#link-to "campaigns.campaign.index" model tagName="li"}}<a href><b>Campaign</b></a>{{/link-to}}
   {{#each (persisted-records model.scenarios) as |scenario|}}

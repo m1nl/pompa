@@ -46,11 +46,11 @@ export default DS.Model.extend({
     let query = { filter: { victim: { scenario_id: this.id }, reported_date: [] } };
 
     if (dateFrom) {
-      query.filter.reported_date.push(">=" + dateFrom.toJSON());
+      query.filter.reported_date.push('>=' + dateFrom.toJSON());
     }
 
     if (dateTo) {
-      query.filter.reported_date.push("<=" + dateTo.toJSON());
+      query.filter.reported_date.push('<=' + dateTo.toJSON());
     }
 
     return adapter.seriesData(timespan, query);

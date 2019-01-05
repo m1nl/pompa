@@ -39,7 +39,7 @@
       <td class="col-md-1 col-sm-2 col-xs-3 text-center">
         {{#link-to "templates.template.resources.resource.upload" resource}}{{fa-icon "upload"}}{{/link-to}}
         {{#link-to "templates.template.resources.resource.edit" resource}}{{fa-icon "edit"}}{{/link-to}}
-        <a href={{resource.downloadUrl}} target="_blank">{{fa-icon "cloud-download"}}</a>
+        <a href={{resource.downloadUrl}} target="_blank" rel="noopener">{{fa-icon "cloud-download"}}</a>
         {{#link-to "templates.template.resources.resource.delete" resource}}{{fa-icon "trash"}}{{/link-to}}
       </td>
     </tr>

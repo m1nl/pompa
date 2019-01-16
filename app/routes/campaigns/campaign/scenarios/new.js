@@ -4,6 +4,12 @@ export default Route.extend({
   controllerName: 'scenarios.new',
   renderTemplate: function(controller, model) {
     this.render('campaigns.campaign.index');
+    this.render('campaigns.campaign.action-panel', {
+      into: 'campaigns.campaign',
+      outlet: 'action-panel',
+      model: model,
+      controller: this.controllerFor('campaigns.campaign.scenarios.scenario.index'),
+    });
     this.render('scenarios.new', {
       into: 'application',
       outlet: 'modal',
@@ -14,7 +20,7 @@ export default Route.extend({
     let campaign = this.modelFor('campaigns.campaign');
     return this.store.createRecord('scenario', { campaign: campaign });
   },
-  setupController(controller) {
+  setupController: function(controller) {
     this._super(...arguments);
 
     let templates = this.store.findAll('template');

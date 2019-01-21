@@ -2,9 +2,10 @@
   "name": "pompa",
   "version": "1.0.0",
   "private": true,
-  "description": "Ultimate spear-phishing toolkit - web front-end",
+  "description": "Fully-featured spear-phishing toolkit - web front-end",
   "license": "LGPL",
   "author": "Mateusz Nalewajski",
+  "homepage": "https://github.com/m1nl/pompa/wiki",
   "directories": {
     "doc": "doc",
     "test": "tests"

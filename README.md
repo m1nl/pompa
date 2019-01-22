@@ -1,6 +1,6 @@
 # pompa
 
-Ultimate spear-phishing toolkit - web front-end
+Fully-featured spear-phishing toolkit - web front-end
 
 ## Prerequisites
 

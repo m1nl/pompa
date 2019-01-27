@@ -26,6 +26,9 @@ export default Route.extend({
     if (isExiting && transition.targetName !== 'error') {
       controller.set('autoRefresh', false);
       controller.set('modelDirty', true);
+
+      controller.set('requestedDateFrom', null);
+      controller.set('requestedDateTo', null);
     }
   },
 });

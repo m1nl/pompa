@@ -2,6 +2,8 @@
 
 Fully-featured spear-phishing toolkit - web front-end
 
+**NOTE:** this is only a web-front end for [pompa-api](https://github.com/m1nl/pompa-api). Please use [pompa-docker](https://github.com/m1nl/pompa-docker) repository for a full deployment and read the [wiki](https://github.com/m1nl/pompa/wiki/Getting-Started).
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer:

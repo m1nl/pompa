@@ -8,6 +8,7 @@ const AUTO_REFRESH_DELAY = 3000;
 
 export default Controller.extend(ConfirmationModalController, {
   autoRefresh: false,
+  campaign: alias('model'),
   modelDirty: true,
   busy: computed('reloadScenariosTask.isRunning', function() {
     return this.get('reloadScenariosTask.isRunning');

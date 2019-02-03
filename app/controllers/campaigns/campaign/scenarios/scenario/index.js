@@ -82,9 +82,12 @@ export default Controller.extend(ConfirmationModalController, {
     }
   }),
   reloadModelsTask: task(function * () {
+    if (!this.model) {
+      return;
+    }
+
     yield all([
       this.model.reload(),
-      this.campaign.reload(),
     ]);
   }).restartable(),
   reloadVictimsTask: task(function * () {

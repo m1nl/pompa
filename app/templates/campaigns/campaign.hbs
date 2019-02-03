@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-sm-8 col-xs-12">
     <h2 class="ellipsis">
-      {{campaign.name}}
+      {{model.name}}
       <br>
       <small>
-        {{when-empty campaign.description "No description"}} <div class={{campaign-state-class campaign.state}}>{{campaign.state}}</div>
+        {{when-empty model.description "No description"}} <div class={{campaign-state-class model.state}}>{{model.state}}</div>
       </small>
     </h2>
   </div>
@@ -16,8 +16,8 @@
 </div>
 <hr>
 <ul class="nav nav-tabs small">
-  {{#link-to "campaigns.campaign.index" campaign tagName="li"}}<a href><b>Campaign</b></a>{{/link-to}}
-  {{#each (persisted-records campaign.scenarios) as |scenario|}}
+  {{#link-to "campaigns.campaign.index" model tagName="li"}}<a href><b>Campaign</b></a>{{/link-to}}
+  {{#each (persisted-records model.scenarios) as |scenario|}}
     {{#link-to "campaigns.campaign.scenarios.scenario.index" scenario tagName="li"}}
       <a href>{{scenario.template.name}}&nbsp;<small>({{when-empty scenario.group.name "No group"}})</small></a>
     {{/link-to}}

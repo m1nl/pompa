@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import ConfirmationModalController from 'pompa/mixins/confirmation-modal-controller';
 import { computed, observer } from '@ember/object';
+import { alias } from '@ember/object/computed';
 import { task, all, timeout } from 'ember-concurrency';
 
 const MAX_EVENTS = 10;

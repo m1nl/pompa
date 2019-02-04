@@ -172,17 +172,29 @@ export default Controller.extend(ConfirmationModalController, {
   },
   seriesDelta: function(diff) {
     let minDateFrom = Moment(this.campaign.get('startedDate') || Moment(0));
-    let maxDateTo = Moment(this.campaign.get('finishedDate') || Moment());
+    let maxDateFrom = Moment(this.campaign.get('finishedDate') || Moment()).startOf('day');
 
-    let dateFrom = this.requestedDateFrom || Moment(0);
+    let dateFrom = this.requestedDateFrom || minDateFrom;
+
+    if (typeof diff === 'string') {
+      if (diff === 'min') {
+        dateFrom = minDateFrom;
+      }
+
+      if (diff === 'max') {
+        dateFrom = maxDateFrom;
+      }
+    }
 
     dateFrom = dateFrom.clone().add(diff, 'days').startOf('day');
     dateFrom = Moment.max(minDateFrom, dateFrom);
-    dateFrom = Moment.min(dateFrom, maxDateTo);
+    dateFrom = Moment.min(dateFrom, maxDateFrom);
+
+    let maxDateTo = Moment(this.campaign.get('finishedDate') || Moment());
 
     let dateTo = dateFrom.clone().add(1, 'days');
 
-    dateTo = Moment.min(maxDateTo, dateTo);
+    dateTo = Moment.min(dateTo, maxDateTo);
 
     this.set('requestedDateFrom', dateFrom);
     this.set('requestedDateTo', dateTo);

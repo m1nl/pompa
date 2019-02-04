@@ -68,9 +68,11 @@
   </div>
   <div id="timeseries" class="tab-pane fade">
     <div class="pad text-center text-muted">
-      <a href {{action 'seriesDelta' -1}}>{{fa-icon "arrow-left" tagName="span"}}</a>
+      <a href {{action 'seriesDelta' 'min'}}>{{fa-icon "angle-double-left" tagName="span" size="lg"}}</a>&nbsp;
+      <a href {{action 'seriesDelta' -1}}>{{fa-icon "angle-left" tagName="span" size="lg"}}</a>
       &nbsp;<strong>{{chartDate}}</strong>&nbsp;
-      <a href {{action 'seriesDelta' 1}}>{{fa-icon "arrow-right" tagName="span"}}</a>
+      <a href {{action 'seriesDelta' 1}}>{{fa-icon "angle-right" tagName="span" size="lg"}}</a>&nbsp;
+      <a href {{action 'seriesDelta' 'max'}}>{{fa-icon "angle-double-right" tagName="span" size="lg"}}</a>
     </div>
     <div class="chart-series-container">
       {{#chart-series series=chartSeries data=chartData xMin=chartXMin xMax=chartXMax}}{{/chart-series}}

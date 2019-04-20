@@ -1,13 +1,14 @@
 import { scheduleOnce } from '@ember/runloop';
 import { observer } from '@ember/object';
 import Component from '@ember/component';
+import $ from 'jquery';
 
 export default Component.extend({
   setup: function() {
     let self = this;
 
-    let even = this.$(".event-list").children('tbody').children('tr').filter(':even');
-    let odd = this.$(".event-list").children('tbody').children('tr').filter(':odd');
+    let even = $(this.element).children('tbody').children('tr').filter(':even');
+    let odd = $(this.element).children('tbody').children('tr').filter(':odd');
 
     odd.hide();
     even.unbind('click');

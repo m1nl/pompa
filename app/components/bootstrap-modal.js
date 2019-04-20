@@ -2,8 +2,13 @@
 
 import { defer } from 'rsvp';
 import Component from '@ember/component';
+import $ from 'jquery';
 
 export default Component.extend({
+  classNames: ['modal', 'fade'],
+  tabIndex: -1,
+  attributeBindings: ['role', 'tabIndex'],
+  role: 'dialog',
   actionClass: 'btn-primary',
   cancelClass: 'btn-default',
   actionTitle: 'OK',
@@ -54,10 +59,9 @@ export default Component.extend({
   },
   show: function() {
     let self = this;
-
-    this.$('.modal').modal({ keyboard: true }).on('hidden.bs.modal',
+    $(this.element).modal({ keyboard: true }).on('hidden.bs.modal',
       function() {
-        self.$('.modal').unbind('hidden.bs.modal');
+        $(self.element).unbind('hidden.bs.modal');
 
         if (self.close) {
           self.close();
@@ -66,13 +70,13 @@ export default Component.extend({
     this.bind();
   },
   hide: function() {
-    this.$('.modal').modal('hide');
+    $(this.element).modal('hide');
   },
   bind: function() {
     let self = this;
 
     this.unbind();
-    this.$('.modal').on('hide.bs.modal', function() {
+    $(this.element).on('hide.bs.modal', function() {
       let deferred = defer();
 
       self.unbind();
@@ -85,7 +89,7 @@ export default Component.extend({
     });
   },
   unbind: function() {
-    this.$('.modal').unbind('hide.bs.modal');
+    $(this.element).unbind('hide.bs.modal');
   },
   didInsertElement: function() {
     this._super(...arguments);

@@ -1,8 +1,12 @@
 import { scheduleOnce } from '@ember/runloop';
 import { observer } from '@ember/object';
 import Component from '@ember/component';
+import $ from 'jquery';
 
 export default Component.extend({
+  tagName: 'ul',
+  classNames: ['bootstrap-pagination'],
+  classNameBindings: ['baseClass'],
   baseClass: 'pagination-sm',
   totalPages: 1,
   visiblePages: 5,
@@ -13,8 +17,8 @@ export default Component.extend({
 
     this.set('currentPage', Math.min(this.page, this.totalPages));
 
-    this.$('.bootstrap-pagination').twbsPagination('destroy');
-    this.$('.bootstrap-pagination').twbsPagination({
+    $(this.element).twbsPagination('destroy');
+    $(this.element).twbsPagination({
       totalPages: this.totalPages,
       visiblePages: this.visiblePages,
       startPage: this.currentPage,
@@ -28,7 +32,7 @@ export default Component.extend({
       },
     });
     if (this.disabled) {
-      this.$('.bootstrap-pagination').twbsPagination('disable');
+      $(this.element).twbsPagination('disable');
     }
   },
   didInsertElement: function() {
@@ -45,9 +49,9 @@ export default Component.extend({
   }),
   disabledObserver: observer('disabled', function() {
     if (this.disabled) {
-      this.$('.bootstrap-pagination').twbsPagination('disable');
+      $(this.element).twbsPagination('disable');
     } else {
-      this.$('.bootstrap-pagination').twbsPagination('enable');
+      $(this.element).twbsPagination('enable');
     }
   }),
 });

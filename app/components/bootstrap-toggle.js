@@ -1,6 +1,7 @@
 import { scheduleOnce } from '@ember/runloop';
 import { observer } from '@ember/object';
 import Component from '@ember/component';
+import $ from 'jquery';
 
 const defaults = {
     onText: "On",
@@ -15,7 +16,7 @@ const defaults = {
 
 export default Component.extend({
   setup: function() {
-    let target = this.$("input[type='checkbox']");
+    let target = $(this.element).children("input[type='checkbox']");
 
     target.unbind('change');
     target.prop('checked', this.getWithDefault('checked', defaults.checked)).change();
@@ -49,7 +50,7 @@ export default Component.extend({
     scheduleOnce('afterRender', this, 'setup');
   }),
   checkedObserver: observer('checked', function() {
-    let target = this.$("input[type='checkbox']");
+    let target = $(this.element).children("input[type='checkbox']");
 
     if (target.prop('checked') != this.checked) {
       scheduleOnce('afterRender', this, 'setup');

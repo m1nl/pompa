@@ -1,5 +1,5 @@
-import $ from 'jquery';
 import Component from '@ember/component';
+import $ from 'jquery';
 
 const {
   defaults
@@ -13,7 +13,7 @@ export default Component.extend({
 
     let self = this;
 
-    this.$().datetimepicker({
+    $(this.element).datetimepicker({
       date: this.getWithDefault('date', null),
       daysOfWeekDisabled: this.getWithDefault('daysOfWeekDisabled', defaults.daysOfWeekDisabled),
       disabledDates: this.getWithDefault('disabledDates', defaults.disabledDates),
@@ -44,31 +44,31 @@ export default Component.extend({
     });
 
     this.addObserver('date', function() {
-      this.$().data('DateTimePicker').date(this.getWithDefault('date', null));
+      $(this.element).data('DateTimePicker').date(this.getWithDefault('date', null));
     });
 
     this.addObserver('maxDate', function() {
-      this.$().data('DateTimePicker').maxDate(this.maxDate);
+      $(this.element).data('DateTimePicker').maxDate(this.maxDate);
     });
 
     this.addObserver('minDate', function() {
-      this.$().data('DateTimePicker').minDate(this.minDate);
+      $(this.element).data('DateTimePicker').minDate(this.minDate);
     });
 
     this.addObserver('locale', function() {
-      this.$().data('DateTimePicker').locale(this.locale);
+      $(this.element).data('DateTimePicker').locale(this.locale);
     });
 
     this.addObserver('format', function() {
-      this.$().data('DateTimePicker').format(this.format);
+      $(this.element).data('DateTimePicker').format(this.format);
     });
 
     this.addObserver('viewMode', function() {
-      this.$().data('DateTimePicker').viewMode(this.viewMode);
+      $(this.element).data('DateTimePicker').viewMode(this.viewMode);
     });
 
     this.addObserver('timeZone', function() {
-      this.$().data('DateTimePicker').timeZone(this.timeZone);
+      $(this.element).data('DateTimePicker').timeZone(this.timeZone);
     });
   },
   willDestroyElement: function() {
@@ -83,7 +83,7 @@ export default Component.extend({
     this.removeObserver('timeZone');
 
     // Running the `ember` application embedded might cause the DOM to be cleaned before
-    let dateTimePicker = this.$().data('DateTimePicker');
+    let dateTimePicker = $(this.element).data('DateTimePicker');
     if (dateTimePicker) {
       dateTimePicker.destroy();
     }
@@ -91,7 +91,7 @@ export default Component.extend({
   actions: {
     focus: function() {
       if (this.openOnFocus) {
-        this.$().data('DateTimePicker').show();
+        $(this.element).data('DateTimePicker').show();
       }
     },
   },

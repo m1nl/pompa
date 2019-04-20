@@ -1,40 +1,32 @@
-<div class="form">
-  <div class="form-group">
-    <label class="control-label" for="name">Name</label>
+<div class="row">
+  {{#validation-group label="Name" for="name" errors=model.errors.name class="col-sm-6"}}
     {{input value=model.name id="name" class="form-control"}}
-  </div>
-  <div class="form-group">
-    <label class="control-label" for="description">Description</label>
+  {{/validation-group}}
+  {{#validation-group label="Description" for="description" errors=model.errors.description class="col-sm-6"}}
     {{input value=model.description id="description" class="form-control" placeholder="optional"}}
-  </div>
-  <div class="row">
-    <div class="col-sm-6 col-xs-12">
-      <div class="form-group">
-        <label class="control-label" for="startDate">Start at</label>
-        {{bootstrap-datetimepicker
-          id="startDate"
-          date=model.startDate
-          changed=(action "startDateChanged")
-          showClear=true
-          showClose=true
-          openOnFocus=true
-          format="YYYY-MM-DD HH:mm"
-          placeholder="optional"}}
-      </div>
-    </div>
-    <div class="col-sm-6 col-xs-12">
-      <div class="form-group">
-        <label class="control-label" for="finishDate">Finish at</label>
-        {{bootstrap-datetimepicker
-          id="finishDate"
-          date=model.finishDate
-          changed=(action "finishDateChanged")
-          showClear=true
-          showClose=true
-          openOnFocus=true
-          format="YYYY-MM-DD HH:mm"
-          placeholder="optional"}}
-      </div>
-    </div>
-  </div>
+  {{/validation-group}}
+</div>
+<div class="row">
+  {{#validation-group label="Start at" for="startDate" errors=model.errors.startDate class="col-sm-6 col-xs-12"}}
+    {{bootstrap-datetimepicker
+      id="startDate"
+      date=model.startDate
+      changed=(action "startDateChanged")
+      showClear=true
+      showClose=true
+      openOnFocus=true
+      format="YYYY-MM-DD HH:mm"
+      placeholder="optional"}}
+  {{/validation-group}}
+  {{#validation-group label="Finish at" for="finishDate" errors=model.errors.finishDate class="col-sm-6 col-xs-12"}}
+    {{bootstrap-datetimepicker
+      id="finishDate"
+      date=model.finishDate
+      changed=(action "finishDateChanged")
+      showClear=true
+      showClose=true
+      openOnFocus=true
+      format="YYYY-MM-DD HH:mm"
+      placeholder="optional"}}
+  {{/validation-group}}
 </div>

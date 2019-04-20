@@ -1,79 +1,56 @@
-<div class="form">
-  <div class="form-group">
-    <label class="control-label" for="name">Name</label>
-    {{input value=model.name id="name" class="form-control"}}
-  </div>
-  <div class="row">
-    <div class="form-group col-sm-6">
-      <label class="control-label" for="senderEmail">Sender e-mail</label>
-      {{input value=model.senderEmail id="senderEmail" class="form-control" placeholder="optional"}}
-    </div>
-    <div class="form-group col-sm-6">
-      <label class="control-label" for="senderName">Sender name</label>
-      {{input value=model.senderName id="senderName" class="form-control" placeholder="optional"}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label class="control-label" for="host">Host</label>
-        {{input value=model.host id="host" class="form-control"}}
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label class="control-label" for="port">Port</label>
-        {{input value=model.port id="port" class="form-control"}}
-      </div>
-    </div>
-  </div>
-  <div class="checkbox">
-    <label>
-      {{#bootstrap-toggle size="mini" width="50" onStyle="warning" checked=model.ignoreCertificate changed=(action "ignoreCertificateChanged")}} Ignore SSL certificate{{/bootstrap-toggle}}
-    </label>
-  </div>
-  <hr>
-  <div class="checkbox">
-    <label>
-      {{#bootstrap-toggle size="mini" width="50" checked=authentication changed=(action "authenticationChanged")}} Authentication{{/bootstrap-toggle}}
-    </label>
-  </div>
-  {{#if authentication}}
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label class="control-label" for="username">Username</label>
-        {{input value=model.username id="username" class="form-control"}}
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label class="control-label" for="password">Password</label>
-        {{input value=model.password id="password" class="form-control" type="password"}}
-      </div>
-    </div>
-  </div>
-  {{/if}}
-  <hr>
-  <div class="checkbox">
-    <label>
-      {{#bootstrap-toggle size="mini" width="50" checked=throttling changed=(action "throttlingChanged")}} Throttling{{/bootstrap-toggle}}
-    </label>
-  </div>
-  {{#if throttling}}
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label class="control-label" for="perMinute">Per minute</label>
-        {{input value=model.perMinute id="perMinute" class="form-control"}}
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label class="control-label" for="burst">Burst</label>
-        {{input value=model.burst id="burst" class="form-control"}}
-      </div>
-    </div>
-  </div>
-  {{/if}}
+{{#validation-group label="Name" for="name" errors=model.errors.name}}
+  {{input value=model.name id="name" class="form-control"}}
+{{/validation-group}}
+<div class="row">
+  {{#validation-group label="Sender e-mail" for="senderEmail" errors=model.errors.senderEmail class="col-sm-6"}}
+    {{input value=model.senderEmail id="senderEmail" class="form-control" placeholder="optional"}}
+  {{/validation-group}}
+  {{#validation-group label="Sender name" for="senderName" errors=model.errors.senderName class="col-sm-6"}}
+    {{input value=model.senderName id="senderName" class="form-control" placeholder="optional"}}
+  {{/validation-group}}
 </div>
+<div class="row">
+  {{#validation-group label="Host" for="host" errors=model.errors.host class="col-sm-6"}}
+    {{input value=model.host id="host" class="form-control"}}
+  {{/validation-group}}
+  {{#validation-group label="Port" for="port" errors=model.errors.port class="col-sm-6"}}
+    {{input value=model.port id="port" class="form-control"}}
+  {{/validation-group}}
+</div>
+<div class="checkbox">
+  <label>
+    {{#bootstrap-toggle size="mini" width="50" onStyle="warning" checked=model.ignoreCertificate changed=(action "ignoreCertificateChanged")}} Ignore SSL certificate{{/bootstrap-toggle}}
+  </label>
+</div>
+<hr>
+<div class="checkbox">
+  <label>
+    {{#bootstrap-toggle size="mini" width="50" checked=authentication changed=(action "authenticationChanged")}} Authentication{{/bootstrap-toggle}}
+  </label>
+</div>
+{{#if authentication}}
+<div class="row">
+  {{#validation-group label="Username" for="username" errors=model.errors.username class="col-sm-6"}}
+    {{input value=model.username id="username" class="form-control"}}
+  {{/validation-group}}
+  {{#validation-group label="Password" for="password" errors=model.errors.password class="col-sm-6"}}
+    {{input value=model.password id="password" class="form-control" type="password"}}
+  {{/validation-group}}
+</div>
+{{/if}}
+<hr>
+<div class="checkbox">
+  <label>
+    {{#bootstrap-toggle size="mini" width="50" checked=throttling changed=(action "throttlingChanged")}} Throttling{{/bootstrap-toggle}}
+  </label>
+</div>
+{{#if throttling}}
+<div class="row">
+  {{#validation-group label="Per minute" for="perMinute" errors=model.errors.perMinute class="col-sm-6"}}
+    {{input value=model.perMinute id="perMinute" class="form-control"}}
+  {{/validation-group}}
+  {{#validation-group label="Burst" for="burst" errors=model.errors.burst class="col-sm-6"}}
+    {{input value=model.burst id="burst" class="form-control"}}
+  {{/validation-group}}
+</div>
+{{/if}}

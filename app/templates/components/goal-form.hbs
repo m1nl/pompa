@@ -1,14 +1,9 @@
-<div class="form">
-  <div class="form-group">
-    <label class="control-label" for="name">Name</label>
-    {{input value=model.name id="name" class="form-control"}}
-  </div>
-  <div class="form-group">
-    <label class="control-label" for="description">Description</label>
-    {{input value=model.description id="description" class="form-control" placeholder="optional"}}
-  </div>
-  <div class="form-group">
-    <label class="control-label" for="score">Score</label>
-    {{input value=model.score id="score" class="form-control" placeholder=""}}
-  </div>
-</div>
+{{#validation-group label="Name" for="name" errors=model.errors.name}}
+  {{input value=model.name id="name" class="form-control"}}
+{{/validation-group}}
+{{#validation-group label="Description" for="description" errors=model.errors.description}}
+  {{input value=model.description id="description" class="form-control" placeholder="optional"}}
+{{/validation-group}}
+{{#validation-group label="Score" for="score" errors=model.errors.score}}
+  {{input value=model.score id="score" class="form-control" placeholder=""}}
+{{/validation-group}}

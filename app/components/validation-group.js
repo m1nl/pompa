@@ -1,12 +1,12 @@
-import { isEmpty } from '@ember/utils';
 import { computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
 
 import Component from '@ember/component';
 
 export default Component.extend({
-  classNames: ['form'],
+  classNames: ['form-group'],
   classNameBindings: ['hasErrors:has-error'],
-  hasErrors: computed('model.errors.record', function() {
-    return !isEmpty(this.get('model.errors.record'));
+  hasErrors: computed('errors', function() {
+    return !isEmpty(this.errors);
   }),
 });

@@ -1,61 +1,49 @@
-<div class="form">
-  <div class="form-group">
-    <label class="control-label" for="name">Name</label>
-    {{input value=model.name id="name" class="form-control"}}
-  </div>
-  <div class="form-group">
-    <label class="control-label" for="description">Description</label>
-    {{input value=model.description id="description" class="form-control" placeholder="optional"}}
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label class="control-label" for="contentType">Content Type</label>
-        {{input value=model.contentType id="contentType" class="form-control" placeholder="optional"}}
-        <div class="text-muted"><small>Provide a valid content type (i.e. <b>image/jpeg</b>).</small></div>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label class="control-label" for="extension">Extension</label>
-        {{input value=model.extension id="extension" class="form-control" placeholder="optional"}}
-        <div class="text-muted"><small>Provide a valid file extension (i.e. <b>.jpg</b>).</small></div>
-      </div>
-    </div>
-  </div>
-  <div class="checkbox">
-    <label>
-      {{#bootstrap-toggle size="mini" width="50" changed=(action "renderTemplateChanged") checked=model.renderTemplate}} Render resource as a <b>liquid</b> template{{/bootstrap-toggle}}
-    </label>
-  </div>
-  <hr>
-  <div class="checkbox">
-    <label>
-      {{#bootstrap-toggle size="mini" width="50" changed=(action "urlResolveChanged") checked=urlResolve}} Resolve resource using an URL{{/bootstrap-toggle}}
-    </label>
-  </div>
-  {{#if urlResolve}}
-  <div class="form-group">
-    <label class="control-label" for="url">URL</label>
-    {{input value=model.url id="url" class="form-control text-mono"}}
-    <small><b>WARNING:</b> providing an URL will clear uploaded file if present.</small>
-  </div>
-  <div class="checkbox">
-    <label>
-      {{#bootstrap-toggle size="mini" width="50" changed=(action "dynamicUrlChanged") checked=model.dynamicUrl}} Allow <b>liquid</b> template in URL{{/bootstrap-toggle}}
-    </label>
-  </div>
-  {{/if}}
-  <hr>
-  <div class="checkbox">
-    <label>
-      {{#bootstrap-toggle size="mini" width="50" changed=(action "transformsChanged") checked=transforms}} Apply transforms{{/bootstrap-toggle}}
-    </label>
-  </div>
-  {{#if transforms}}
-  <div class="form-group">
-    <label class="control-label" for="transforms">Transforms</label>
-    {{textarea value=model.transforms id="transforms" class="form-control text-mono" rows=4 autoresize=true}}
-  </div>
-  {{/if}}
+{{#validation-group label="Name" for="name" errors=model.errors.name}}
+  {{input value=model.name id="name" class="form-control"}}
+{{/validation-group}}
+{{#validation-group label="Description" for="description" errors=model.errors.description}}
+  {{input value=model.description id="description" class="form-control" placeholder="optional"}}
+{{/validation-group}}
+<div class="row">
+  {{#validation-group label="Content Type" for="contentType" errors=model.errors.contentType class="col-sm-6"}}
+    {{input value=model.contentType id="contentType" class="form-control" placeholder="optional"}}
+    <div class="text-muted"><small>Provide a valid content type (i.e. <b>image/jpeg</b>).</small></div>
+  {{/validation-group}}
+  {{#validation-group label="Extension" for="extension" errors=model.errors.extension class="col-sm-6"}}
+    {{input value=model.extension id="extension" class="form-control" placeholder="optional"}}
+    <div class="text-muted"><small>Provide a valid file extension (i.e. <b>.jpg</b>).</small></div>
+  {{/validation-group}}
 </div>
+<div class="checkbox">
+  <label>
+    {{#bootstrap-toggle size="mini" width="50" changed=(action "renderTemplateChanged") checked=model.renderTemplate}} Render resource as a <b>liquid</b> template{{/bootstrap-toggle}}
+  </label>
+</div>
+<hr>
+<div class="checkbox">
+  <label>
+    {{#bootstrap-toggle size="mini" width="50" changed=(action "urlResolveChanged") checked=urlResolve}} Resolve resource using an URL{{/bootstrap-toggle}}
+  </label>
+</div>
+{{#if urlResolve}}
+{{#validation-group label="URL" for="url" errors=model.errors.url}}
+  {{input value=model.url id="url" class="form-control text-mono"}}
+  <small><b>WARNING:</b> providing an URL will clear uploaded file if present.</small>
+{{/validation-group}}
+<div class="checkbox">
+  <label>
+    {{#bootstrap-toggle size="mini" width="50" changed=(action "dynamicUrlChanged") checked=model.dynamicUrl}} Allow <b>liquid</b> template in URL{{/bootstrap-toggle}}
+  </label>
+</div>
+{{/if}}
+<hr>
+<div class="checkbox">
+  <label>
+    {{#bootstrap-toggle size="mini" width="50" changed=(action "transformsChanged") checked=transforms}} Apply transforms{{/bootstrap-toggle}}
+  </label>
+</div>
+{{#if transforms}}
+{{#validation-group label="Transforms" for="transforms" errors=model.errors.transforms}}
+  {{textarea value=model.transforms id="transforms" class="form-control text-mono" rows=4 autoresize=true}}
+{{/validation-group}}
+{{/if}}

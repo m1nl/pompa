@@ -1,7 +1,15 @@
 import { isNone } from '@ember/utils';
+import { isEmpty } from '@ember/utils';
+import { computed } from '@ember/object';
+
 import Component from '@ember/component';
 
 export default Component.extend({
+  classNames: ['form'],
+  classNameBindings: ['hasErrors:has-error'],
+  hasErrors: computed('model.errors.record', function() {
+    return !isEmpty(this.get('model.errors.record'));
+  }),
   setup: function() {
     this.set('urlResolve', !isNone(this.get('model.url')));
     this.set('transforms', !isNone(this.get('model.transforms')));

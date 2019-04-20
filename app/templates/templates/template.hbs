@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-sm-8 col-xs-12">
+    <h2 class="ellipsis">
+      {{model.name}}
+      <br>
+      <small>{{when-empty model.description "No description"}}</small>
+    </h2>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <h2>
+      {{outlet "action-panel"}}
+    </h2>
+  </div>
+</div>
+<hr>
+<ul class="nav nav-tabs">
+  {{#link-to "templates.template.index" tagName="li"}}<a href>E-mail</a>{{/link-to}}
+  {{#link-to "templates.template.goals" tagName="li"}}<a href>Goals</a>{{/link-to}}
+  {{#link-to "templates.template.resources" tagName="li"}}<a href>Resources</a>{{/link-to}}
+  {{#link-to "templates.template.attachments" tagName="li"}}<a href>Attachments</a>{{/link-to}}
+</ul>
+{{outlet}}

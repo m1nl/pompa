@@ -1,24 +1,3 @@
-<div class="row">
-  <div class="col-sm-8 col-xs-12">
-    <h2 class="ellipsis">
-      {{model.name}}
-      <br>
-      <small>{{when-empty model.description "No description"}}</small>
-    </h2>
-  </div>
-  <div class="col-sm-4 col-xs-12">
-    <h2>
-      {{#link-to "templates.template.goals.new" class="btn btn-primary pull-right-sm"}}New goal{{/link-to}}
-    </h2>
-  </div>
-</div>
-<hr>
-<ul class="nav nav-tabs">
-  {{#link-to "templates.template.index" tagName="li"}}<a href>E-mail</a>{{/link-to}}
-  {{#link-to "templates.template.goals" tagName="li"}}<a href>Goals</a>{{/link-to}}
-  {{#link-to "templates.template.resources" tagName="li"}}<a href>Resources</a>{{/link-to}}
-  {{#link-to "templates.template.attachments" tagName="li"}}<a href>Attachments</a>{{/link-to}}
-</ul>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -30,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-  {{#each (persisted-records model.goals) as |goal|}}
+  {{#each (persisted-records model) as |goal|}}
     <tr>
       <td class="col-md-4 col-sm-4 col-xs-7">{{goal.name}}</td>
       <td class="col-md-4 hidden-sm hidden-xs">{{when-empty goal.description "None"}}</td>

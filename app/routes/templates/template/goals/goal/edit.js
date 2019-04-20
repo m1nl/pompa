@@ -4,6 +4,12 @@ export default Route.extend({
   controllerName: 'goals.goal.edit',
   renderTemplate: function(controller, model) {
     this.render('templates.template.goals.index');
+    this.render('templates.template.goals.action-panel', {
+      into: 'templates.template',
+      outlet: 'action-panel',
+      model: this.modelFor('templates.template.goals.index'),
+      controller: this.controllerFor('templates.template.goals.index'),
+    });
     this.render('goals.goal.edit', {
       into: 'application',
       outlet: 'modal',

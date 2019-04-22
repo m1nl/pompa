@@ -1,31 +1,29 @@
-<table class="table table-hover event-list">
-  <thead>
-    <tr>
-      <th class="col-xs-7 col-sm-7">Goal</th>
-      <th class="hidden-xs col-sm-2">Score</th>
-      <th class="col-xs-5 col-sm-3">Reported</th>
-    </tr>
-  </thead>
-  <tbody>
-  {{#each model as |event|}}
-    <tr class="pointer">
-      <td class="col-xs-7 col-sm-7">
-        {{#tool-tip title=(when-empty event.goal.description "No description")}}
-          {{event.goal.name}}
-        {{/tool-tip}}
-      </td>
-      <td class="hidden-xs col-sm-2">{{event.goal.score}}</td>
-      <td class="col-xs-5 col-sm-3">{{event.reportedDateString}}</td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <div class="panel panel-default no-margin">
-          <div class="panel-body text-mono text-muted small wrap small-pad">
-            {{event.reportedData}}
-          </div>
+<thead>
+  <tr>
+    <th class="col-xs-7 col-sm-7">Goal</th>
+    <th class="hidden-xs col-sm-2">Score</th>
+    <th class="col-xs-5 col-sm-3">Reported</th>
+  </tr>
+</thead>
+<tbody>
+{{#each model as |event|}}
+  <tr class="pointer">
+    <td class="col-xs-7 col-sm-7">
+      {{#tool-tip title=(when-empty event.goal.description "No description")}}
+        {{event.goal.name}}
+      {{/tool-tip}}
+    </td>
+    <td class="hidden-xs col-sm-2">{{event.goal.score}}</td>
+    <td class="col-xs-5 col-sm-3">{{event.reportedDateString}}</td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <div class="panel panel-default no-margin">
+        <div class="panel-body text-mono text-muted small wrap small-pad">
+          {{event.reportedData}}
         </div>
-      </td>
-    </tr>
-  {{/each}}
-  </tbody>
-</table>
+      </div>
+    </td>
+  </tr>
+{{/each}}
+</tbody>

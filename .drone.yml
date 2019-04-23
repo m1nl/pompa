@@ -24,7 +24,7 @@ steps:
   - git submodule update --checkout -- web/pompa
   - cd web/pompa
   - git checkout $DRONE_COMMIT
-  - cd ..
+  - cd ../..
   - git add web/pompa
   - git commit --allow-empty -m "update pompa with $SHORT_COMMIT ($DRONE_COMMIT_MESSAGE) by $DRONE_COMMIT_AUTHOR"
   - git push origin master

@@ -16,7 +16,7 @@ steps:
   - echo -ne "$POMPA_DOCKER_DEPLOY_KEY" > ~/.ssh/id_rsa
   - ssh-keyscan -H github.com > ~/.ssh/known_hosts
   - chmod 600 ~/.ssh/id_rsa ~/.ssh/known_hosts
-  - git clone https://github.com/m1nl/pompa-docker.git
+  - git clone git@github.com:m1nl/pompa-docker.git
   - cd pompa-docker
   - git config user.email "drone@nalewajski.pl"
   - git config user.name "Drone CI"

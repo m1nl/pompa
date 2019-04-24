@@ -7,16 +7,9 @@ export default ActiveModelAdapter.extend({
   host: ENV.APP.apiHost,
   handleResponse: function(status, headers, payload, requestData) {
     if (status === 202 && payload['status'] === 'pending') {
-      let host = this.get('host');
-      let namespace = this.get('namespace');
+      let url = this.urlPrefix(payload['tracking']['url']);
 
-      if (!host || host === '/') {
-        host = '';
-      }
-
-      let url = payload['tracking']['url'];
-
-      return this.ajax(`${host}${url}?sync=true`);
+      return this.ajax(`${url}?sync=true`);
     }
 
     return this._super(...arguments);

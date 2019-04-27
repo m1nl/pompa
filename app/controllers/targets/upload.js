@@ -18,9 +18,14 @@ export default Controller.extend({
     },
     upload: function(deferred) {
       let adapter = this.store.adapterFor('target');
+      let self = this;
       adapter.upload(this.file, this.params).then(function() {
         deferred.resolve();
-      }, function() {
+      }, function(response) {
+        if (response.body && response.body.errors && response.body.errors.file) {
+          let errors = response.body.errors.file.map((v) => { return { message: v } })
+          self.set('errors', errors);
+        }
         deferred.reject();
       });
     },

@@ -1,6 +1,6 @@
 {{#bootstrap-modal title="Upload targets" actionTitle="Upload" actionClass="btn-warning" actionEnabled=fileNotEmpty cancel=(action "cancel") action=(action "upload") close=(route-action "back")}}
   <div class="form">
-    <div class="form-group">
+    {{#validation-group errors=errors}}
       {{#file-upload name="targets"
                      accept="text/csv"
                      multiple=false
@@ -14,7 +14,7 @@
           No file selected.
         {{/if}}
       </b>
-    </div>
+    {{/validation-group}}
   </div>
   <small>
     Provide a CSV (comma-separated values) file:

@@ -16,4 +16,9 @@ export default DS.Model.extend({
   goals: DS.hasMany('goal', { async: true }),
   resources: DS.hasMany('resource', { async: true }),
   attachments: DS.hasMany('attachment', { async: true }),
+  duplicate: function() {
+    let modelName = this.constructor.modelName;
+    let adapter = this.store.adapterFor(modelName);
+    return adapter.duplicate(this.id);
+  },
 });

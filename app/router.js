@@ -36,6 +36,7 @@ Router.map(function() {
     this.route('template', { path: '/:template_id' }, function() {
       this.route('edit');
       this.route('delete');
+      this.route('duplicate');
 
       this.route('goals', { path: '/goals' }, function() {
         this.route('goal', { path: '/:goal_id' }, function() {

@@ -19,7 +19,7 @@ export default ApplicationAdapter.extend(FileSaverMixin, {
 
           return self.ajax(url, 'GET', { blob: true })
             .then(function(content) {
-              self.saveFileAs(`template-${id}.zip`, content, content.type);
+              return self.saveFileAs(`template-${id}.zip`, content, content.type);
             });
         }
       });

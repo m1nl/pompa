@@ -21,9 +21,9 @@ export default DS.Model.extend({
     let adapter = this.store.adapterFor(modelName);
     return adapter.duplicate(this.id);
   },
-  _export: function() {
+  download: function() {
     let modelName = this.constructor.modelName;
     let adapter = this.store.adapterFor(modelName);
-    return adapter._export(this.id);
+    return adapter.download(this.id);
   },
 });

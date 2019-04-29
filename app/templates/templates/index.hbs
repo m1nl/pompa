@@ -6,7 +6,10 @@
   </div>
   <div class="col-sm-4 col-xs-12">
     <h1>
-      {{#link-to "templates.new" class="btn btn-primary pull-right-sm"}}New template{{/link-to}}
+      <div class="btn-group pull-right-sm">
+        {{#link-to "templates.new" class="btn btn-primary" tagName="button"}}New template{{/link-to}}
+        {{#link-to "templates.upload" class="btn btn-warning" tagName="button"}}Upload{{/link-to}}
+      </div>
     </h1>
   </div>
 </div>
@@ -14,20 +17,20 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th class="col-md-5 col-sm-4 col-xs-9">Name</th>
-      <th class="col-md-6 col-sm-6 hidden-xs">Description</th>
-      <th class="col-md-1 col-sm-2 col-xs-3 text-center">Actions</th>
+      <th class="col-lg-5 col-sm-4 col-xs-9">Name</th>
+      <th class="col-lg-6 col-sm-6 hidden-xs">Description</th>
+      <th class="col-lg-1 col-sm-2 col-xs-3 text-center">Actions</th>
     </tr>
   </thead>
   <tbody>
   {{#each (persisted-records model) as |template|}}
     <tr>
-      <td class="col-md-5 col-sm-4 col-xs-9">{{#link-to "templates.template.index" template}}{{template.name}}{{/link-to}}</td>
-      <td class="col-md-6 col-sm-6 hidden-xs">{{when-empty template.description "None"}}</td>
-      <td class="col-md-1 col-sm-2 col-xs-3 text-center">
+      <td class="col-lg-5 col-sm-4 col-xs-9">{{#link-to "templates.template.index" template}}{{template.name}}{{/link-to}}</td>
+      <td class="col-lg-6 col-sm-6 hidden-xs">{{when-empty template.description "None"}}</td>
+      <td class="col-lg-1 col-sm-2 col-xs-3 text-center">
         {{#link-to "templates.template.edit" template}}{{fa-icon "edit" title="Edit"}}{{/link-to}}
         {{#link-to "templates.template.duplicate" template}}{{fa-icon "clone" title="Duplicate"}}{{/link-to}}
-        <a href {{ action "_export" template }}>{{fa-icon "cloud-download"}}</a>
+        <a href {{ action "download" template }}>{{fa-icon "cloud-download"}}</a>
         {{#link-to "templates.template.delete" template}}{{fa-icon "trash" title="Delete"}}{{/link-to}}
       </td>
     </tr>

@@ -1,0 +1,22 @@
+{{#bootstrap-modal title="Upload template" actionTitle="Upload" actionClass="btn-warning" actionEnabled=fileNotEmpty cancel=(action "cancel") action=(action "upload") close=(route-action "back")}}
+  <div class="form">
+    {{#validation-group errors=errors}}
+      {{#file-upload name="template"
+                     accept="application/zip"
+                     multiple=false
+                     onfileadd=(action "enqueue")}}
+        <a class="btn btn-primary">Browse</a>
+      {{/file-upload}}
+      <b>&nbsp;
+        {{#if file}}
+          {{file.name}} ({{file.size}} bytes)
+        {{else}}
+          No file selected.
+        {{/if}}
+      </b>
+    {{/validation-group}}
+  </div>
+  <small>
+    Provide a ZIP archive with template export. 
+  </small>
+{{/bootstrap-modal}}

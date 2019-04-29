@@ -64,6 +64,7 @@ Router.map(function() {
       });
     });
     this.route('new');
+    this.route('upload');
   });
 
   this.route('campaigns', { path: '/campaigns' }, function() {

@@ -8,9 +8,9 @@ export default ApplicationAdapter.extend(FileSaverMixin, {
   urlForDuplicateAction(id) {
     return `${this.buildURL('template', id)}/duplicate`;
   },
-  _export(id) {
+  download(id) {
     let self = this;
-    return this.ajax(this.urlForExportAction(id), 'POST')
+    return this.ajax(this.urlForDownloadAction(id), 'POST')
       .then(function(response) {
         if (response['worker_response'] &&
           response['worker_response']['status'] === 'success') {
@@ -24,7 +24,13 @@ export default ApplicationAdapter.extend(FileSaverMixin, {
         }
       });
   },
-  urlForExportAction(id) {
+  urlForDownloadAction(id) {
     return `${this.buildURL('template', id)}/export`;
+  },
+  upload(file, params) {
+    return file.upload(this.urlForUploadAction(), { data: params });
+  },
+  urlForUploadAction() {
+    return `${this.buildURL('template')}/import`;
   },
 });

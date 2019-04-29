@@ -18,5 +18,6 @@ export default Route.extend({
 
     controller.set('params', params);
     controller.set('file', null);
+    controller.set('errors', null);
   },
 });

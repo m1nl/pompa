@@ -1,8 +1,7 @@
 import ActiveModelAdapter from 'active-model-adapter';
-import AdapterArrayBufferMixin from 'ember-cli-file-saver/mixins/adapter-arraybuffer-mixin';
 import ENV from "../config/environment";
 
-export default ActiveModelAdapter.extend(AdapterArrayBufferMixin, {
+export default ActiveModelAdapter.extend({
   namespace: ENV.APP.apiNamespace,
   host: ENV.APP.apiHost,
   handleResponse: function(status, headers, payload) {

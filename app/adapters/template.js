@@ -1,7 +1,7 @@
 import ApplicationAdapter from 'pompa/adapters/application';
-import FileSaverMixin from 'ember-cli-file-saver/mixins/file-saver';
+import FileSaver from 'file-saver';
 
-export default ApplicationAdapter.extend(FileSaverMixin, {
+export default ApplicationAdapter.extend({
   duplicate(id) {
     return this.ajax(this.urlForDuplicateAction(id), 'POST');
   },
@@ -16,11 +16,9 @@ export default ApplicationAdapter.extend(FileSaverMixin, {
           response['worker_response']['status'] === 'success') {
           let url = self.urlPrefix(
             response['worker_response']['result']['url']);
+          let filename = `template-${id}.zip`;
 
-          return self.ajax(url, 'GET', { blob: true })
-            .then(function(content) {
-              return self.saveFileAs(`template-${id}.zip`, content, content.type);
-            });
+          FileSaver.saveAs(url, filename);
         }
       });
   },

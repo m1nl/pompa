@@ -7,7 +7,7 @@ export default Route.extend({
     this.render('campaigns.campaign.action-panel', {
       into: 'campaigns.campaign',
       outlet: 'action-panel',
-      model: model,
+      model: this.modelFor('campaigns.campaign'),
       controller: this.controllerFor('campaigns.campaign.index'),
     });
     this.render('scenarios.new', {

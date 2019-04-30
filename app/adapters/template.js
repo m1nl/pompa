@@ -20,15 +20,30 @@ export default ApplicationAdapter.extend({
           let timestamp = Moment.utc().format('YYMMDDhhmmss');
           let filename = `template-${id}-${timestamp}.zip`;
 
-          FileSaver.saveAs(url, filename);
+          return FileSaver.saveAs(url, filename);
         }
+
+        return self;
       });
   },
   urlForDownloadAction(id) {
     return `${this.buildURL('template', id)}/export`;
   },
   upload(file, params) {
-    return file.upload(this.urlForUploadAction(), { data: params });
+    let self = this;
+    return file.upload(this.urlForUploadAction(), { data: params })
+      .then(function(response) {
+        let status = response.status;
+        let payload = response.body;
+
+        if (status === 202 && payload['status'] === 'pending') {
+          let url = self.urlPrefix(payload['tracking']['url']);
+
+          return self.ajax(`${url}?sync=true`, 'GET');
+        }
+
+        return self;
+      });
   },
   urlForUploadAction() {
     return `${this.buildURL('template')}/import`;

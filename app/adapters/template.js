@@ -1,5 +1,6 @@
 import ApplicationAdapter from 'pompa/adapters/application';
 import FileSaver from 'file-saver';
+import Moment from 'moment';
 
 export default ApplicationAdapter.extend({
   duplicate(id) {
@@ -16,7 +17,8 @@ export default ApplicationAdapter.extend({
           response['worker_response']['status'] === 'success') {
           let url = self.urlPrefix(
             response['worker_response']['result']['url']);
-          let filename = `template-${id}.zip`;
+          let timestamp = Moment.utc().format('YYMMDDhhmmss');
+          let filename = `template-${id}-${timestamp}.zip`;
 
           FileSaver.saveAs(url, filename);
         }

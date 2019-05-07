@@ -19,13 +19,22 @@ export default Controller.extend({
     upload: function(deferred) {
       let adapter = this.store.adapterFor('template');
       let self = this;
-      adapter.upload(this.file, this.params).then(function() {
-        deferred.resolve();
-      }, function(response) {
-        if (response.body && response.body.errors && response.body.errors.file) {
-          let errors = response.body.errors.file.map((v) => { return { message: v } })
-          self.set('errors', errors);
+      adapter.upload(this.file, this.params).then(function(response) {
+        if (!response.worker_response) {
+          deferred.reject();
         }
+
+        let worker_response = response.worker_response;
+        let status = worker_response.status;
+
+        if (status === "error") {
+          let errors = [{ message: worker_response.value }];
+          self.set('errors', errors);
+          deferred.reject();
+        }
+
+        deferred.resolve();
+      }, function() {
         deferred.reject();
       });
     },

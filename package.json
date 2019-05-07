@@ -49,7 +49,7 @@
     "ember-cli-template-lint": "^1.0.0-beta.3",
     "ember-cli-uglify": "^3.0.0",
     "ember-concurrency": "^0.10.0",
-    "ember-data": "^3.9.1",
+    "ember-data": "^3.9.2",
     "ember-export-application-global": "^2.0.0",
     "ember-file-upload": "^2.6.1",
     "ember-font-awesome": "^3.0.5",

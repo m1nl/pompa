@@ -44,6 +44,6 @@
 </div>
 {{#if transforms}}
 {{#validation-group label="Transforms" for="transforms" errors=model.errors.transforms}}
-  {{textarea value=model.transforms id="transforms" class="form-control text-mono" rows=4 autoresize=true}}
+  {{textarea value=model.transforms id="transforms" class="form-control text-mono" rows=4 max-rows=10 autoresize=true}}
 {{/validation-group}}
 {{/if}}

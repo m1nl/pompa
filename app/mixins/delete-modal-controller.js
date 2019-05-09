@@ -8,13 +8,11 @@ export default Mixin.create({
     },
     save: function(deferred) {
       let self = this;
-      this.model.deleteRecord();
-      this.model.save().then(
+      this.model.destroyRecord().then(
         function() {
           deferred.resolve();
         },
         function() {
-          self.model.rollbackAttributes();
           deferred.reject();
         });
     },

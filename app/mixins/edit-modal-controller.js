@@ -10,6 +10,8 @@ export default Mixin.create({
       deferred.resolve();
     },
     save: function(deferred) {
+      let self = this;
+
       if (this.model.validate) {
         if (!this.model.validate()) {
           deferred.reject();
@@ -17,7 +19,6 @@ export default Mixin.create({
         }
       }
 
-      let self = this;
       this.model.save().then(
         function() {
           self.afterSave(deferred);

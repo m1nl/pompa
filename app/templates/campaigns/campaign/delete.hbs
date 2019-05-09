@@ -1,3 +1,6 @@
 {{#bootstrap-modal title="Delete campaign" actionTitle="Delete" actionClass="btn-danger" cancel=(action "cancel") action=(action "save") close=(route-action "back")}}
   <p>Are you sure you want to delete <b>{{model.name}}</b> campaign?</p>
+  {{#if model.errors.record}}
+  <p><span class="text-danger">Unable to delete record: {{join model.errors.record ", " "message"}}.</span></p>
+  {{/if}}
 {{/bootstrap-modal}}

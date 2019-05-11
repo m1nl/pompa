@@ -7,7 +7,6 @@ export default Mixin.create({
       deferred.resolve();
     },
     save: function(deferred) {
-      let self = this;
       this.model.destroyRecord().then(
         function() {
           deferred.resolve();

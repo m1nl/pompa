@@ -17,7 +17,7 @@
 <hr>
 <ul class="nav nav-tabs small">
   {{#link-to "campaigns.campaign.index" model tagName="li"}}<a href><b>Campaign</b></a>{{/link-to}}
-  {{#each (persisted-records model.scenarios) as |scenario|}}
+  {{#each (persisted-records sortedScenarios) as |scenario|}}
     {{#link-to "campaigns.campaign.scenarios.scenario.index" scenario tagName="li"}}
       <a href>{{scenario.template.name}}&nbsp;<small>({{when-empty scenario.group.name "No group"}})</small></a>
     {{/link-to}}

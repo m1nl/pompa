@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-  {{#each (persisted-records model) as |attachment|}}
+  {{#each (persisted-records sortedAttachments) as |attachment|}}
     <tr>
       <td class="col-sm-4 col-xs-5">{{attachment.name}}</td>
       <td class="col-sm-4 col-xs-5">{{attachment.resource.name}}</td>

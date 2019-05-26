@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-  {{#each (persisted-records model) as |resource|}}
+  {{#each (persisted-records sortedResources) as |resource|}}
     <tr>
       <td class="col-md-4 col-sm-5 col-xs-7">{{resource.name}}</td>
       <td class="col-md-4 hidden-sm hidden-xs">{{when-empty resource.description "None"}}</td>

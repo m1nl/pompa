@@ -6,6 +6,7 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   description: DS.attr('string'),
   state: DS.attr('string'),
+  stateOrder: DS.attr('number'),
   startDate: DS.attr('date'),
   startedDate: DS.attr('date'),
   finishDate: DS.attr('date'),

@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 
 export default Route.extend({
+  controllerName: 'resources.index',
   renderTemplate: function(controller, model) {
     this.render('templates.template.resources.index');
     this.render('templates.template.resources.action-panel', {

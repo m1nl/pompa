@@ -3,7 +3,9 @@ import Route from '@ember/routing/route';
 export default Route.extend({
   controllerName: 'goals.new',
   renderTemplate: function(controller, model) {
-    this.render('templates.template.goals.index');
+    this.render('templates.template.goals.index', {
+      controller: this.controllerFor('goals.index'),
+    });
     this.render('templates.template.goals.action-panel', {
       into: 'templates.template',
       outlet: 'action-panel',

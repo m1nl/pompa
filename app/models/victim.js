@@ -11,6 +11,7 @@ export default DS.Model.extend({
   comment: DS.attr('string'),
   code: DS.attr('string'),
   state: DS.attr('string'),
+  stateOrder: DS.attr('number'),
   lastError: DS.attr('string'),
   errorCount: DS.attr('number'),
   sentDate: DS.attr('date'),

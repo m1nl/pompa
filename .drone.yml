@@ -5,6 +5,15 @@ clone:
   disable: true
 
 steps:
+- name: test
+  image: node:carbon
+  commands:
+  - npm install -g npm@latest
+  - npm install -g ember-cli
+  - npm install
+  - npm run lint:hbs
+  - npm run lint:js
+  - npm test
 - name: update_docker
   image: docker:git
   environment:

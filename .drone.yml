@@ -10,6 +10,9 @@ steps:
   commands:
   - npm install -g npm@latest
   - npm install -g ember-cli
+  - git clone https://github.com/m1nl/pompa.git
+  - cd pompa
+  - git checkout $DRONE_COMMIT
   - npm install
   - npm run lint:hbs
   - npm run lint:js

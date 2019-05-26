@@ -8,7 +8,7 @@ module.exports = {
     'Chrome'
   ],
   browser_args: {
-    Chrome: {
+    Chromium: {
       mode: 'ci',
       args: [
         '--disable-gpu',

@@ -9,6 +9,7 @@ steps:
   - npm install -g npm@latest
   - npm install -g ember-cli
   - npm install
+  - cp config/environment.js.sample config/environment.js
   - npm run lint:hbs
   - npm run lint:js
   - npm test ci

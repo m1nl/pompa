@@ -20,7 +20,7 @@ steps:
   - npm install
   - npm run lint:hbs
   - npm run lint:js
-  - npm test
+  - npm test ci
 - name: update_docker
   image: docker:git
   environment:

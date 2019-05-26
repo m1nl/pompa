@@ -3,13 +3,9 @@ kind: pipeline
 name: ci
 
 steps:
-- name: npm_test
-  image: node:carbon-alpine
-  environment:
-    CHROME_BIN: /usr/bin/chromium-browser
-    CHROME_PATH: /usr/lib/chromium/
+- name: perform_tests
+  image: registry.nalewajski.pl/node-dubnium-chrome
   commands:
-  - apk add --no-cache chromium git
   - npm install -g npm@latest
   - npm install -g ember-cli
   - npm install

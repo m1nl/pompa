@@ -1,11 +1,9 @@
+---
 kind: pipeline
-name: default
-
-clone:
-  disable: true
+name: ci
 
 steps:
-- name: test
+- name: npm_test
   image: node:carbon-alpine
   environment:
     CHROME_BIN: /usr/bin/chromium-browser
@@ -14,13 +12,19 @@ steps:
   - apk add --no-cache chromium git
   - npm install -g npm@latest
   - npm install -g ember-cli
-  - git clone https://github.com/m1nl/pompa.git
-  - cd pompa
-  - git checkout $DRONE_COMMIT
   - npm install
   - npm run lint:hbs
   - npm run lint:js
   - npm test ci
+
+---
+kind: pipeline
+name: cd
+
+clone:
+  disable: true
+
+steps:
 - name: update_docker
   image: docker:git
   environment:
@@ -44,3 +48,14 @@ steps:
   - git add web/pompa
   - git commit --allow-empty -m "update pompa with $SHORT_COMMIT ($DRONE_COMMIT_MESSAGE) by $DRONE_COMMIT_AUTHOR"
   - git push origin master
+
+trigger:
+  status:
+  - success
+  branch:
+  - master
+  event:
+  - push
+
+depends_on:
+- ci

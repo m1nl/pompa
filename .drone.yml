@@ -7,6 +7,9 @@ clone:
 steps:
 - name: test
   image: node:carbon-alpine
+  environment:
+    CHROME_BIN: /usr/bin/chromium-browser
+    CHROME_PATH: /usr/lib/chromium/
   commands:
   - apk add --no-cache chromium git
   - npm install -g npm@latest

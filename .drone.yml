@@ -8,7 +8,7 @@ steps:
 - name: test
   image: node:carbon-alpine
   commands:
-  - apk add --no-cache chromium
+  - apk add --no-cache chromium git
   - npm install -g npm@latest
   - npm install -g ember-cli
   - git clone https://github.com/m1nl/pompa.git

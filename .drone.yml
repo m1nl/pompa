@@ -1,5 +1,22 @@
+---
 kind: pipeline
-name: default
+name: ci
+
+steps:
+- name: perform_tests
+  image: registry.nalewajski.pl/node-dubnium-chrome
+  commands:
+  - npm install -g npm@latest
+  - npm install -g ember-cli
+  - npm install
+  - cp config/environment.js.sample config/environment.js
+  - npm run lint:hbs
+  - npm run lint:js
+  - npm test ci
+
+---
+kind: pipeline
+name: cd
 
 clone:
   disable: true
@@ -28,3 +45,14 @@ steps:
   - git add web/pompa
   - git commit --allow-empty -m "update pompa with $SHORT_COMMIT ($DRONE_COMMIT_MESSAGE) by $DRONE_COMMIT_AUTHOR"
   - git push origin master
+
+trigger:
+  status:
+  - success
+  branch:
+  - master
+  event:
+  - push
+
+depends_on:
+- ci

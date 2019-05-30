@@ -3,6 +3,6 @@ import { sort, alias } from '@ember/object/computed';
 
 export default Controller.extend({
   resources: alias('model'),
-  resourcesSorting: Object.freeze(['type', 'id']),
+  resourcesSorting: Object.freeze(['type', 'numericId']),
   sortedResources: sort('resources', 'resourcesSorting'),
 });

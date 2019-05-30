@@ -3,7 +3,7 @@ import { sort, alias } from '@ember/object/computed';
 
 export default Controller.extend({
   templates: alias('model'),
-  templatesSorting: Object.freeze(['id']),
+  templatesSorting: Object.freeze(['numericId']),
   sortedTemplates: sort('templates', 'templatesSorting'),
   actions: {
     download: function(template) {

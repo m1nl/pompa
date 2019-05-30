@@ -10,7 +10,7 @@ const AUTO_REFRESH_DELAY = 3000;
 export default Controller.extend(ConfirmationModalController, {
   autoRefresh: false,
   campaign: alias('model'),
-  scenariosSorting: Object.freeze(['id']),
+  scenariosSorting: Object.freeze(['numericId']),
   sortedScenarios: sort('scenarios', 'scenariosSorting'),
   modelDirty: true,
   busy: computed('reloadScenariosTask.isRunning', function() {

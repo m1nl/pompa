@@ -1,6 +1,6 @@
-import { computed } from '@ember/object';
 import DS from 'ember-data';
 import Moment from 'moment';
+import { computed } from '@ember/object';
 
 export default DS.Model.extend({
   firstName: DS.attr('string'),

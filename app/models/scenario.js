@@ -1,9 +1,10 @@
-import { computed } from '@ember/object';
 import DS from 'ember-data';
+import NumericIdModel from 'pompa/mixins/numeric-id-model';
 import RSVP from 'rsvp';
 import Moment from 'moment';
+import { computed } from '@ember/object';
 
-export default DS.Model.extend({
+export default DS.Model.extend(NumericIdModel, {
   campaign: DS.belongsTo('campaign', { async: true }),
   template: DS.belongsTo('template', { async: true }),
   mailer: DS.belongsTo('mailer', { async: true }),

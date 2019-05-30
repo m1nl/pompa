@@ -1,7 +1,8 @@
-import { computed } from '@ember/object';
 import DS from 'ember-data';
+import NumericIdModel from 'pompa/mixins/numeric-id-model';
+import { computed } from '@ember/object';
 
-export default DS.Model.extend({
+export default DS.Model.extend(NumericIdModel, {
   name: DS.attr('string'),
   description: DS.attr('string'),
   url: DS.attr('string'),

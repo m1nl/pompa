@@ -19,7 +19,7 @@
     "test": "ember test"
   },
   "devDependencies": {
-    "@ember/jquery": "^0.6.0",
+    "@ember/jquery": "^0.6.1",
     "@ember/optional-features": "^0.7.0",
     "active-model-adapter": "github:ember-data/active-model-adapter",
     "bootstrap-sass": "^3.4.1",

@@ -1,6 +1,6 @@
 import { scheduleOnce } from '@ember/runloop';
 import { observer } from '@ember/object';
-import { isBlank } from '@ember/utils';
+import { isBlank, isEqual } from '@ember/utils';
 import Component from '@ember/component';
 import Moment from 'moment';
 import Chart from 'chart-js';
@@ -83,36 +83,71 @@ export default Component.extend({
 
     options.scales.yAxes[0].scaleLabel.display = !isBlank(this.yLabel);
     options.scales.yAxes[0].scaleLabel.labelString = this.yLabel;
+
+    scheduleOnce('afterRender', this, 'updateChart');
   },
   updateData: function() {
-    let series = this.series;
-    let data = this.data;
+    let datasets = this.chart.data.datasets || [];
+    let data = this.data || [];
 
-    let datasets = [];
+    for (let i = 0; i < datasets.length; i++) {
+      let seriesData = [];
 
-    if (series && data) {
-      let palette = Palette('tol', series.length).map(function(hex) {
-        return '#' + hex;
-      });
+      if (i < data.length) {
+        seriesData = data[i];
+      }
+
+      datasets[i].data = seriesData;
+    }
+
+    scheduleOnce('afterRender', this, 'updateChart');
+  },
+  updateSeries: function() {
+    let datasets = this.chart.data.datasets || [];
+    let series = this.series || [];
+
+    if (datasets.length === series.length) {
+      let seriesDiffer = false;
 
       for (let i = 0; i < series.length; i++) {
-        datasets.push({
-          label: series[i],
-          fill: true,
-          borderColor: palette[i],
-          data: data[i],
-        });
+        if (!isEqual(datasets[i].label, series[i])) {
+          seriesDiffer = true;
+          break;
+        }
+      }
+
+      if (!seriesDiffer) {
+        return;
       }
     }
 
+    datasets = []
+
+    let palette = Palette('tol', series.length).map(function(hex) {
+      return '#' + hex;
+    });
+
+    for (let i = 0; i < series.length; i++) {
+      datasets.push({
+        label: series[i],
+        fill: true,
+        borderColor: palette[i],
+        data: [],
+      });
+    }
+
     this.chart.data = { labels: [], datasets: datasets };
+
+    scheduleOnce('actions', this, 'updateData');
+    scheduleOnce('afterRender', this, 'updateChart');
   },
   optionsObserver: observer('timeUnit', 'xLabel', 'yLabel', 'xMin', 'xMax', function() {
-    this.updateOptions();
-    scheduleOnce('afterRender', this, 'updateChart');
+    scheduleOnce('actions', this, 'updateOptions');
   }),
-  dataObserver: observer('series', 'data', function() {
-    this.updateData();
-    scheduleOnce('afterRender', this, 'updateChart');
+  dataObserver: observer('data', function() {
+    scheduleOnce('actions', this, 'updateData');
+  }),
+  seriesObserver: observer('series', function() {
+    scheduleOnce('actions', this, 'updateSeries');
   }),
 });

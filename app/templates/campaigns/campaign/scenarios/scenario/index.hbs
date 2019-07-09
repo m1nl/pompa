@@ -16,12 +16,26 @@
 <hr>
 <div class="tab-content">
   <div id="details" class="tab-pane fade in active">
-    <div class="row">
+    <div class="row pad-bottom">
       <div class="col-sm-5 col-md-4 col-xs-12 small vertical-align">
-        <div class="btn-group-justified relative">
-          {{input value=quicksearch class="form-control input-sm" placeholder="quicksearch"}}
-          {{fa-icon "times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
-        </div>
+          <div class="pad-bottom">
+            <div class="btn-group-justified relative">
+              {{input value=quicksearch class="form-control input-sm" placeholder="quicksearch"}}
+              {{fa-icon "times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
+            </div>
+          </div>
+          <a class="text-muted" data-toggle="collapse" href="#advancedFiltering" aria-expanded="false" aria-controls="advancedFiltering">
+            Advanced filtering&nbsp;{{fa-icon "angle-down" tagName="span"}}
+          </a>
+          <div class="collapse" id="advancedFiltering">
+            {{#each scenario.template.goals as |goal|}}
+            <div class="checkbox">
+              <label>
+                {{goal.name}}&nbsp;{{bootstrap-toggle size="mini" width="50" checked=requestedJoinEvents changed=(action "joinEventsChanged")}}
+              </label>
+            </div>
+            {{/each}}
+          </div>
       </div><!--
       --><div class="col-sm-7 col-md-8 col-xs-12 vertical-align text-right">
         {{bootstrap-pagination
@@ -29,20 +43,6 @@
             page=currentPage
             pageChanged=(action "pageChanged")
             disabled=busy}}
-      </div>
-    </div>
-    <div class="row pad-bottom">
-      <div class="col-sm-12 small">
-        <a class="text-muted" data-toggle="collapse" href="#advancedFiltering" aria-expanded="false" aria-controls="advancedFiltering">
-          Advanced filtering&nbsp;{{fa-icon "angle-down" tagName="span"}}
-        </a>
-        <div class="collapse" id="advancedFiltering">
-          <div class="checkbox">
-            <label>
-              {{#bootstrap-toggle size="mini" width="50" checked=requestedJoinEvents changed=(action "joinEventsChanged")}} Hide victims with no events recorded{{/bootstrap-toggle}}
-            </label>
-          </div>
-        </div>
       </div>
     </div>
     <table class="table table-hover">

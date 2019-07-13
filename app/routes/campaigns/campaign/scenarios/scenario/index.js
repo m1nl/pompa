@@ -27,10 +27,6 @@ export default Route.extend({
       controller.set('modelDirty', true);
 
       controller.set('autoRefresh', false);
-
-      controller.set('requestedGoalFilter', {});
-      controller.set('requestedDateFrom', null);
-      controller.set('requestedDateTo', null);
     }
   },
 });

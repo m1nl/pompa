@@ -24,9 +24,9 @@ export default Route.extend({
   },
   resetController: function(controller, isExiting, transition) {
     if (isExiting && transition.targetName !== 'error') {
-      controller.set('autoRefresh', false);
       controller.set('modelDirty', true);
 
+      controller.set('autoRefresh', false);
       controller.set('requestedDateFrom', null);
       controller.set('requestedDateTo', null);
     }

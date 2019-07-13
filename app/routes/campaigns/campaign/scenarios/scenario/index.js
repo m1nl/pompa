@@ -28,7 +28,7 @@ export default Route.extend({
 
       controller.set('autoRefresh', false);
 
-      controller.set('requestedGoalFilter', null);
+      controller.set('requestedGoalFilter', {});
       controller.set('requestedDateFrom', null);
       controller.set('requestedDateTo', null);
     }

@@ -23,7 +23,7 @@ export default Route.extend({
     }
   },
   resetController: function(controller, isExiting, transition) {
-    if (transition.targetName !== 'error') {
+    if (isExiting && transition.targetName !== 'error') {
       controller.set('modelDirty', true);
 
       controller.set('autoRefresh', false);

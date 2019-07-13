@@ -18,15 +18,32 @@
   <div id="details" class="tab-pane fade in active">
     <div class="row pad-bottom">
       <div class="col-sm-5 col-md-4 col-xs-12 small vertical-align">
-        <div class="btn-group-justified relative">
-          {{input value=quicksearch class="form-control input-sm" placeholder="quicksearch"}}
-          {{fa-icon "times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
+        <div class="pad-bottom">
+          <div class="btn-group-justified relative">
+            {{input value=quicksearch class="form-control input-sm" placeholder="quicksearch" input=(action "quicksearchChanged")}}
+            {{fa-icon "times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
+          </div>
         </div>
-        <div class="checkbox">
-          <label>
-            {{#bootstrap-toggle size="mini" width="50" checked=requestedJoinEvents changed=(action "joinEventsChanged")}} Hide victims with no events recorded{{/bootstrap-toggle}}
-          </label>
-        </div>
+        {{#bootstrap-collapse label="Advanced filtering" collapsed=(not advancedFiltering) triggered=(action "toggleAdvancedFiltering")}}
+          <div class="container-fluid">
+          {{#each scenario.template.goals as |goal|}}
+          <div class="row no-gutters pad-top">
+            <div class="col-lg-8 col-sm-7 col-xs-8 ellipsis">
+              {{goal.name}}
+            </div>
+            <div class="col-lg-4 col-sm-5 col-xs-4 text-right">
+              <div class="btn-group">
+                {{#let (get requestedGoalFilter goal.id) as |filter|}}
+                  {{bootstrap-button-radio value="hit" groupValue=filter label="Hit" class="btn-xs btn-default" changed=(action "goalFilterChanged" goal.id)}}
+                  {{bootstrap-button-radio value="any" groupValue=filter label="Any" class="btn-xs btn-default" changed=(action "goalFilterChanged" goal.id)}}
+                  {{bootstrap-button-radio value="miss" groupValue=filter label="Miss" class="btn-xs btn-default" changed=(action "goalFilterChanged" goal.id)}}
+                {{/let}}
+              </div>
+            </div>
+          </div>
+          {{/each}}
+          </div>
+        {{/bootstrap-collapse}}
       </div><!--
       --><div class="col-sm-7 col-md-8 col-xs-12 vertical-align text-right">
         {{bootstrap-pagination
@@ -75,7 +92,7 @@
       <a href {{action 'seriesDelta' 'max'}}>{{fa-icon "angle-double-right" tagName="span" size="lg"}}</a>
     </div>
     <div class="chart-series-container">
-      {{#chart-series series=chartSeries data=chartData xMin=chartXMin xMax=chartXMax}}{{/chart-series}}
+      {{chart-series series=chartSeries data=chartData xMin=dateFrom xMax=dateTo}}
     </div>
   </div>
 </div>

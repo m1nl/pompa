@@ -1,5 +1,6 @@
 import { isBlank, isNone } from '@ember/utils';
 import { observer, computed } from '@ember/object';
+import { scheduleOnce } from '@ember/runloop';
 import { alias } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import ConfirmationModalController from 'pompa/mixins/confirmation-modal-controller';
@@ -9,22 +10,62 @@ import Moment from 'moment';
 const DEBOUNCE_MS = 1000;
 const AUTO_REFRESH_DELAY = 3000;
 
+const MISS = 'miss';
+const ANY = 'any';
+const HIT = 'hit';
+
+const MAX = 'max';
+const MIN = 'min';
+
 export default Controller.extend(ConfirmationModalController, {
+  /* aliases */
+  scenario: alias('model'),
+  campaign: alias('model.campaign'),
+
+  /* query params */
   queryParams: {
     requestedPage: 'page',
     requestedQuicksearch: 'quicksearch',
-    requestedJoinEvents: 'joinEvents'
+    requestedGoalFilterJSON: 'goalFilter',
   },
+
+  /* properties */
   requestedPage: 1,
   requestedQuicksearch: '',
-  requestedJoinEvents: false,
+  requestedGoalFilterJSON: '',
+  requestedGoalFilter: null,
+  requestedDateFrom: null,
+  requestedDateTo: null,
   currentPage: 1,
   totalPages: 1,
   quicksearch: '',
+  goalFilter: null,
+  dateFrom: null,
+  dateTo: null,
   autoRefresh: false,
-  scenario: alias('model'),
-  campaign: alias('model.campaign'),
+  advancedFiltering: false,
   modelDirty: true,
+
+  /* observers */
+  modelObserver: observer('model', function() {
+    this.set('modelDirty', true);
+
+    this.set('report', null);
+    this.set('victims', null);
+    this.set('chartSeries', null);
+    this.set('chartData', null);
+  }),
+  requestedGoalFilterJSONObserver: observer('requestedGoalFilterJSON', function() {
+    if (isBlank(this.requestedGoalFilterJSON)) {
+      return;
+    }
+
+    if (JSON.stringify(this.requestedGoalFilter) !== this.requestedGoalFilterJSON) {
+      scheduleOnce('actions', this, 'syncRequestedGoalFilter');
+    }
+  }),
+
+  /* computed properties */
   busy: computed('reloadVictimsTask.isRunning', 'reloadReportTask.isRunning', 'reloadEventSeriesTask.isRunning', function() {
     return this.reloadVictimsTask.isRunning || this.reloadReportTask.isRunning || this.reloadEventSeriesTask.isRunning;
   }),
@@ -34,89 +75,88 @@ export default Controller.extend(ConfirmationModalController, {
     }
     return this.dateFrom.format('YYYY-MM-DD');
   }),
-  modelObserver: observer('model', function() {
-    this.set('modelDirty', true);
-    this.set('report', null);
-    this.set('victims', null);
-    this.set('chartSeries', null);
-    this.set('chartData', null);
-  }),
-  pageObserver: observer('requestedPage', function() {
-    if (this.modelDirty) {
-      return;
-    }
 
-    this.reloadVictimsTask.perform();
-  }),
-  filterObserver: observer('requestedQuicksearch', 'requestedJoinEvents', function() {
-    if (this.modelDirty) {
-      return;
-    }
-
-    this.set('requestedPage', 1);
-    this.reloadVictimsTask.perform();
-  }),
-  quicksearchObserver: observer('quicksearch', function() {
-    this.quicksearchDebounceTask.perform();
-  }),
-  eventSeriesObserver: observer('eventSeries', 'dateFrom', 'dateTo', function() {
-    let series = [];
-    let data = [];
-
-    if (this.eventSeries) {
-      series = this.eventSeries.series;
-      data = this.eventSeries.data;
-    }
-
-    this.set('chartSeries', series);
-    this.set('chartData', data);
-
-    this.set('chartXMin', this.dateFrom);
-    this.set('chartXMax', this.dateTo);
-  }),
-  autoRefreshObserver: observer('autoRefresh', function() {
-    if (this.autoRefresh) {
-      this.autoRefreshTask.perform();
-    } else {
-      this.autoRefreshTask.cancelAll();
-    }
-  }),
+  /* tasks */
   reloadModelsTask: task(function * () {
     if (!this.model) {
       return;
     }
 
     yield all([
-      this.model.reload(),
+      this.scenario.reload(),
     ]);
+
+    let template = yield this.scenario.template;
+    let goals = yield template.goals;
+
+    let goalFilter = this.requestedGoalFilter;
+
+    goals.forEach(function(g) {
+      if (!goalFilter[g.id]) {
+        goalFilter[g.id] = ANY;
+      }
+    });
+
+    this.set('requestedGoalFilterJSON', JSON.stringify(this.requestedGoalFilter));
   }).restartable(),
   reloadVictimsTask: task(function * () {
     if (!this.model) {
       return;
     }
 
-    this.model.set('victim-query-params', {
-        include: 'report',
-        page: { number: this.requestedPage },
-        sort: ['state_order', 'id'],
-        quicksearch: this.requestedQuicksearch,
-        join: ( this.requestedJoinEvents ? 'events' : '' ),
-        distinct: ( this.requestedJoinEvents ? true : false ),
-      });
+    let goalFilter = this.requestedGoalFilter || {};
+
+    let hitGoals = [];
+    let missGoals = [];
+
+    Object.entries(goalFilter).forEach(function(g) {
+      if (g[1] === HIT) {
+        hitGoals.push(g[0]);
+      } else if (g[1] === MISS) {
+        missGoals.push(g[0]);
+      }
+    });
+
+    let victimQueryParams = {
+      include: 'report',
+      page: { number: this.requestedPage },
+      sort: ['state_order', 'id'],
+      quicksearch: this.requestedQuicksearch,
+    };
+
+    let filter = {};
+
+    if (hitGoals.length > 0) {
+      filter['events'] = { goal_id: hitGoals.join(',') };
+    }
+
+    if (missGoals.length > 0) {
+      filter['!events'] = { goal_id: missGoals.join(',') };
+    }
+
+    victimQueryParams['filter'] = filter;
+
+    this.scenario.set('victim-query-params', victimQueryParams);
 
     let victims = yield this.model.hasMany('victims').reload();
 
     this.set('victims', victims);
+
     this.set('totalPages', Math.max(victims.meta.paging.total_pages, 1));
     this.set('currentPage', Math.max(victims.meta.paging.current_page, 1));
+
     this.set('quicksearch', this.requestedQuicksearch);
+    this.set('goalFilter', this.requestedGoalFilter);
+
+    let values = Object.values(this.goalFilter);
+    this.set('advancedFiltering', values.includes(HIT) || values.includes(MISS));
   }).restartable(),
   reloadReportTask: task(function * () {
     if (!this.model) {
       return;
     }
 
-    let report = yield this.model.belongsTo('report').reload();
+    let report = yield this.scenario.belongsTo('report').reload();
 
     this.set('report', report);
   }).restartable(),
@@ -127,9 +167,19 @@ export default Controller.extend(ConfirmationModalController, {
 
     this.seriesDelta(0);
 
-    let eventSeries = yield this.model.eventSeries('hour', this.requestedDateFrom, this.requestedDateTo);
+    let eventSeries = yield this.scenario.eventSeries('hour', this.requestedDateFrom, this.requestedDateTo);
 
-    this.set('eventSeries', eventSeries);
+    let series = [];
+    let data = [];
+
+    if (eventSeries) {
+      series = eventSeries.series;
+      data = eventSeries.data;
+    }
+
+    this.set('chartSeries', series);
+    this.set('chartData', data);
+
     this.set('dateFrom', this.requestedDateFrom);
     this.set('dateTo', this.requestedDateTo);
   }).restartable(),
@@ -152,6 +202,16 @@ export default Controller.extend(ConfirmationModalController, {
       yield timeout(AUTO_REFRESH_DELAY);
     }
   }).restartable(),
+  quicksearchDebounceTask: task(function * () {
+    if (!isBlank(this.quicksearch)) {
+      yield timeout(DEBOUNCE_MS);
+    }
+
+    this.set('requestedQuicksearch', this.quicksearch);
+    this.set('requestedPage', 1);
+
+    this.reloadVictimsTask.perform();
+  }).restartable(),
   synchronizeGroupTask: task(function * () {
     yield this.scenario.synchronizeGroup();
     yield this.refreshTask.perform();
@@ -160,15 +220,14 @@ export default Controller.extend(ConfirmationModalController, {
     yield victim.resetState();
     yield victim.reload();
   }).restartable(),
-  quicksearchDebounceTask: task(function * () {
-    if (!isBlank(this.quicksearch)) {
-      yield timeout(DEBOUNCE_MS);
-    }
 
-    this.set('requestedQuicksearch', this.quicksearch);
-  }).restartable(),
+  /* methods */
+  init: function() {
+    this._super(...arguments)
+    this.set('requestedGoalFilter', {});
+  },
   refresh: function() {
-    return this.refreshTask.perform();
+    this.refreshTask.perform();
   },
   seriesDelta: function(diff) {
     let minDateFrom = Moment(this.campaign.get('startedDate') || Moment(0));
@@ -177,11 +236,11 @@ export default Controller.extend(ConfirmationModalController, {
     let dateFrom = this.requestedDateFrom || minDateFrom;
 
     if (typeof diff === 'string') {
-      if (diff === 'min') {
+      if (diff === MIN) {
         dateFrom = minDateFrom;
       }
 
-      if (diff === 'max') {
+      if (diff === MAX) {
         dateFrom = maxDateFrom;
       }
     }
@@ -199,7 +258,12 @@ export default Controller.extend(ConfirmationModalController, {
     this.set('requestedDateFrom', dateFrom);
     this.set('requestedDateTo', dateTo);
   },
+  syncRequestedGoalFilter: function() {
+    this.set('requestedGoalFilter', JSON.parse(this.requestedGoalFilterJSON));
+  },
   actions: {
+
+    /* actions */
     refresh: function() {
       this.refresh();
     },
@@ -211,15 +275,33 @@ export default Controller.extend(ConfirmationModalController, {
     },
     pageChanged: function(page) {
       this.set('requestedPage', page);
+
+      this.reloadVictimsTask.perform();
     },
-    joinEventsChanged: function(joinEvents) {
-      this.set('requestedJoinEvents', joinEvents);
+    goalFilterChanged: function(goal_id, value) {
+      this.set(`requestedGoalFilter.${goal_id}`, value);
+      this.set('requestedGoalFilterJSON', JSON.stringify(this.requestedGoalFilter));
+      this.set('requestedPage', 1);
+
+      this.reloadVictimsTask.perform();
+    },
+    quicksearchChanged: function() {
+      this.quicksearchDebounceTask.perform();
     },
     clearQuicksearch: function() {
       this.set('quicksearch', '');
     },
     toggleAutoRefresh: function() {
       this.set('autoRefresh', !this.autoRefresh);
+
+      if (this.autoRefresh) {
+        this.autoRefreshTask.perform();
+      } else {
+        this.autoRefreshTask.cancelAll();
+      }
+    },
+    toggleAdvancedFiltering: function() {
+      this.set('advancedFiltering', !this.advancedFiltering);
     },
     seriesDelta: function(delta) {
       this.seriesDelta(delta);

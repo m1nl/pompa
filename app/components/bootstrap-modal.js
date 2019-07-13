@@ -1,5 +1,3 @@
-/* eslint ember/closure-actions:0 */
-
 import { defer } from 'rsvp';
 import Component from '@ember/component';
 import $ from 'jquery';

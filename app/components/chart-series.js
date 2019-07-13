@@ -57,7 +57,7 @@ export default Component.extend({
   xLabel: '',
   yLabel: '',
   legendPosition: 'bottom',
-  setup: function() {
+  updateComponent: function() {
     let context = this.element.getContext('2d');
     this.set('chart', new Chart(context, defaultOptions));
   },
@@ -66,7 +66,7 @@ export default Component.extend({
   },
   didInsertElement: function() {
     this._super(...arguments);
-    this.setup();
+    scheduleOnce('afterRender', this, 'updateComponent');
   },
   updateOptions: function() {
     let options = this.chart.options;
@@ -138,16 +138,16 @@ export default Component.extend({
 
     this.chart.data = { labels: [], datasets: datasets };
 
-    scheduleOnce('actions', this, 'updateData');
+    scheduleOnce('render', this, 'updateData');
     scheduleOnce('afterRender', this, 'updateChart');
   },
   optionsObserver: observer('timeUnit', 'xLabel', 'yLabel', 'xMin', 'xMax', function() {
-    scheduleOnce('actions', this, 'updateOptions');
+    scheduleOnce('render', this, 'updateOptions');
   }),
   dataObserver: observer('data', function() {
-    scheduleOnce('actions', this, 'updateData');
+    scheduleOnce('render', this, 'updateData');
   }),
   seriesObserver: observer('series', function() {
-    scheduleOnce('actions', this, 'updateSeries');
+    scheduleOnce('render', this, 'updateSeries');
   }),
 });

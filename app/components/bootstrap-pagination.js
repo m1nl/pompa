@@ -12,7 +12,12 @@ export default Component.extend({
   visiblePages: 5,
   currentPage: 1,
   disabled: false,
-  setup: function() {
+  invokePageChangedAction: function() {
+    if (this.pageChanged) {
+      this.pageChanged(this.get('currentPage'));
+    }
+  },
+  updateComponent: function() {
     let self = this;
 
     this.set('currentPage', Math.min(this.page, this.totalPages));
@@ -25,33 +30,35 @@ export default Component.extend({
       onPageClick: function(event, page) {
         if (page != self.get('currentPage')) {
           self.set('currentPage', page);
-          if (typeof self.get('pageChanged') === 'function') {
-            self.get('pageChanged')(page);
-          }
+          scheduleOnce('actions', self, 'invokePageChangedAction');
         }
       },
     });
+
     if (this.disabled) {
       $(this.element).twbsPagination('disable');
     }
   },
-  didInsertElement: function() {
-    this._super(...arguments);
-    this.setup();
-  },
-  parametersObserver: observer('visiblePages', 'totalPages', function() {
-    scheduleOnce('afterRender', this, 'setup');
-  }),
-  pageObserver: observer('page', function() {
-    if (this.page != this.currentPage) {
-      scheduleOnce('afterRender', this, 'setup');
-    }
-  }),
-  disabledObserver: observer('disabled', function() {
+  updateDisabled: function() {
     if (this.disabled) {
       $(this.element).twbsPagination('disable');
     } else {
       $(this.element).twbsPagination('enable');
     }
+  },
+  didInsertElement: function() {
+    this._super(...arguments);
+    scheduleOnce('render', this, 'updateComponent');
+  },
+  parametersObserver: observer('visiblePages', 'totalPages', function() {
+    scheduleOnce('render', this, 'updateComponent');
+  }),
+  pageObserver: observer('page', function() {
+    if (this.page != this.currentPage) {
+      scheduleOnce('render', this, 'updateComponent');
+    }
+  }),
+  disabledObserver: observer('disabled', function() {
+    scheduleOnce('render', this, 'updateDisabled');
   }),
 });

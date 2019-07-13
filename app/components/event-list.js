@@ -1,12 +1,11 @@
 import { scheduleOnce } from '@ember/runloop';
-import { observer } from '@ember/object';
 import Component from '@ember/component';
 import $ from 'jquery';
 
 export default Component.extend({
   tagName: 'table',
   classNames: ['table', 'table-hover'],
-  setup: function() {
+  updateComponent: function() {
     let self = this;
 
     let even = $(this.element).children('tbody').children('tr').filter(':even');
@@ -20,11 +19,7 @@ export default Component.extend({
       e.next('tr').toggle('fast');
     });
   },
-  didInsertElement: function() {
-    this._super(...arguments);
-    this.setup();
+  didReceiveAttrs: function() {
+    scheduleOnce('render', this, 'updateComponent');
   },
-  parametersObserver: observer('model', 'model.length', function() {
-    scheduleOnce('afterRender', this, 'setup');
-  }),
 });

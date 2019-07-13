@@ -15,10 +15,16 @@ const defaults = {
   };
 
 export default Component.extend({
-  setup: function() {
+  invokeChangedAction: function(checked) {
+    if (this.changed) {
+      this.changed(checked);
+    }
+  },
+  updateComponent: function() {
     let target = $(this.element).children("input[type='checkbox']");
 
     target.unbind('change');
+
     target.prop('checked', this.getWithDefault('checked', defaults.checked)).change();
 
     target.bootstrapToggle({
@@ -35,25 +41,21 @@ export default Component.extend({
     let self = this;
 
     target.on('change', function() {
-      if (typeof self.get('changed') === 'function') {
-        self.get('changed')(target.prop('checked'));
-      }
+      scheduleOnce('actions', self, 'invokeChangedAction', target.prop('checked'));
     });
-
-    this._super(...arguments);
   },
   didInsertElement: function() {
     this._super(...arguments);
-    this.setup();
+    scheduleOnce('render', this, 'updateComponent');
   },
   propertiesObserver: observer('on', 'off', 'size', 'onstyle', 'offstyle', 'style', 'width', 'height', function() {
-    scheduleOnce('afterRender', this, 'setup');
+    scheduleOnce('render', this, 'updateComponent');
   }),
   checkedObserver: observer('checked', function() {
     let target = $(this.element).children("input[type='checkbox']");
 
-    if (target.prop('checked') != this.checked) {
-      scheduleOnce('afterRender', this, 'setup');
+    if (target.prop('checked') !== this.checked) {
+      scheduleOnce('render', this, 'updateComponent');
     }
   }),
 });

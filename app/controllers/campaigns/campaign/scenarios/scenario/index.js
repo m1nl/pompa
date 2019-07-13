@@ -1,6 +1,5 @@
 import { isBlank, isNone } from '@ember/utils';
 import { observer, computed } from '@ember/object';
-import { scheduleOnce } from '@ember/runloop';
 import { alias } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import ConfirmationModalController from 'pompa/mixins/confirmation-modal-controller';
@@ -26,13 +25,11 @@ export default Controller.extend(ConfirmationModalController, {
   queryParams: {
     requestedPage: 'page',
     requestedQuicksearch: 'quicksearch',
-    requestedGoalFilterJSON: 'goalFilter',
   },
 
   /* properties */
   requestedPage: 1,
   requestedQuicksearch: '',
-  requestedGoalFilterJSON: '',
   requestedGoalFilter: null,
   requestedDateFrom: null,
   requestedDateTo: null,
@@ -50,19 +47,12 @@ export default Controller.extend(ConfirmationModalController, {
   modelObserver: observer('model', function() {
     this.set('modelDirty', true);
 
-    this.set('report', null);
     this.set('victims', null);
+    this.set('report', null);
+
+    this.set('goalFilter', {});
     this.set('chartSeries', null);
     this.set('chartData', null);
-  }),
-  requestedGoalFilterJSONObserver: observer('requestedGoalFilterJSON', function() {
-    if (isBlank(this.requestedGoalFilterJSON)) {
-      return;
-    }
-
-    if (JSON.stringify(this.requestedGoalFilter) !== this.requestedGoalFilterJSON) {
-      scheduleOnce('actions', this, 'syncRequestedGoalFilter');
-    }
   }),
 
   /* computed properties */
@@ -89,15 +79,18 @@ export default Controller.extend(ConfirmationModalController, {
     let template = yield this.scenario.template;
     let goals = yield template.goals;
 
-    let goalFilter = this.requestedGoalFilter;
+    let goalFilter = {};
+    let requestedGoalFilter = this.requestedGoalFilter || {};
 
     goals.forEach(function(g) {
+      goalFilter[g.id] = requestedGoalFilter[g.id];
+
       if (!goalFilter[g.id]) {
         goalFilter[g.id] = ANY;
       }
     });
 
-    this.set('requestedGoalFilterJSON', JSON.stringify(this.requestedGoalFilter));
+    this.set('requestedGoalFilter', goalFilter);
   }).restartable(),
   reloadVictimsTask: task(function * () {
     if (!this.model) {
@@ -148,8 +141,8 @@ export default Controller.extend(ConfirmationModalController, {
     this.set('quicksearch', this.requestedQuicksearch);
     this.set('goalFilter', this.requestedGoalFilter);
 
-    let values = Object.values(this.goalFilter);
-    this.set('advancedFiltering', values.includes(HIT) || values.includes(MISS));
+    let goalFilterValues = Object.values(this.goalFilter);
+    this.set('advancedFiltering', goalFilterValues.includes(HIT) || goalFilterValues.includes(MISS));
   }).restartable(),
   reloadReportTask: task(function * () {
     if (!this.model) {
@@ -184,8 +177,9 @@ export default Controller.extend(ConfirmationModalController, {
     this.set('dateTo', this.requestedDateTo);
   }).restartable(),
   refreshTask: task(function * () {
+    yield this.reloadModelsTask.perform();
+
     yield all([
-      this.reloadModelsTask.perform(),
       this.reloadVictimsTask.perform(),
       this.reloadReportTask.perform(),
       this.reloadEventSeriesTask.perform(),
@@ -259,8 +253,7 @@ export default Controller.extend(ConfirmationModalController, {
     this.set('requestedDateTo', dateTo);
   },
   syncRequestedGoalFilter: function() {
-    this.set('requestedGoalFilter', JSON.parse(this.requestedGoalFilterJSON));
-  },
+    },
   actions: {
 
     /* actions */
@@ -280,7 +273,6 @@ export default Controller.extend(ConfirmationModalController, {
     },
     goalFilterChanged: function(goal_id, value) {
       this.set(`requestedGoalFilter.${goal_id}`, value);
-      this.set('requestedGoalFilterJSON', JSON.stringify(this.requestedGoalFilter));
       this.set('requestedPage', 1);
 
       this.reloadVictimsTask.perform();

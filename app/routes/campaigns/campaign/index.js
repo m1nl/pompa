@@ -18,7 +18,7 @@ export default Route.extend({
     controller.refresh();
   },
   resetController: function(controller, isExiting, transition) {
-    if (isExiting && transition.targetName !== 'error') {
+    if (transition.targetName !== 'error') {
       controller.set('autoRefresh', false);
       controller.set('modelDirty', true);
     }

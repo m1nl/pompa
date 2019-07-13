@@ -235,3 +235,11 @@ div.tooltip-inner {
 .fa-lg {
   vertical-align: -10%!important;
 }
+
+.no-gutters {
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

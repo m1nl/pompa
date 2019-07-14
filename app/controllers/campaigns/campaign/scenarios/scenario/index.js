@@ -120,7 +120,8 @@ export default Controller.extend(ConfirmationModalController, {
     let filter = {};
 
     if (hitGoals.length > 0) {
-      filter['events'] = { goal_id: hitGoals.join(',') };
+      filter['events'] = []
+      hitGoals.forEach(g => { filter['events'].push({ goal_id: g }) });
     }
 
     if (missGoals.length > 0) {

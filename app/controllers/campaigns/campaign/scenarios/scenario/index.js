@@ -112,6 +112,7 @@ export default Controller.extend(ConfirmationModalController, {
 
     let victimQueryParams = {
       include: 'report',
+      join: 'report',
       page: { number: this.requestedPage },
       sort: ['state_order', 'id'],
       quicksearch: this.requestedQuicksearch,

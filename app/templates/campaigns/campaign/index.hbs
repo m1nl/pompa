@@ -1,47 +1,52 @@
 {{#each (persisted-records sortedScenarios) as |scenario|}}
-<div class="pad-bottom">
-  <h3>{{scenario.template.name}}&nbsp;<small>({{when-empty scenario.group.name "No group"}})</small> <span class="badge">{{scenario.report.victims.total}} victim{{pluralize scenario.report.victims.total}}</span></h3>
-</div>
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="row left-border">
-      <div class="col-md-7 col-sm-7 col-xs-12">
-        <h4>Last events</h4>
-        {{#if scenario.events.length}}
-        <table class="table table-hover">
-          <tbody>
-          {{#each scenario.events as |event|}}
-            <tr>
-              <td class="col-md-5 col-sm-6 hidden-xs">{{#link-to "campaigns.campaign.victims.victim.index" event.victim}}{{event.victim.displayName}}{{/link-to}}</td>
-              <td class="hidden-md hidden-sm col-xs-6 hidden-lg">{{#link-to "campaigns.campaign.victims.victim.index" event.victim}}{{event.victim.email}}{{/link-to}}</td>
-              <td class="col-md-4 col-sm-6 col-xs-6">{{event.goal.name}}</td>
-              <td class="col-md-3 hidden-sm hidden-xs">{{event.reportedDateString}}</td>
-            </tr>
-          {{/each}}
-          </tbody>
-        </table>
-        {{else}}
-        <h5 class="text-muted">No events</h5>
-        {{/if}}
-      </div>
-      <div class="col-md-5 col-sm-5 col-xs-12">
-        <h4>Goal summary</h4>
-        {{#if scenario.report.goals.length}}
-          <ul class="list-group">
-            {{#each scenario.report.goals as |goal|}}
-            <li class="list-group-item">{{goal.name}} <span class="badge">{{goal.count}} hit{{pluralize goal.count}}</span></li>
-            {{/each}}
-          </ul>
-        {{else}}
-        <h4 class="text-muted pad">No goals</h4>
-        {{/if}}
+  <div class="pad-bottom">
+    <h3>{{scenario.template.name}}&nbsp;<small>({{when-empty scenario.group.name "No group"}})</small> <span class="badge">{{scenario.report.victims.total}} victim{{pluralize scenario.report.victims.total}}</span></h3>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row left-border">
+        <div class="col-md-7 col-sm-7 col-xs-12">
+          <h4>Last events</h4>
+          {{#if scenario.events.length}}
+            <table class="table table-hover">
+              <tbody>
+              {{#each scenario.events as |event|}}
+                <tr>
+                  <td class="col-md-5 col-sm-6 hidden-xs">{{#link-to "campaigns.campaign.victims.victim.index" event.victim}}{{event.victim.displayName}}{{/link-to}}</td>
+                  <td class="hidden-md hidden-sm col-xs-6 hidden-lg">{{#link-to "campaigns.campaign.victims.victim.index" event.victim}}{{event.victim.email}}{{/link-to}}</td>
+                  <td class="col-md-4 col-sm-6 col-xs-6">{{event.goal.name}}</td>
+                  <td class="col-md-3 hidden-sm hidden-xs">{{event.reportedDateString}}</td>
+                </tr>
+              {{/each}}
+              </tbody>
+            </table>
+          {{else}}
+            <h5 class="text-muted">No events</h5>
+          {{/if}}
+        </div>
+        <div class="col-md-5 col-sm-5 col-xs-12">
+          <h4>Goal summary</h4>
+          {{#if scenario.report.goals.length}}
+            <ul class="list-group">
+              {{#each scenario.report.goals as |goal|}}
+                <li class="list-group-item container-fluid">
+                  <div class="row">
+                    <div class="col-md-9 col-sm-8 col-xs-9 ellipsis">{{goal.name}}</div>
+                    <div class="col-md-3 col-sm-4 col-xs-3 text-right"><span class="badge">{{goal.count}}&nbsp;hit{{pluralize goal.count}}</span></div>
+                  </div>
+                </li>
+              {{/each}}
+            </ul>
+          {{else}}
+            <h4 class="text-muted pad">No goals</h4>
+          {{/if}}
+        </div>
       </div>
     </div>
   </div>
-</div>
 {{else}}
-<div class="pad-bottom">
-  <h3 class="text-muted">No scenarios</h3>
-  <p class="text-muted">Use <b>Campaign</b> drop-down list to add new scenario to this campaign</p>
-</div>
+  <div class="pad-bottom">
+    <h3 class="text-muted">No scenarios</h3>
+    <p class="text-muted">Use <b>Campaign</b> drop-down list to add new scenario to this campaign</p>
+  </div>
 {{/each}}

@@ -243,3 +243,7 @@ div.tooltip-inner {
     padding-left: 0;
   }
 }
+
+@media (max-width: 767px) {
+  .text-left-sm { text-align: left }
+}

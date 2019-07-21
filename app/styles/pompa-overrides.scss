@@ -5,7 +5,6 @@
 /* move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
-  font-family: 'Noto Sans', sans-serif;
 }
 
 /* global add-ons */
@@ -44,7 +43,8 @@ body {
   }
 }
 
-/* Sidebar navigation */
+/* sidebar navigation */
+
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
   margin-bottom: 20px;
@@ -84,6 +84,12 @@ body {
   }
 }
 
+/* override font for ace editor */
+
+.ace_editor, .ace_editor * {
+  font-family: $font-family-monospace;
+}
+
 /* custom styles */
 
 .table {
@@ -121,7 +127,7 @@ textarea {
 }
 
 .text-mono {
-  font-family: monospace;
+  font-family: $font-family-monospace;
 }
 
 div.tooltip-inner {

@@ -11,7 +11,8 @@ export default Controller.extend({
 
     /* actions */
     groupChanged: function(value) {
-      this.model.set('group', this.groups.findBy('id', value));
+      this.set('model.group', this.groups.findBy('id', value));
+      this.set('model.errors.group_id', undefined);
     },
     cancel: function(deferred) {
       deferred.resolve();
@@ -30,13 +31,10 @@ export default Controller.extend({
       }, function(response) {
         if (response.errors) {
           let hash = errorsArrayToHash(response.errors);
-          let errors = {};
 
           Object.keys(hash).forEach(function(k) {
-            errors[k] = hash[k].map((v) => { return { message: v } });
+            self.model.errors.set(k, hash[k].map((v) => { return { message: v } }));
           });
-
-          self.set('errors', errors);
         }
 
         deferred.reject();

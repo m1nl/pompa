@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import Object from '@ember/object';
+import EmberObject from '@ember/object';
 import { isBlank } from '@ember/utils';
 
 export default Route.extend({
@@ -36,7 +36,11 @@ export default Route.extend({
 
     filter['filter']['scenario_id'] = scenario.id;
 
-    return Object.create({ filter: filter, group: null });
+    return EmberObject.create({
+      filter: filter,
+      group: null,
+      errors: EmberObject.create(),
+    });
   },
   setupController: function(controller) {
     this._super(...arguments);

@@ -1,6 +1,6 @@
 {{#bootstrap-modal title="Create targets from filtered victims" actionTitle="Create" cancel=(action "cancel") action=(action "save") close=(route-action "back")}}
   <div class="form">
-    {{#validation-group label="Group" for="group" errors=errors.group_id}}
+    {{#validation-group label="Group" for="group" errors=model.errors.group_id}}
       <select class="form-control" id="group" onchange={{action "groupChanged" value="target.value"}}>
         <option>-- not specified --</option>
         {{#each sortedGroups as |group|}}

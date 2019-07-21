@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
-import { sort, alias } from '@ember/object/computed';
+import { sort } from '@ember/object/computed';
 import { assign } from '@ember/polyfills';
-import { errorsHashToArray, errorsArrayToHash } from '@ember-data/adapter/error'
+import { errorsArrayToHash } from '@ember-data/adapter/error'
 
 export default Controller.extend({
   /* properties */

@@ -232,11 +232,26 @@ div.tooltip-inner {
   }
 
   .text-right-sm {
-    text-align: right
+    text-align: right;
   }
 
   .dropdown-menu-right-sm {
     left: auto;
     right: 0;
   }
+}
+
+@media (max-width: $screen-xs-max) {
+  .text-center-xs-only {
+    text-align: center;
+  }
+
+	.nav-pills > li {
+		float: none;
+	}
+
+  .pad-bottom-xs-only {
+    padding-bottom: 1.2em;
+  }
+
 }

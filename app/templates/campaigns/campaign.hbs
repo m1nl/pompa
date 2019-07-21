@@ -16,7 +16,7 @@
 </div>
 <hr>
 <ul class="nav nav-pills small">
-  {{#link-to "campaigns.campaign.index" model tagName="li"}}<a href><b>Campaign</b></a>{{/link-to}}
+  {{#link-to "campaigns.campaign.index" model tagName="li"}}<a href><b>Campaign&nbsp;dashboard</b></a>{{/link-to}}
   {{#each (persisted-records sortedScenarios) as |scenario|}}
     {{#link-to "campaigns.campaign.scenarios.scenario.index" scenario tagName="li"}}
       <a href>{{scenario.template.name}}<small>&nbsp;&raquo;&nbsp;{{when-empty scenario.group.name "No group"}}</small></a>

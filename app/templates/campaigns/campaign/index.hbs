@@ -1,11 +1,12 @@
 {{#each (persisted-records sortedScenarios) as |scenario|}}
   <div class="pad-bottom">
-    <h3>{{scenario.template.name}}&nbsp;<small>({{when-empty scenario.group.name "No group"}})</small> <span class="badge">{{scenario.report.victims.total}} victim{{pluralize scenario.report.victims.total}}</span></h3>
+    <h3>{{scenario.template.name}}</h3>
+    <h4><span class="text-muted">targeted&nbsp;at {{when-empty scenario.group.name "(deleted group)"}}</span>&nbsp;<span class="badge">{{scenario.report.victims.total}}&nbsp;victim{{pluralize scenario.report.victims.total}}</span></h4>
   </div>
   <div class="panel panel-default">
     <div class="panel-body">
-      <div class="row left-border-sm">
-        <div class="col-md-7 col-sm-7 col-xs-12">
+      <div class="row border-left-sm box-left-sm">
+        <div class="col-sm-7 col-xs-12">
           <h4>Last events</h4>
           {{#if scenario.events.length}}
             <table class="table table-hover">
@@ -24,22 +25,17 @@
             <h5 class="text-muted">No events</h5>
           {{/if}}
         </div>
-        <div class="col-md-5 col-sm-5 col-xs-12">
+        <div class="col-sm-5 col-xs-12">
           <h4>Goal summary</h4>
-          {{#if scenario.report.goals.length}}
-            <ul class="list-group">
-              {{#each scenario.report.goals as |goal|}}
-                <li class="list-group-item container-fluid">
-                  <div class="row">
-                    <div class="col-md-9 col-sm-8 col-xs-9 ellipsis">{{goal.name}}</div>
-                    <div class="col-md-3 col-sm-4 col-xs-3 text-right"><span class="badge">{{goal.count}}&nbsp;hit{{pluralize goal.count}}</span></div>
-                  </div>
-                </li>
-              {{/each}}
-            </ul>
+          <div class="visible-xs-inline"><hr></div>
+          {{#each (sort-by 'score' scenario.report.goals) as |goal|}}
+            <div class="row pad border-left-sm box-left-sm">
+              <div class="col-md-9 col-sm-8 col-xs-9 ellipsis">{{goal.name}}</div>
+              <div class="col-md-3 col-sm-4 col-xs-3 text-right"><span class="badge">{{goal.count}}&nbsp;hit{{pluralize goal.count}}</span></div>
+            </div>
           {{else}}
-            <h4 class="text-muted pad">No goals</h4>
-          {{/if}}
+            <h5 class="text-muted">No goals</h5>
+          {{/each}}
         </div>
       </div>
     </div>

@@ -27,7 +27,7 @@
         {{#if (gt scenario.template.goals.length 0)}}
           {{#bootstrap-collapse label="Advanced filtering" collapsed=(not advancedFiltering) triggered=(action "toggleAdvancedFiltering")}}
             <div class="container-fluid">
-              {{#each scenario.template.goals as |goal|}}
+              {{#each (sort-by 'score' scenario.template.goals) as |goal|}}
                 <div class="row no-gutters pad-top">
                   <div class="col-lg-8 col-sm-7 col-xs-8 ellipsis">
                     {{goal.name}}
@@ -60,10 +60,10 @@
         <tr>
           <th class="col-md-2 hidden-sm hidden-xs">First name</th>
           <th class="col-md-2 hidden-sm hidden-xs">Last name</th>
-          <th class="col-md-2 col-sm-4 col-xs-6">Email</th>
-          <th class="col-md-1 col-sm-2 col-xs-3 text-center">State</th>
+          <th class="col-md-2 col-sm-4 col-xs-8">Email</th>
+          <th class="col-md-1 col-sm-2 col-xs-2 text-center">State</th>
           <th class="col-md-3 col-sm-4 hidden-xs">Details</th>
-          <th class="col-md-1 col-sm-1 col-xs-1 text-center">Score</th>
+          <th class="col-md-1 col-sm-1 hidden-xs text-center">Score</th>
           <th class="col-md-1 col-sm-1 col-xs-2 text-center">Actions</th>
         </tr>
       </thead>
@@ -72,10 +72,10 @@
           <tr>
             <td class="col-md-2 hidden-sm hidden-xs">{{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.index" victim}}{{victim.firstName}}{{/link-to}}</td>
             <td class="col-md-2 hidden-sm hidden-xs">{{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.index" victim}}{{victim.lastName}}{{/link-to}}</td>
-            <td class="col-md-3 col-sm-4 col-xs-6">{{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.index" victim}}{{victim.email}}{{/link-to}}</td>
-            <td class="col-md-1 col-sm-2 col-xs-3 text-center"><div class={{victim-state-class victim.state}}>{{victim.state}}</div></td>
+            <td class="col-md-3 col-sm-4 col-xs-8">{{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.index" victim}}{{victim.email}}{{/link-to}}</td>
+            <td class="col-md-1 col-sm-2 col-xs-2 text-center"><div class={{victim-state-class victim.state}}>{{victim.state}}</div></td>
             <td class="col-md-3 col-sm-4 hidden-xs">{{when-empty victim.details "None"}}</td>
-            <td class="col-md-1 col-sm-1 col-xs-1 text-center">{{victim.report.total_score}}</td>
+            <td class="col-md-1 col-sm-1 hidden-xs text-center">{{victim.report.total_score}}</td>
             <td class="col-md-1 col-sm-1 col-xs-2 text-center">
               <a href {{action "resetVictimState" victim}}>{{fa-icon "repeat"}}</a>
               {{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.delete" victim}}{{fa-icon "trash"}}{{/link-to}}

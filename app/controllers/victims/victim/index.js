@@ -28,6 +28,10 @@ export default Controller.extend({
       sort: ['-reported_date', 'id']
     });
 
+    let report = yield this.model.belongsTo('report').reload();
+
+    this.set('report', report);
+
     let events = yield this.model.hasMany('events').reload();
 
     this.set('events', events);

@@ -29,27 +29,35 @@
       </div>
     </div>
   </div>
-  {{#if model.details}}
   <hr>
   <div class="form">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <div class="form-group">
-          <label class="control-label" for="details">Detailed State</label>
-          <p id="details" class="form-control-static">{{model.details}}&nbsp;<div class={{victim-state-class model.state}}>{{model.state}}</div></p>
+          <label class="control-label" for="details">Detailed state</label>
+          <p id="details" class="form-control-static">
+            {{when-empty model.details "None"}}&nbsp;<div class={{victim-state-class model.state}}>{{model.state}}</div>
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="control-label" for="score">Total score</label>
+          <p id="score" class="form-control-static">
+            {{when-empty report.total_score "-"}}
+          </p>
         </div>
       </div>
     </div>
   </div>
-  {{/if}}
   <hr>
   <div class="pull-right">
     <a href {{action "refresh"}}>{{fa-icon "refresh" spin=busy size="lg"}}</a>
   </div>
   {{#if events}}
-  <h4>Events</h4>
-  {{event-list model=events}}
+    <h4>Events</h4>
+    {{event-list model=events}}
   {{else}}
-  <h4 class="text-muted">No events</h4>
+    <h4 class="text-muted">No events</h4>
   {{/if}}
 {{/bootstrap-modal}}

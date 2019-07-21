@@ -24,7 +24,7 @@ export default DS.Model.extend(NumericIdModel, {
   }),
   eventSeries: function(timespan, dateFrom, dateTo) {
     return RSVP.hash({
-      goals: this.template.then(template => template.goals).then(goals => goals.sortBy('id')),
+      goals: this.template.then(template => template.goals).then(goals => goals.sortBy('score')),
       rawData: this.eventSeriesRawData(timespan, dateFrom, dateTo),
     }).then(rawResult => {
       let goals = rawResult.goals;

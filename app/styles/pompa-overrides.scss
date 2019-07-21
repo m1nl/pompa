@@ -227,11 +227,13 @@ div.tooltip-inner {
 }
 
 @media (min-width: $screen-sm-min) {
-  .left-border-sm {
-    margin-left: .2em;
-    margin-bottom: .2em;
-    padding-left: .2em;
+  .border-left-sm {
     border-left: .5em solid #f1f1f1;
+  }
+
+  .box-left-sm {
+    margin-left: .3em;
+    padding-left: .3em;
   }
 
   .pull-right-sm {
@@ -260,5 +262,4 @@ div.tooltip-inner {
   .pad-bottom-xs-only {
     padding-bottom: 1.2em;
   }
-
 }

@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import ApplicationAdapter from 'pompa/adapters/application';
 
 export default ApplicationAdapter.extend({

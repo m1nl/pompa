@@ -1,48 +1,41 @@
-import { isBlank } from '@ember/utils';
+import Controller from '@ember/controller';
 import { observer, computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
-import Controller from '@ember/controller';
+import { isBlank } from '@ember/utils';
 import { task, all, timeout } from 'ember-concurrency';
 
 const DEBOUNCE_MS = 1000;
 
 export default Controller.extend({
+  /* aliases */
+  group: alias('model'),
+
+  /* query params */
   queryParams: {
     requestedPage: 'page',
     requestedQuicksearch: 'quicksearch',
   },
+
+  /* properties */
   requestedPage: 1,
   requestedQuicksearch: '',
   currentPage: 1,
   totalPages: 1,
   quicksearch: '',
-  group: alias('model'),
   modelDirty: true,
-  busy: computed('reloadTargetsTask.isRunning', function() {
-    return this.get('reloadTargetsTask.isRunning');
-  }),
+
+  /* observers */
   modelObserver: observer('model', function() {
     this.set('modelDirty', true);
     this.set('targets', null);
   }),
-  pageObserver: observer('requestedPage', function() {
-    if (this.modelDirty) {
-      return;
-    }
 
-    this.reloadTargetsTask.perform();
+  /* computed properties */
+  busy: computed('reloadTargetsTask.isRunning', function() {
+    return this.get('reloadTargetsTask.isRunning');
   }),
-  filterObserver: observer('requestedQuicksearch', function() {
-    if (this.modelDirty) {
-      return;
-    }
 
-    this.set('requestedPage', 1);
-    this.reloadTargetsTask.perform();
-  }),
-  quicksearchObserver: observer('quicksearch', function() {
-    this.quicksearchDebounceTask.perform();
-  }),
+  /* tasks */
   reloadTargetsTask: task(function * () {
     if (!this.model) {
       return;
@@ -73,16 +66,30 @@ export default Controller.extend({
     }
 
     this.set('requestedQuicksearch', this.quicksearch);
+    this.set('requestedPage', 1);
+
+    this.reloadTargetsTask.perform();
   }).restartable(),
+
+  /* methods */
   refresh: function() {
     return this.refreshTask.perform();
   },
   actions: {
+
+    /* actions */
     pageChanged: function(page) {
       this.set('requestedPage', page);
+
+      this.reloadTargetsTask.perform();
+    },
+    quicksearchChanged: function() {
+      this.quicksearchDebounceTask.perform();
     },
     clearQuicksearch: function() {
       this.set('quicksearch', '');
+
+      this.quicksearchDebounceTask.perform();
     },
   }
 });

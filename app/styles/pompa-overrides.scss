@@ -1,36 +1,33 @@
 // app/overrides.scss
 
-/* Move down content because we have a fixed navbar that is 50px tall */
+/* body */
+
+/* move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
 }
 
-/*
- * Global add-ons
- */
+/* global add-ons */
 
 .sub-header {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
 
-/*
- * Top navigation
- * Hide default border to remove 1px line.
- */
+/* top navigation */
+
+/* hide default border to remove 1px line */
 .navbar-fixed-top {
   border: 0;
 }
 
-/*
- * Sidebar
- */
+/* sidebar */
 
-/* Hide for mobile, show later */
+/* hide for mobile, show later */
 .sidebar {
   display: none;
 }
-@media (min-width: 768px) {
+@media (min-width: $screen-sm-min) {
   .sidebar {
     position: fixed;
     top: 51px;
@@ -40,7 +37,7 @@ body {
     display: block;
     padding: 20px;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    overflow-y: auto; /* scrollable contents if viewport is shorter than content */
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
   }
@@ -69,9 +66,7 @@ body {
   }
 }
 
-/*
- * Main content
- */
+/* main content */
 
 .main {
   padding: 20px;
@@ -81,14 +76,14 @@ body {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: $screen-sm-min) {
   .main {
     padding-right: 40px;
     padding-left: 40px;
   }
 }
 
-/* Custom styles */
+/* custom styles */
 
 .table {
   width: 100%;
@@ -212,26 +207,6 @@ div.tooltip-inner {
   height: 50vh;
 }
 
-@media (min-width: $screen-sm-min) {
-  .left-border {
-    margin-left: .2em;
-    margin-bottom: .2em;
-    padding-left: .2em;
-    border-left: .5em solid #f1f1f1;
-  }
-}
-
-@media (min-width: $screen-sm-min) {
-  .pull-right-sm {
-    float: right;
-  }
-
-  .dropdown-menu-right-sm {
-    left: auto;
-    right: 0;
-  }
-}
-
 .fa-lg {
   vertical-align: -10%!important;
 }
@@ -244,6 +219,24 @@ div.tooltip-inner {
   }
 }
 
-@media (max-width: 767px) {
-  .text-left-sm { text-align: left }
+@media (min-width: $screen-sm-min) {
+  .left-border-sm {
+    margin-left: .2em;
+    margin-bottom: .2em;
+    padding-left: .2em;
+    border-left: .5em solid #f1f1f1;
+  }
+
+  .pull-right-sm {
+    float: right;
+  }
+
+  .text-right-sm {
+    text-align: right
+  }
+
+  .dropdown-menu-right-sm {
+    left: auto;
+    right: 0;
+  }
 }

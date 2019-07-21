@@ -1,10 +1,10 @@
-import { isBlank, isNone } from '@ember/utils';
-import { observer, computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import ConfirmationModalController from 'pompa/mixins/confirmation-modal-controller';
-import { task, all, timeout } from 'ember-concurrency';
 import Moment from 'moment';
+import { observer, computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
+import { isBlank, isNone } from '@ember/utils';
+import { task, all, timeout } from 'ember-concurrency';
 
 const DEBOUNCE_MS = 1000;
 const AUTO_REFRESH_DELAY = 3000;
@@ -253,8 +253,6 @@ export default Controller.extend(ConfirmationModalController, {
     this.set('requestedDateFrom', dateFrom);
     this.set('requestedDateTo', dateTo);
   },
-  syncRequestedGoalFilter: function() {
-    },
   actions: {
 
     /* actions */
@@ -283,6 +281,8 @@ export default Controller.extend(ConfirmationModalController, {
     },
     clearQuicksearch: function() {
       this.set('quicksearch', '');
+
+      this.quicksearchDebounceTask.perform();
     },
     toggleAutoRefresh: function() {
       this.set('autoRefresh', !this.autoRefresh);

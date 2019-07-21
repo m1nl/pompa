@@ -8,25 +8,27 @@ const MAX_EVENTS = 10;
 const AUTO_REFRESH_DELAY = 3000;
 
 export default Controller.extend(ConfirmationModalController, {
-  autoRefresh: false,
+  /* aliases */
   campaign: alias('model'),
+
+  /* properties */
+  autoRefresh: false,
   scenariosSorting: Object.freeze(['numericId']),
   sortedScenarios: sort('scenarios', 'scenariosSorting'),
   modelDirty: true,
-  busy: computed('reloadScenariosTask.isRunning', function() {
-    return this.get('reloadScenariosTask.isRunning');
-  }),
+
+  /* observers */
   modelObserver: observer('model', function() {
     this.set('modelDirty', true);
     this.set('scenarios', null);
   }),
-  autoRefreshObserver: observer('autoRefresh', function() {
-    if (this.autoRefresh) {
-      this.autoRefreshTask.perform();
-    } else {
-      this.autoRefreshTask.cancelAll();
-    }
+
+  /* computed properties */
+  busy: computed('reloadScenariosTask.isRunning', function() {
+    return this.get('reloadScenariosTask.isRunning');
   }),
+
+  /* tasks */
   reloadScenariosTask: task(function * () {
     if (!this.model) {
       return;
@@ -69,10 +71,14 @@ export default Controller.extend(ConfirmationModalController, {
       yield timeout(AUTO_REFRESH_DELAY);
     }
   }).restartable(),
+
+  /* methods */
   refresh: function() {
     return this.refreshTask.perform();
   },
   actions: {
+
+    /* actions */
     refresh: function() {
       this.refresh();
     },
@@ -96,6 +102,12 @@ export default Controller.extend(ConfirmationModalController, {
     },
     toggleAutoRefresh: function() {
       this.set('autoRefresh', !this.autoRefresh);
+
+      if (this.autoRefresh) {
+        this.autoRefreshTask.perform();
+      } else {
+        this.autoRefreshTask.cancelAll();
+      }
     },
   }
 });

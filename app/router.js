@@ -81,10 +81,15 @@ Router.map(function() {
         this.route('scenario', { path: '/:scenario_id' }, function() {
           this.route('edit');
           this.route('delete');
+
           this.route('victims', { path: '/victims' }, function() {
             this.route('victim', { path: '/:victim_id' }, function() {
               this.route('delete');
             });
+          });
+
+          this.route('targets', { path: '/targets' }, function() {
+            this.route('from-victims', { path: '/from-victims' });
           });
         });
         this.route('new');

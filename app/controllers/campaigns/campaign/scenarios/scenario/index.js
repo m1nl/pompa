@@ -110,10 +110,7 @@ export default Controller.extend(ConfirmationModalController, {
       }
     });
 
-    let victimQueryParams = {
-      include: 'report',
-      page: { number: this.requestedPage },
-      sort: ['state_order', 'id'],
+    let victimsFilter = {
       quicksearch: this.requestedQuicksearch,
     };
 
@@ -128,7 +125,17 @@ export default Controller.extend(ConfirmationModalController, {
       filter['!events'] = { goal_id: missGoals.join(',') };
     }
 
-    victimQueryParams['filter'] = filter;
+    victimsFilter['filter'] = filter;
+
+    this.set('victimsFilter', victimsFilter);
+
+    let victimQueryParams = {
+      include: 'report',
+      page: { number: this.requestedPage },
+      sort: ['state_order', 'id'],
+      quicksearch: victimsFilter['quicksearch'],
+      filter: victimsFilter['filter'],
+    };
 
     this.scenario.set('victim-query-params', victimQueryParams);
 

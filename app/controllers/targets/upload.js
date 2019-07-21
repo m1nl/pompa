@@ -23,7 +23,7 @@ export default Controller.extend({
         deferred.resolve();
       }, function(response) {
         if (response.body && response.body.errors && response.body.errors.file) {
-          let errors = response.body.errors.file.map((v) => { return { message: v } })
+          let errors = response.body.errors.file.map((v) => { return { message: v } });
           self.set('errors', errors);
         }
         deferred.reject();

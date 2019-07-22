@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-import { sort } from '@ember/object/computed';
 import { assign } from '@ember/polyfills';
 import { errorsArrayToHash } from '@ember-data/adapter/error'
 

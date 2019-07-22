@@ -9,7 +9,7 @@ export default Controller.extend({
     },
     savePlaintext: function(deferred) {
       if (!isNone(this.draftPlaintext)) {
-        this.model.set('plaintext', this.draftPlaintext);
+        this.set('model.plaintext', this.draftPlaintext);
       }
       deferred.resolve();
     },
@@ -22,7 +22,7 @@ export default Controller.extend({
     },
     saveHtml: function(deferred) {
       if (!isNone(this.draftHtml)) {
-        this.model.set('html', this.draftHtml);
+        this.set('model.html', this.draftHtml);
       }
       deferred.resolve();
     },

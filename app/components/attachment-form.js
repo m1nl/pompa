@@ -4,12 +4,15 @@ import { computed } from '@ember/object';
 import Component from '@ember/component';
 
 export default Component.extend({
+  /* properties */
   classNames: ['form'],
   classNameBindings: ['hasErrors:has-error'],
   hasErrors: computed('model.errors.record', function() {
     return !isEmpty(this.get('model.errors.record'));
   }),
   actions: {
+
+    /* actions */
     resourceChanged: function(value) {
       this.set('model.resource', this.resources.findBy('id', value));
     },

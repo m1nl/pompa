@@ -8,8 +8,8 @@
   </div><!--
   --><div class="col-sm-5 col-md-5 col-xs-12 small vertical-align">
     <ul class="nav nav-pills pull-right-sm">
-      <li role="presentation" class="active"><a data-toggle="pill" href="#details">Details</a></li>
-      <li role="presentation"><a data-toggle="pill" href="#timeseries">Time series</a></li>
+      <li role="presentation" class="active"><a class="nav-link" data-toggle="pill" href="#details">Details</a></li>
+      <li role="presentation" class="{{if goalsExist '' 'disabled'}}"><a data-toggle="pill" href="#timeseries">Time series</a></li>
     </ul>
   </div>
 </div>
@@ -24,7 +24,7 @@
             {{fa-icon "times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
           </div>
         </div>
-        {{#if (gt scenario.template.goals.length 0)}}
+        {{#if goalsExist}}
           {{#bootstrap-collapse label="Advanced filtering" collapsed=(not advancedFiltering) triggered=(action "toggleAdvancedFiltering")}}
             <div class="container-fluid">
               {{#each (sort-by 'score' scenario.template.goals) as |goal|}}

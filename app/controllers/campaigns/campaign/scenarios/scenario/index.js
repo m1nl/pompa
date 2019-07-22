@@ -65,6 +65,9 @@ export default Controller.extend(ConfirmationModalController, {
     }
     return this.dateFrom.format('YYYY-MM-DD');
   }),
+  goalsExist: computed('scenario.template.goals.length', function() {
+    return this.get('scenario.template.goals.length') > 0;
+  }),
 
   /* tasks */
   reloadModelsTask: task(function * () {

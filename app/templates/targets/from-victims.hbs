@@ -3,7 +3,7 @@
     {{#validation-group label="Group" for="group" errors=model.errors.group_id}}
       <select class="form-control" id="group" onchange={{action "groupChanged" value="target.value"}}>
         <option>-- not specified --</option>
-        {{#each sortedGroups as |group|}}
+        {{#each (sort-by "name" groups) as |group|}}
           <option value={{group.id}} selected={{eq model.group.id group.id}}>{{group.name}}</option>
         {{/each}}
       </select>

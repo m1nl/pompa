@@ -4,8 +4,8 @@
 {{#validation-group label="Resource" for="resource" errors=model.errors.resource}}
   <select class="form-control" id="resource" onchange={{action "resourceChanged" value="target.value"}}>
     <option>-- not specified --</option>
-    {{#each resources as |resource|}}
-    <option value={{resource.id}} selected={{eq model.resource.id resource.id}}>{{resource.name}}</option>
+    {{#each (sort-by "name" resources) as |resource|}}
+      <option value={{resource.id}} selected={{eq model.resource.id resource.id}}>{{resource.name}}</option>
     {{/each}}
   </select>
 {{/validation-group}}

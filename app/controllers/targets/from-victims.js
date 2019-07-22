@@ -4,9 +4,6 @@ import { assign } from '@ember/polyfills';
 import { errorsArrayToHash } from '@ember-data/adapter/error'
 
 export default Controller.extend({
-  /* properties */
-  groupsSorting: Object.freeze(['numericId']),
-  sortedGroups: sort('groups', 'groupsSorting'),
   actions: {
 
     /* actions */

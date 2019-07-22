@@ -226,6 +226,10 @@ div.tooltip-inner {
   }
 }
 
+.nav > li.disabled > a {
+  pointer-events: none;
+}
+
 @media (min-width: $screen-sm-min) {
   .border-left-sm {
     border-left: .5em solid #f1f1f1;

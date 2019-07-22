@@ -23,7 +23,7 @@ export default Controller.extend({
       return;
     }
 
-    this.model.set('event-query-params', {
+    this.set('model.event-query-params', {
       include: ['victim', 'goal'],
       sort: ['-reported_date', 'id']
     });

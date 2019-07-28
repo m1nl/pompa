@@ -1,4 +1,4 @@
-import ActiveModelAdapter from 'active-model-adapter';
+import ActiveModelAdapter from 'pompa/adapters/active-model-adapter';
 import ENV from "../config/environment";
 
 export default ActiveModelAdapter.extend({

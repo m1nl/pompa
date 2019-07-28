@@ -1,4 +1,4 @@
-import { ActiveModelSerializer } from 'active-model-adapter';
+import ActiveModelSerializer from 'pompa/serializers/active-model-serializer';
 
 export default ActiveModelSerializer.extend({
 });

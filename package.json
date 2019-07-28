@@ -21,7 +21,6 @@
   "devDependencies": {
     "@ember/jquery": "^0.6.1",
     "@ember/optional-features": "^0.7.0",
-    "active-model-adapter": "github:ember-data/active-model-adapter",
     "bootstrap-sass": "^3.4.1",
     "bootstrap-toggle": "^2.2.2",
     "broccoli-asset-rev": "^3.0.0",
@@ -54,6 +53,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-file-upload": "^2.7.1",
     "ember-font-awesome": "^3.1.1",
+    "ember-inflector": "^3.0.1",
     "ember-load-initializers": "^2.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-model-validator": "^3.9.0",

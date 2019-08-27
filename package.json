@@ -54,7 +54,7 @@
     "ember-file-upload": "^2.7.1",
     "ember-font-awesome": "^3.1.1",
     "ember-inflector": "^3.0.1",
-    "ember-load-initializers": "^2.0.0",
+    "ember-load-initializers": "^2.1.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-model-validator": "^3.9.0",
     "ember-qunit": "^4.5.1",

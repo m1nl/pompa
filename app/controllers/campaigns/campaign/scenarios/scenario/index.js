@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import ConfirmationModalController from 'pompa/mixins/confirmation-modal-controller';
 import Moment from 'moment';
-import { observer, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { isBlank, isNone } from '@ember/utils';
 import { task, all, timeout } from 'ember-concurrency';

@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { observer, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 import { task, all, timeout } from 'ember-concurrency';
@@ -22,13 +22,6 @@ export default Controller.extend({
   currentPage: 1,
   totalPages: 1,
   quicksearch: '',
-  modelDirty: true,
-
-  /* observers */
-  modelObserver: observer('model', function() {
-    this.set('modelDirty', true);
-    this.set('targets', null);
-  }),
 
   /* computed properties */
   busy: computed('reloadTargetsTask.isRunning', function() {
@@ -57,8 +50,6 @@ export default Controller.extend({
     yield all([
       this.reloadTargetsTask.perform(),
     ]);
-
-    this.set('modelDirty', false);
   }).restartable(),
   quicksearchDebounceTask: task(function * () {
     if (!isBlank(this.quicksearch)) {
@@ -74,6 +65,9 @@ export default Controller.extend({
   /* methods */
   refresh: function() {
     return this.refreshTask.perform();
+  },
+  reset: function() {
+    this.set('targets', null);
   },
   actions: {
 

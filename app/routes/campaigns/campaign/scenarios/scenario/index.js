@@ -23,10 +23,18 @@ export default Route.extend({
     }
   },
   resetController: function(controller, isExiting, transition) {
-    if (isExiting && transition.targetName !== 'error') {
-      controller.set('modelDirty', true);
-
-      controller.set('autoRefresh', false);
+    if (isExiting && transition.targetName !== 'error' &&
+      !this.isNestedRoute(transition.targetName)) {
+      controller.reset();
     }
+  },
+  isNestedRoute: function(route) {
+    let routeA = this.routeName;
+    let routeB = route;
+
+    routeA = routeA.replace(/\.index$/, '');
+    routeB = routeB.replace(/\.index$/, '');
+
+    return routeB.startsWith(routeA);
   },
 });

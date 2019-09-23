@@ -24,7 +24,7 @@ export default Route.extend({
   },
   resetController: function(controller, isExiting, transition) {
     if (isExiting && transition.targetName !== 'error') {
-      controller.set('modelDirty', true);
+      controller.reset();
     }
   },
 });

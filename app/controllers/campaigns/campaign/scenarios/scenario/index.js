@@ -41,19 +41,6 @@ export default Controller.extend(ConfirmationModalController, {
   dateTo: null,
   autoRefresh: false,
   advancedFiltering: false,
-  modelDirty: true,
-
-  /* observers */
-  modelObserver: observer('model', function() {
-    this.set('modelDirty', true);
-
-    this.set('victims', null);
-    this.set('report', null);
-
-    this.set('goalFilter', {});
-    this.set('chartSeries', null);
-    this.set('chartData', null);
-  }),
 
   /* computed properties */
   busy: computed('reloadVictimsTask.isRunning', 'reloadReportTask.isRunning', 'reloadEventSeriesTask.isRunning', function() {
@@ -195,8 +182,6 @@ export default Controller.extend(ConfirmationModalController, {
       this.reloadReportTask.perform(),
       this.reloadEventSeriesTask.perform(),
     ]);
-
-    this.set('modelDirty', false);
   }).restartable(),
   autoRefreshTask: task(function * () {
     while (this.autoRefresh) {
@@ -233,6 +218,14 @@ export default Controller.extend(ConfirmationModalController, {
   },
   refresh: function() {
     this.refreshTask.perform();
+  },
+  reset: function() {
+    this.set('victims', null);
+    this.set('report', null);
+
+    this.set('goalFilter', {});
+    this.set('chartSeries', null);
+    this.set('chartData', null);
   },
   seriesDelta: function(diff) {
     let minDateFrom = Moment(this.campaign.get('startedDate') || Moment(0));

@@ -1,17 +1,8 @@
 import Controller from '@ember/controller';
-import { observer, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { task, all } from 'ember-concurrency';
 
 export default Controller.extend({
-  /* properties */
-  modelDirty: true,
-
-  /* observers */
-  modelObserver: observer('model', function() {
-    this.set('modelDirty', true);
-    this.set('events', null);
-  }),
-
   /* computed properties */
   busy: computed('reloadEventsTask.isRunning', function() {
     return this.reloadEventsTask.isRunning;
@@ -40,13 +31,14 @@ export default Controller.extend({
     yield all([
       this.reloadEventsTask.perform(),
     ]);
-
-    this.set('modelDirty', false);
   }),
 
   /* methods */
   refresh: function() {
     return this.refreshTask.perform();
+  },
+  reset: function() {
+    this.set('events', null);
   },
   actions: {
 

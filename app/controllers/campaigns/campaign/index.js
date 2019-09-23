@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import ConfirmationModalController from 'pompa/mixins/confirmation-modal-controller';
-import { computed, observer } from '@ember/object';
+import { computed } from '@ember/object';
 import { sort, alias } from '@ember/object/computed';
 import { task, all, timeout } from 'ember-concurrency';
 
@@ -15,13 +15,6 @@ export default Controller.extend(ConfirmationModalController, {
   autoRefresh: false,
   scenariosSorting: Object.freeze(['numericId']),
   sortedScenarios: sort('scenarios', 'scenariosSorting'),
-  modelDirty: true,
-
-  /* observers */
-  modelObserver: observer('model', function() {
-    this.set('modelDirty', true);
-    this.set('scenarios', null);
-  }),
 
   /* computed properties */
   busy: computed('reloadScenariosTask.isRunning', function() {
@@ -59,8 +52,6 @@ export default Controller.extend(ConfirmationModalController, {
     yield all([
       this.reloadScenariosTask.perform(),
     ]);
-
-    this.set('modelDirty', false);
   }).restartable(),
   autoRefreshTask: task(function * () {
     while (this.autoRefresh) {
@@ -75,6 +66,9 @@ export default Controller.extend(ConfirmationModalController, {
   /* methods */
   refresh: function() {
     return this.refreshTask.perform();
+  },
+  reset: function() {
+    this.set('scenarios', null);
   },
   actions: {
 

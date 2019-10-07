@@ -19,7 +19,7 @@
     "test": "ember test"
   },
   "devDependencies": {
-    "@ember/jquery": "^1.0.0",
+    "@ember/jquery": "^1.1.0",
     "@ember/optional-features": "^1.0.0",
     "bootstrap-sass": "^3.4.1",
     "bootstrap-toggle": "^2.2.2",

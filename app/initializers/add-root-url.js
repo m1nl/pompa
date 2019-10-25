@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import Controller from '@ember/controller';
-import ENV from '../config/environment'
+import ENV from '../config/environment';
 
 let alreadyRun = false;
 

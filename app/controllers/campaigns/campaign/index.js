@@ -1,3 +1,4 @@
+import ENV from '../../../config/environment';
 import Controller from '@ember/controller';
 import ConfirmationModalController from 'pompa/mixins/confirmation-modal-controller';
 import { computed } from '@ember/object';
@@ -69,6 +70,10 @@ export default Controller.extend(ConfirmationModalController, {
   },
   reset: function() {
     this.set('scenarios', null);
+  },
+  init: function() {
+    this._super(...arguments);
+    this.set('campaignChallenge', ENV.APP.campaignChallenge);
   },
   actions: {
 

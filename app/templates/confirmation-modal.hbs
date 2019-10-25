@@ -1,3 +1,12 @@
-{{#bootstrap-modal title=confirmationTitle actionTitle="OK" close=(route-action "removeModal") action=confirmationAction}}
+{{#bootstrap-modal title=confirmationTitle actionTitle="OK" close=(route-action "removeModal") action=confirmationAction actionEnabled=(eq confirmationResponse confirmationChallenge)}}
   {{confirmationText}}
+  {{#if confirmationChallenge}}
+    <hr>
+    <div class="form">
+      <div class="form-group">
+        <p class="no-select">Please enter <b>{{confirmationChallenge}}</b> into following box to confirm.</p>
+        {{input value=confirmationResponse id="response" class="form-control"}}
+      </div>
+    </div>
+  {{/if}}
 {{/bootstrap-modal}}

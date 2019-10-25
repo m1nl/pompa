@@ -32,6 +32,7 @@ module.exports = function(environment) {
 
     ENV.APP.apiHost = "http://localhost:3000"
     ENV.APP.apiNamespace = "api"
+    ENV.APP.campaignChallenge = "yes";
   }
 
   if (environment === 'staging') {
@@ -43,11 +44,13 @@ module.exports = function(environment) {
 
     ENV.APP.apiHost = "http://localhost:3000"
     ENV.APP.apiNamespace = "api"
+    ENV.APP.campaignChallenge = "yes";
   }
 
   if (environment === 'production') {
     ENV.APP.apiHost = "http://localhost:3000"
     ENV.APP.apiNamespace = "api"
+    ENV.APP.campaignChallenge = "yes";
   }
 
   if (environment === 'test') {

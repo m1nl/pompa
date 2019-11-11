@@ -7,6 +7,10 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('authentication');
+  this.route('forbidden');
+  this.route('logged-out');
+
   this.route('mailers', function() {
     this.route('mailer', { path: '/:mailer_id' }, function() {
       this.route('edit');

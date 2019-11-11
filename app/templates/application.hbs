@@ -1,5 +1,5 @@
 {{! app/templates/application.hbs}}
-{{nav-bar}}
+{{nav-bar user=user onLogOut=(action 'logOut')}}
 <div class="root-container container">
   {{outlet}}
 </div>

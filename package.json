@@ -70,7 +70,7 @@
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
     "pace-js": "^1.0.2",
-    "qunit-dom": "^0.9.1",
+    "qunit-dom": "^0.9.2",
     "sass": "^1.23.3",
     "twbs-pagination": "github:esimakin/twbs-pagination",
     "uglify-es": "^3.3.9"

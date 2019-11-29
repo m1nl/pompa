@@ -16,6 +16,7 @@
       {{#link-to "groups.index" tagName="li"}}<a href>Groups</a>{{/link-to}}
       {{#link-to "mailers.index" tagName="li"}}<a href>Mailers</a>{{/link-to}}
     </ul>
+    {{#if user}}
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user}}&nbsp;{{fa-icon "caret-down"}}</a>
@@ -24,5 +25,6 @@
         </ul>
       </li>
     </ul>
+    {{/if}}
   </div>
 </div>

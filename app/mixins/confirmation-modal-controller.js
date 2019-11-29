@@ -11,7 +11,7 @@ export default Mixin.create({
       this.set('confirmationChallenge', challenge || '');
       this.set('confirmationResponse', '');
 
-      this.send('showModal', 'confirmation-modal', null, this);
+      this.send('showModal', 'confirmation-modal', this.model, this);
     },
   },
 });

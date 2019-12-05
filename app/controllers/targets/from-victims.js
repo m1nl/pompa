@@ -77,7 +77,7 @@ export default Controller.extend({
 
         let self = this;
         group.save().then(
-          function(group) {
+          function() {
             self.copy(deferred);
           },
           function() {

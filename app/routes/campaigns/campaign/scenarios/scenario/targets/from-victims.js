@@ -49,4 +49,9 @@ export default Route.extend({
 
     controller.set('groups', groups);
   },
+  resetController: function(controller, isExiting, transition) {
+    if (isExiting && transition.targetName !== 'error') {
+      controller.reset();
+    }
+  },
 });

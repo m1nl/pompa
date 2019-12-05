@@ -1,16 +1,26 @@
-{{#bootstrap-modal title="Create targets from filtered victims" actionTitle="Create" cancel=(action "cancel") action=(action "save") close=(route-action "back")}}
+{{#bootstrap-modal title="Copy visible targets to a group" actionTitle="Confirm" cancel=(action "cancel") action=(action "confirm") close=(route-action "back")}}
   <div class="form">
     {{#validation-group label="Group" for="group" errors=model.errors.group_id}}
-      <select class="form-control" id="group" onchange={{action "groupChanged" value="target.value"}}>
+      <select class="form-control {{if newGroup 'disabled' ''}}" id="group" onchange={{action "groupChanged" value="target.value"}} disabled={{newGroup}}>
         <option>-- not specified --</option>
         {{#each (sort-by "name" groups) as |group|}}
           <option value={{group.id}} selected={{eq model.group.id group.id}}>{{group.name}}</option>
         {{/each}}
       </select>
     {{/validation-group}}
-    <div class="form-group">
-      <label class="control-label" for="filter">Filter</label>
-      <p class="form-control-static text-mono" id="filter">{{json-stringify model.filter}}</p>
+    <hr>
+    <div class="checkbox">
+      <label>
+        {{#bootstrap-toggle size="mini" width="50" checked=newGroup changed=(action "newGroupChanged")}} Create new group{{/bootstrap-toggle}}
+      </label>
     </div>
+    {{#if newGroup}}
+      {{#group-form model=model.group}}
+      {{/group-form}}
+    {{/if}}
+    <hr>
+    {{#validation-group label="Filter" for="filter"}}
+    <p class="form-control-static text-mono" id="filter">{{json-stringify model.filter}}</p>
+    {{/validation-group}}
   </div>
 {{/bootstrap-modal}}

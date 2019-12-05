@@ -1,4 +1,4 @@
-{{#bootstrap-modal title="Copy visible targets to a group" actionTitle="Confirm" cancel=(action "cancel") action=(action "confirm") close=(route-action "back")}}
+{{#bootstrap-modal title="Copy visible victims to a group" actionTitle="Confirm" cancel=(action "cancel") action=(action "confirm") close=(route-action "back")}}
   <div class="form">
     {{#validation-group label="Group" for="group" errors=model.errors.group_id}}
       <select class="form-control {{if newGroup 'disabled' ''}}" id="group" onchange={{action "groupChanged" value="target.value"}} disabled={{newGroup}}>

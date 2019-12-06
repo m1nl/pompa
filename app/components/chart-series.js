@@ -25,13 +25,15 @@ const defaultOptions = {
           bounds: 'ticks',
           unit: 'hour',
           round: 'hour',
-          min: Moment(0),
-          max: Moment(),
           displayFormats: {
             day: 'YYYY-MM-DD',
             hour: 'HH:mm',
             minute: 'HH:mm',
-          }
+          },
+          ticks: {
+            min: Moment(0),
+            max: Moment(),
+          },
         },
         scaleLabel: {
           display: false,
@@ -75,8 +77,8 @@ export default Component.extend({
 
     options.scales.xAxes[0].time.unit = this.timeUnit;
     options.scales.xAxes[0].time.round = this.timeUnit;
-    options.scales.xAxes[0].time.min = this.xMin;
-    options.scales.xAxes[0].time.max = this.xMax;
+    options.scales.xAxes[0].ticks.min = this.xMin;
+    options.scales.xAxes[0].ticks.max = this.xMax;
 
     options.scales.xAxes[0].scaleLabel.display = !isBlank(this.xLabel);
     options.scales.xAxes[0].scaleLabel.labelString = this.xLabel;

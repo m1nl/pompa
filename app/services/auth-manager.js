@@ -144,7 +144,7 @@ export default Service.extend({
       }
     });
   },
-  invalidate() {
+  invalidate: function() {
     return new Promise(resolve  => {
       if (this.isAuthenticated && !this.revokeTokenTask.isRunning) {
         return this.revokeTokenTask.perform().then(resolve);

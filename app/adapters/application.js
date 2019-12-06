@@ -24,6 +24,10 @@ export default ActiveModelAdapter.extend({
       this.authManager.refresh();
     }
 
+    if (status === 401) {
+      this.authManager.invalidate();
+    }
+
     if (status === 202 && payload['status'] === 'pending') {
       let url = this.urlPrefix(payload['tracking']['url']);
 
@@ -31,5 +35,21 @@ export default ActiveModelAdapter.extend({
     }
 
     return this._super(...arguments);
+  },
+
+  /* methods */
+  authenticateUrl(url) {
+    let self = this;
+    return new Promise(resolve => {
+      if (self.authManager.isAuthenticated) {
+        return self.ajax(self.urlForAuthenticateUrlAction(), 'POST',
+          { data: { url: url } }).then(r => resolve(r.url));
+      } else {
+        resolve(url);
+      }
+    });
+  },
+  urlForAuthenticateUrlAction() {
+    return `${this.buildURL()}/auth/url`;
   },
 });

@@ -21,4 +21,14 @@ export default Ajax.extend({
 
   /* services */
   authManager: service(),
+
+  /* methods */
+  blob: function(url) {
+    return this.request(url, {
+      type: 'GET',
+      cache: false,
+      dataType: 'binary',
+      xhr: function() { let xhr = new XMLHttpRequest(); xhr.responseType = 'blob'; return xhr; },
+    });
+  },
 });

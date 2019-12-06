@@ -1,8 +1,18 @@
 import $ from 'jquery';
 import ApplicationAdapter from 'pompa/adapters/application';
+import FileSaver from 'file-saver';
+import Moment from 'moment';
 
 export default ApplicationAdapter.extend({
-  urlForVictimsSummary(id) {
+  victimsSummary(id) {
+    let timestamp = Moment.utc().format('YYMMDDhhmmss');
+    let filename = `victims-summary-${id}-${timestamp}.csv`;
+
+    let self = this;
+    return self.authenticateUrl(this.urlForVictimsSummaryAction(id)).then(u =>
+      FileSaver.saveAs(u, filename));
+  },
+  urlForVictimsSummaryAction(id) {
     return `${this.buildURL('scenario', id)}/victims-summary`;
   },
   synchronizeGroup(id) {

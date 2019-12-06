@@ -262,6 +262,9 @@ export default Controller.extend(ConfirmationModalController, {
     refresh: function() {
       this.refresh();
     },
+    victimsSummary: function() {
+      this.scenario.victimsSummary();
+    },
     synchronizeGroup: function(deferred) {
       this.synchronizeGroupTask.perform().then(() => deferred.resolve());
     },

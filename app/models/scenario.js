@@ -2,7 +2,6 @@ import DS from 'ember-data';
 import NumericIdModel from 'pompa/mixins/numeric-id-model';
 import RSVP from 'rsvp';
 import Moment from 'moment';
-import { computed } from '@ember/object';
 
 export default DS.Model.extend(NumericIdModel, {
   campaign: DS.belongsTo('campaign', { async: true }),
@@ -12,16 +11,16 @@ export default DS.Model.extend(NumericIdModel, {
   victims: DS.hasMany('victim', { async: true }),
   report: DS.belongsTo('scenario-report', { async: true }),
   events: DS.hasMany('event', { async: true, inverse: null }),
+  victimsSummary: function() {
+    let modelName = this.constructor.modelName;
+    let adapter = this.store.adapterFor(modelName);
+    return adapter.victimsSummary(this.id);
+  },
   synchronizeGroup: function() {
     let modelName = this.constructor.modelName;
     let adapter = this.store.adapterFor(modelName);
     return adapter.synchronizeGroup(this.id);
   },
-  victimsSummaryUrl: computed('id', function() {
-    let modelName = this.constructor.modelName;
-    let adapter = this.store.adapterFor(modelName);
-    return adapter.urlForVictimsSummary(this.id);
-  }),
   eventSeries: function(timespan, dateFrom, dateTo) {
     return RSVP.hash({
       goals: this.template.then(template => template.goals).then(goals => goals.sortBy('score')),

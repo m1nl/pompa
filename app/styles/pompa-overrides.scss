@@ -69,6 +69,7 @@ div.tooltip-inner {
 }
 
 .img-invert {
+  -webkit-filter: invert(100%);
   filter: invert(100%);
 }
 
@@ -147,6 +148,7 @@ div.tooltip-inner {
 }
 
 .no-select {
+  -webkit-touch-callout: none;
   user-select: none;
 }
 
@@ -170,6 +172,7 @@ div.tooltip-inner {
   width: 100%;
   z-index: 1100;
   overflow-x: hidden;
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 

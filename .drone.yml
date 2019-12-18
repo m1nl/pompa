@@ -21,6 +21,9 @@ name: cd
 clone:
   disable: true
 
+concurrency:
+  limit: 1
+
 steps:
 - name: update_docker
   image: docker:git

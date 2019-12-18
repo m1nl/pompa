@@ -4,7 +4,9 @@ import { readOnly } from '@ember/object/computed';
 
 export default Controller.extend({
   /* properties */
-  user: readOnly('authManager.clientId'),
+  clientId: readOnly('authManager.clientId'),
+  isAuthenticated: readOnly('authManager.isAuthenticated'),
+  enforceAuthentication: readOnly('authManager.enforceAuthentication'),
 
   /* services */
   authManager: service(),
@@ -15,6 +17,9 @@ export default Controller.extend({
     logOut: function() {
       this.authManager.invalidate()
         .then(() => this.transitionToRoute('logged-out'));
+    },
+    reload: function() {
+      window.location.reload();
     },
   }
 });

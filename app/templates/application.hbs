@@ -1,6 +1,11 @@
 {{! app/templates/application.hbs}}
-{{nav-bar user=user onLogOut=(action 'logOut')}}
+{{nav-bar user=clientId onLogOut=(action 'logOut')}}
 <div class="root-container container">
   {{outlet}}
 </div>
 {{outlet "modal"}}
+{{#if (and enforceAuthentication (not isAuthenticated))}}
+<div class="full-screen-overlay">
+  <h4 class="center-screen text-muted">Session is invalid or expired<br>Click <a href {{action "reload"}}>here</a> to reload</h4>
+</div>
+{{/if}}

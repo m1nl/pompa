@@ -69,7 +69,6 @@ div.tooltip-inner {
 }
 
 .img-invert {
-  -webkit-filter: invert(100%);
   filter: invert(100%);
 }
 
@@ -148,7 +147,6 @@ div.tooltip-inner {
 }
 
 .no-select {
-  -webkit-touch-callout: none;
   user-select: none;
 }
 
@@ -156,12 +154,23 @@ div.tooltip-inner {
   pointer-events: none;
 }
 
-.center-screen{
+.center-screen {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.full-screen-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1100;
+  overflow-x: hidden;
+  backdrop-filter: blur(4px);
 }
 
 @media (min-width: $screen-sm-min) {

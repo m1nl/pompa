@@ -13,6 +13,7 @@ const tokenKey = 'token';
 
 export default Service.extend({
   tokenRefreshMargin: ENV.APP.tokenRefreshMargin,
+  enforceAuthentication: ENV.APP.enforceAuthentication,
 
   /* properties */
   refreshTokenMarginDuration: computed('tokenRefreshMargin', {

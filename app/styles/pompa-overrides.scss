@@ -172,13 +172,14 @@ div.tooltip-inner {
   width: 100%;
   z-index: 1100;
   overflow-x: hidden;
+  touch-action: none;
   background-color: rgba(255, 255, 255, .9);
 }
 
 @supports (backdrop-filter: blur(1.2em)) {
   .full-screen-overlay {
-/*    background-color: rgba(255, 255, 255, .5);
-    backdrop-filter: blur(1.2em);*/
+    background-color: rgba(255, 255, 255, .5);
+    backdrop-filter: blur(1.2em);
   }
 }
 

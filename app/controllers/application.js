@@ -15,8 +15,8 @@ export default Controller.extend({
 
     /* actions */
     logOut: function() {
-      this.authManager.invalidate()
-        .then(() => this.transitionToRoute('logged-out'));
+      this.transitionToRoute('logged-out')
+        .then(() => this.authManager.invalidate());
     },
     reload: function() {
       window.location.reload();

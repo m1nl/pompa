@@ -1,4 +1,4 @@
 <div class="btn-group pull-right-sm">
- <button class={{if model.hasDirtyAttributes "btn btn-primary" "btn btn-primary disabled"}} {{action "save"}} disabled={{not model.hasDirtyAttributes}}>Save template</button>
- <button class="btn btn-default" {{action "cancel"}}>Cancel</button>
+ <button type="button" class={{if model.hasDirtyAttributes "btn btn-primary" "btn btn-primary disabled"}} {{action "save"}} disabled={{not model.hasDirtyAttributes}}>Save template</button>
+ <button type="button" class="btn btn-default" {{action "cancel"}}>Cancel</button>
 </div>

@@ -40,12 +40,12 @@ steps:
   - cd pompa-docker
   - git config user.email "drone@nalewajski.pl"
   - git config user.name "Drone CI"
-  - git submodule init -- web/pompa
-  - git submodule update --checkout -- web/pompa
-  - cd web/pompa
+  - git submodule init -- facade/pompa
+  - git submodule update --checkout -- facade/pompa
+  - cd facade/pompa
   - git checkout $DRONE_COMMIT
   - cd ../..
-  - git add web/pompa
+  - git add facade/pompa
   - git commit --allow-empty -m "update pompa with $SHORT_COMMIT ($DRONE_COMMIT_MESSAGE) by $DRONE_COMMIT_AUTHOR"
   - git push origin master
 

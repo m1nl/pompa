@@ -6,6 +6,7 @@ module.exports = {
     'block-indentation': false,
     'attribute-indentation': false,
     'no-html-comments': false,
-    'quotes': false
+    'quotes': false,
+    'link-href-attributes': false
   }
 };

@@ -1,6 +1,5 @@
 import DS from 'ember-data';
 import NumericIdModel from 'pompa/mixins/numeric-id-model';
-import { computed } from '@ember/object';
 
 export default DS.Model.extend(NumericIdModel, {
   name: DS.attr('string'),
@@ -16,11 +15,11 @@ export default DS.Model.extend(NumericIdModel, {
   transforms: DS.attr('json'),
   dynamic: DS.attr('boolean'),
   template: DS.belongsTo('template', { async: true }),
-  downloadUrl: computed('id', function() {
+  download: function(){
     let modelName = this.constructor.modelName;
     let adapter = this.store.adapterFor(modelName);
-    return adapter.urlForDownload(this.id);
-  }),
+    return adapter.download(this.id);
+  },
   upload: function(file, params) {
     let modelName = this.constructor.modelName;
     let adapter = this.store.adapterFor(modelName);

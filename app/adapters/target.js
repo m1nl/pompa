@@ -2,7 +2,8 @@ import ApplicationAdapter from 'pompa/adapters/application';
 
 export default ApplicationAdapter.extend({
   upload(file, params) {
-    return file.upload(this.urlForUploadAction(), { data: params });
+    return this.authenticateUrl(this.urlForUploadAction()).then(u =>
+      file.upload(u, { data: params }));
   },
   urlForUploadAction() {
     return `${this.buildURL('target')}/upload`;

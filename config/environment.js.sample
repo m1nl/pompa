@@ -31,7 +31,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
     ENV.APP.apiHost = "http://localhost:3000"
-    ENV.APP.apiNamespace = "api"
+    ENV.APP.apiNamespace = "/api"
     ENV.APP.campaignChallenge = "yes";
   }
 
@@ -43,13 +43,13 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
     ENV.APP.apiHost = "http://localhost:3000"
-    ENV.APP.apiNamespace = "api"
+    ENV.APP.apiNamespace = "/api"
     ENV.APP.campaignChallenge = "yes";
   }
 
   if (environment === 'production') {
     ENV.APP.apiHost = "http://localhost:3000"
-    ENV.APP.apiNamespace = "api"
+    ENV.APP.apiNamespace = "/api"
     ENV.APP.campaignChallenge = "yes";
   }
 

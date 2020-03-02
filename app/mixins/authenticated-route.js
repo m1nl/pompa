@@ -10,12 +10,15 @@ export default Mixin.create({
   beforeModel: function(transition) {
     this._super(...arguments);
 
-    if (this.authManager.enforceAuthentication && !this.authManager.isAuthenticated) {
-      this.transitionHistory.save(transition);
-      this.transitionTo('authentication');
-      return false;
-    }
+    let self = this;
+    return this.authManager.enabled.then(function(enabled) {
+      if (enabled && !self.authManager.isAuthenticated) {
+        self.transitionHistory.save(transition);
+        self.transitionTo('authentication');
+        return false;
+      }
 
-    return true;
+      return true;
+    });
   },
 });

@@ -13,12 +13,20 @@ const tokenKey = 'token';
 
 export default Service.extend({
   tokenRefreshMargin: ENV.APP.tokenRefreshMargin,
-  enforceAuthentication: ENV.APP.enforceAuthentication,
 
   /* properties */
   refreshTokenMarginDuration: computed('tokenRefreshMargin', {
     get() {
       return Moment.duration({ 'seconds': this.tokenRefreshMargin });
+    }
+  }),
+  enabled: computed({
+    get() {
+      let promise = this.ajax.request('/auth')
+        .then(() => true)
+        .catch(e => isForbiddenError(e));
+
+      return DS.PromiseObject.create({ promise: promise });
     }
   }),
   token: computed({

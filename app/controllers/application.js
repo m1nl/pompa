@@ -4,9 +4,9 @@ import { readOnly } from '@ember/object/computed';
 
 export default Controller.extend({
   /* properties */
-  clientId: readOnly('authManager.clientId'),
+  isAuthenticationEnabled: readOnly('authManager.enabled'),
   isAuthenticated: readOnly('authManager.isAuthenticated'),
-  enforceAuthentication: readOnly('authManager.enforceAuthentication'),
+  clientId: readOnly('authManager.clientId'),
 
   /* services */
   authManager: service(),

@@ -19,7 +19,6 @@ module.exports = function(environment) {
 
     APP: {
       tokenRefreshMargin: 60, // in seconds
-      enforceAuthentication: false,
     },
   };
 

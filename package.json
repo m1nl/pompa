@@ -52,7 +52,7 @@
     "ember-concurrency": "^1.1.6",
     "ember-data": "^3.17.0",
     "ember-export-application-global": "^2.0.1",
-    "ember-file-upload": "^2.7.1",
+    "ember-file-upload": "^3.0.0",
     "ember-font-awesome": "^3.1.1",
     "ember-inflector": "^3.0.1",
     "ember-load-initializers": "^2.1.1",

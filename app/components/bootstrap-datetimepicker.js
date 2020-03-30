@@ -1,3 +1,5 @@
+/* eslint ember/no-observers: "off" */
+
 import Component from '@ember/component';
 import $ from 'jquery';
 
@@ -14,27 +16,27 @@ export default Component.extend({
     let self = this;
 
     $(this.element).datetimepicker({
-      date: this.getWithDefault('date', null),
-      daysOfWeekDisabled: this.getWithDefault('daysOfWeekDisabled', defaults.daysOfWeekDisabled),
-      disabledDates: this.getWithDefault('disabledDates', defaults.disabledDates),
-      disabledHours: this.getWithDefault('disabledHours', defaults.disabledHours),
-      enabledDates: this.getWithDefault('enabledDates', defaults.enabledDates),
-      enabledHours: this.getWithDefault('enabledHours', defaults.enabledHours),
-      focusOnShow: this.getWithDefault('focusOnShow', defaults.focusOnShow),
-      format: this.getWithDefault('format', defaults.format),
-      ignoreReadonly: this.getWithDefault('ignoreReadonly', defaults.ignoreReadonly),
-      locale: this.getWithDefault('locale', defaults.locale),
-      maxDate: this.getWithDefault('maxDate', defaults.maxDate),
-      minDate: this.getWithDefault('minDate', defaults.minDate),
-      showClear: this.getWithDefault('showClear', defaults.showClear),
-      showClose: this.getWithDefault('showClose', defaults.showClose),
-      showTodayButton: this.getWithDefault('showTodayButton', defaults.showTodayButton),
-      sideBySide: this.getWithDefault('sideBySide', defaults.sideBySide),
-      timeZone: this.getWithDefault('timeZone', defaults.timeZone),
-      useCurrent: this.getWithDefault('useCurrent', false),
-      viewDate: this.getWithDefault('viewDate', defaults.viewDate),
-      viewMode: this.getWithDefault('viewMode', defaults.viewMode),
-      widgetPositioning: this.getWithDefault('widgetPositioning', defaults.widgetPositioning)
+      date: this.date || null,
+      daysOfWeekDisabled: this.daysOfWeekDisabled || defaults.daysOfWeekDisabled,
+      disabledDates: this.disabledDates || defaults.disabledDates,
+      disabledHours: this.disabledHours || defaults.disabledHours,
+      enabledDates: this.enabledDates || defaults.enabledDates,
+      enabledHours: this.enabledHours || defaults.enabledHours,
+      focusOnShow: this.focusOnShow || defaults.focusOnShow,
+      format: this.format || defaults.format,
+      ignoreReadonly: this.ignoreReadonly || defaults.ignoreReadonly,
+      locale: this.locale || defaults.locale,
+      maxDate: this.maxDate || defaults.maxDate,
+      minDate: this.minDate || defaults.minDate,
+      showClear: this.showClear || defaults.showClear,
+      showClose: this.showClose || defaults.showClose,
+      showTodayButton: this.showTodayButton || defaults.showTodayButton,
+      sideBySide: this.sideBySide || defaults.sideBySide,
+      timeZone: this.timeZone || defaults.timeZone,
+      useCurrent: this.useCurrent || false,
+      viewDate: this.viewDate || defaults.viewDate,
+      viewMode: this.viewMode || defaults.viewMode,
+      widgetPositioning: this.widgetPositioning || defaults.widgetPositioning
     }).on('dp.change', function(e) {
       let date = e.date && e.date.toDate() || null;
 
@@ -44,7 +46,7 @@ export default Component.extend({
     });
 
     this.addObserver('date', function() {
-      $(this.element).data('DateTimePicker').date(this.getWithDefault('date', null));
+      $(this.element).data('DateTimePicker').date(this.date || null);
     });
 
     this.addObserver('maxDate', function() {

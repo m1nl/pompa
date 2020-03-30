@@ -1,4 +1,6 @@
-import DS from 'ember-data';
+import Model from "@ember-data/model";
+import { attr } from '@ember-data/model';
+
 import NumericIdModel from 'pompa/mixins/numeric-id-model';
 import Validator from 'ember-model-validator/mixins/model-validator';
 
@@ -28,16 +30,16 @@ const validations = {
   }
 };
 
-export default DS.Model.extend(NumericIdModel, Validator, {
-  name: DS.attr('string'),
-  host: DS.attr('string'),
-  port: DS.attr('number'),
-  senderEmail: DS.attr('string'),
-  senderName: DS.attr('string'),
-  username: DS.attr('string'),
-  password: DS.attr('string'),
-  perMinute: DS.attr('number'),
-  burst: DS.attr('number'),
-  ignoreCertificate: DS.attr('boolean'),
+export default Model.extend(NumericIdModel, Validator, {
+  name: attr('string'),
+  host: attr('string'),
+  port: attr('number'),
+  senderEmail: attr('string'),
+  senderName: attr('string'),
+  username: attr('string'),
+  password: attr('string'),
+  perMinute: attr('number'),
+  burst: attr('number'),
+  ignoreCertificate: attr('boolean'),
   validations: validations,
 });

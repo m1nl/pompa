@@ -1,25 +1,27 @@
-import DS from 'ember-data';
+import Model from "@ember-data/model";
+import { attr, belongsTo, hasMany } from '@ember-data/model';
+
 import Moment from 'moment';
 import { computed } from '@ember/object';
 
-export default DS.Model.extend({
-  firstName: DS.attr('string'),
-  lastName: DS.attr('string'),
-  gender: DS.attr('string'),
-  department: DS.attr('string'),
-  email: DS.attr('string'),
-  comment: DS.attr('string'),
-  code: DS.attr('string'),
-  state: DS.attr('string'),
-  stateOrder: DS.attr('number'),
-  lastError: DS.attr('string'),
-  errorCount: DS.attr('number'),
-  sentDate: DS.attr('date'),
-  messageId: DS.attr('string'),
-  group: DS.belongsTo('group', { async: true }),
-  scenario: DS.belongsTo('scenario', { async: true }),
-  events: DS.hasMany('event', { async: true }),
-  report: DS.belongsTo('victim-report', { async: true }),
+export default Model.extend({
+  firstName: attr('string'),
+  lastName: attr('string'),
+  gender: attr('string'),
+  department: attr('string'),
+  email: attr('string'),
+  comment: attr('string'),
+  code: attr('string'),
+  state: attr('string'),
+  stateOrder: attr('number'),
+  lastError: attr('string'),
+  errorCount: attr('number'),
+  sentDate: attr('date'),
+  messageId: attr('string'),
+  group: belongsTo('group', { async: true }),
+  scenario: belongsTo('scenario', { async: true }),
+  events: hasMany('event', { async: true }),
+  report: belongsTo('victim-report', { async: true }),
   displayName: computed('firstName', 'lastName', function() {
     return this.firstName + ' ' + this.lastName;
   }),

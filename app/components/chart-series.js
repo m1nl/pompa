@@ -1,3 +1,5 @@
+/* eslint ember/no-observers: "off" */
+
 import { scheduleOnce } from '@ember/runloop';
 import { observer } from '@ember/object';
 import { isBlank, isEqual } from '@ember/utils';

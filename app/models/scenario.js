@@ -1,16 +1,18 @@
-import DS from 'ember-data';
+import Model from '@ember-data/model';
+import { hasMany, belongsTo } from '@ember-data/model';	
+
 import NumericIdModel from 'pompa/mixins/numeric-id-model';
 import RSVP from 'rsvp';
 import Moment from 'moment';
 
-export default DS.Model.extend(NumericIdModel, {
-  campaign: DS.belongsTo('campaign', { async: true }),
-  template: DS.belongsTo('template', { async: true }),
-  mailer: DS.belongsTo('mailer', { async: true }),
-  group: DS.belongsTo('group', { async: true }),
-  victims: DS.hasMany('victim', { async: true }),
-  report: DS.belongsTo('scenario-report', { async: true }),
-  events: DS.hasMany('event', { async: true, inverse: null }),
+export default Model.extend(NumericIdModel, {
+  campaign: belongsTo('campaign', { async: true }),
+  template: belongsTo('template', { async: true }),
+  mailer: belongsTo('mailer', { async: true }),
+  group: belongsTo('group', { async: true }),
+  victims: hasMany('victim', { async: true }),
+  report: belongsTo('scenario-report', { async: true }),
+  events: hasMany('event', { async: true, inverse: null }),
   victimsSummary: function() {
     let modelName = this.constructor.modelName;
     let adapter = this.store.adapterFor(modelName);

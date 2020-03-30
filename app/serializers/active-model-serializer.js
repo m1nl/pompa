@@ -1,4 +1,6 @@
-import DS from 'ember-data';
+import RESTSerializer from '@ember-data/serializer/rest';	
+import { normalizeModelName } from '@ember-data/store';	
+
 import Ember from 'ember';
 import { singularize, pluralize } from 'ember-inflector';
 import { isNone } from '@ember/utils';
@@ -14,11 +16,6 @@ const {
   underscore
 } = Ember.String;
 
-const {
-  RESTSerializer,
-  normalizeModelName
-} = DS;
-
 /**
   The ActiveModelSerializer is a subclass of the RESTSerializer designed to integrate
   with a JSON API that uses an underscored naming convention instead of camelCasing.
@@ -27,7 +24,7 @@ const {
   Ruby gem. This Serializer expects specific settings using ActiveModel::Serializers,
   `embed :ids, embed_in_root: true` which sideloads the records.
 
-  This serializer extends the DS.RESTSerializer by making consistent
+  This serializer extends the RESTSerializer by making consistent
   use of the camelization, decamelization and pluralization methods to
   normalize the serialized JSON into a format that is compatible with
   a conventional Rails backend and Ember Data.
@@ -46,10 +43,10 @@ const {
   For example, if you have a `Person` model:
 
   ```js
-  App.FamousPerson = DS.Model.extend({
-    firstName: DS.attr('string'),
-    lastName: DS.attr('string'),
-    occupation: DS.attr('string')
+  App.FamousPerson = Model.extend({
+    firstName: attr('string'),
+    lastName: attr('string'),
+    occupation: attr('string')
   });
   ```
 
@@ -69,16 +66,16 @@ const {
   Let's imagine that `Occupation` is just another model:
 
   ```js
-  App.Person = DS.Model.extend({
-    firstName: DS.attr('string'),
-    lastName: DS.attr('string'),
-    occupation: DS.belongsTo('occupation')
+  App.Person = Model.extend({
+    firstName: attr('string'),
+    lastName: attr('string'),
+    occupation: belongsTo('occupation')
   });
 
-  App.Occupation = DS.Model.extend({
-    name: DS.attr('string'),
-    salary: DS.attr('number'),
-    people: DS.hasMany('person')
+  App.Occupation = Model.extend({
+    name: attr('string'),
+    salary: attr('number'),
+    people: hasMany('person')
   });
   ```
 
@@ -104,7 +101,7 @@ const {
 
   @class ActiveModelSerializer
   @namespace DS
-  @extends DS.RESTSerializer
+  @extends RESTSerializer
 */
 var ActiveModelSerializer = RESTSerializer.extend({
   // SERIALIZE
@@ -173,7 +170,7 @@ var ActiveModelSerializer = RESTSerializer.extend({
     Serializes a polymorphic type as a fully capitalized model name.
 
     @method serializePolymorphicType
-    @param {DS.Snapshot} snapshot
+    @param {Snapshot} snapshot
     @param {Object} json
     @param {Object} relationship
   */
@@ -190,7 +187,7 @@ var ActiveModelSerializer = RESTSerializer.extend({
   },
 
   /**
-    Add extra step to `DS.RESTSerializer.normalize` so links are normalized.
+    Add extra step to `RESTSerializer.normalize` so links are normalized.
 
     If your payload looks like:
 
@@ -217,7 +214,7 @@ var ActiveModelSerializer = RESTSerializer.extend({
     ```
 
     @method normalize
-    @param {subclass of DS.Model} typeClass
+    @param {subclass of Model} typeClass
     @param {Object} hash
     @param {String} prop
     @return Object

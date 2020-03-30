@@ -1,8 +1,9 @@
-import DS from 'ember-data';
+import Model from '@ember-data/model';	
+import { attr, belongsTo } from '@ember-data/model';	
 
-export default DS.Model.extend({
-  victim: DS.belongsTo('victim', { async: true }),
-  goals: DS.attr('raw'),
-  total_score: DS.attr('number'),
-  max_score: DS.attr('number'),
+export default Model.extend({
+  victim: belongsTo('victim', { async: true }),
+  goals: attr('raw'),
+  total_score: attr('number'),
+  max_score: attr('number'),
 });

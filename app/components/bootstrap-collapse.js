@@ -1,3 +1,5 @@
+/* eslint ember/no-observers: "off" */
+
 import Component from '@ember/component';
 import { scheduleOnce } from '@ember/runloop';
 import { observer } from '@ember/object';

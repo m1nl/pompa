@@ -1,9 +1,12 @@
+/* eslint ember/use-ember-data-rfc-395-imports: "off" */
+
 import Service from '@ember/service';
 import Moment from 'moment';
 import DS from 'ember-data';
 import ENV from "../config/environment"
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
 import { task } from 'ember-concurrency';
 import { isForbiddenError } from 'ember-ajax/errors';
@@ -14,12 +17,13 @@ const tokenKey = 'token';
 export default Service.extend({
   tokenRefreshMargin: ENV.APP.tokenRefreshMargin,
 
-  /* properties */
+  /* computed properties */
   refreshTokenMarginDuration: computed('tokenRefreshMargin', {
     get() {
       return Moment.duration({ 'seconds': this.tokenRefreshMargin });
     }
   }),
+
   enabled: computed({
     get() {
       let promise = this.ajax.request('/auth')
@@ -29,6 +33,7 @@ export default Service.extend({
       return DS.PromiseObject.create({ promise: promise });
     }
   }),
+
   token: computed({
     get() {
       return window.sessionStorage.getItem(tokenKey);
@@ -43,11 +48,13 @@ export default Service.extend({
       return value;
     }
   }),
+
   isAuthenticated: computed('token', {
     get() {
       return !isEmpty(this.token);
     },
   }),
+
   payload: computed('token', {
     get() {
       if (this.isAuthenticated) {
@@ -58,11 +65,11 @@ export default Service.extend({
       }
     }
   }),
-  clientId: computed('payload.client_id', function() {
-    return this.get('payload.client_id');
-  }),
+
+  clientId: readOnly('payload.client_id'),
+
   expiration: computed('payload.exp', function() {
-    return this.get('payload').then(p => Moment.unix(p.exp));
+    return this.payload.then(p => Moment.unix(p.exp));
   }),
 
   /* services */

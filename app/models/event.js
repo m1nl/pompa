@@ -1,12 +1,14 @@
-import DS from 'ember-data';
+import Model from "@ember-data/model";
+import { attr, belongsTo } from '@ember-data/model';
+
 import Moment from 'moment';
 import { computed } from '@ember/object';
 
-export default DS.Model.extend({
-  reportedDate: DS.attr('date'),
-  reportedData: DS.attr('json'),
-  victim: DS.belongsTo('victim', { async: true }),
-  goal: DS.belongsTo('goal', { async: true }),
+export default Model.extend({
+  reportedDate: attr('date'),
+  reportedData: attr('json'),
+  victim: belongsTo('victim', { async: true }),
+  goal: belongsTo('goal', { async: true }),
   reportedDateString: computed('reportedDate', function() {
     return String(Moment(this.reportedDate).format('YYYY-MM-DD HH:mm'));
   }),

@@ -1,9 +1,11 @@
-import DS from 'ember-data';
+import Model from "@ember-data/model";
+import { attr, belongsTo } from '@ember-data/model';
+
 import NumericIdModel from 'pompa/mixins/numeric-id-model';
 
-export default DS.Model.extend(NumericIdModel, {
-  name: DS.attr('string'),
-  filename: DS.attr('string'),
-  template: DS.belongsTo('template', { async: true }),
-  resource: DS.belongsTo('resource', { async: true }),
+export default Model.extend(NumericIdModel, {
+  name: attr('string'),
+  filename: attr('string'),
+  template: belongsTo('template', { async: true }),
+  resource: belongsTo('resource', { async: true }),
 });

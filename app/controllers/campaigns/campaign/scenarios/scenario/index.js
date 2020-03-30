@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import ConfirmationModalController from 'pompa/mixins/confirmation-modal-controller';
 import Moment from 'moment';
 import { computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
+import { alias, or, gt } from '@ember/object/computed';
 import { isBlank, isNone } from '@ember/utils';
 import { task, all, timeout } from 'ember-concurrency';
 
@@ -43,17 +43,15 @@ export default Controller.extend(ConfirmationModalController, {
   advancedFiltering: false,
 
   /* computed properties */
-  busy: computed('reloadVictimsTask.isRunning', 'reloadReportTask.isRunning', 'reloadEventSeriesTask.isRunning', function() {
-    return this.reloadVictimsTask.isRunning || this.reloadReportTask.isRunning || this.reloadEventSeriesTask.isRunning;
-  }),
+  busy: or('reloadVictimsTask.isRunning', 'reloadReportTask.isRunning', 'reloadEventSeriesTask.isRunning'),
+
+  goalsExist: gt('scenario.template.goals.length', 0),
+
   chartDate: computed('dateFrom', function() {
     if (isNone(this.dateFrom)) {
       return "-";
     }
     return this.dateFrom.format('YYYY-MM-DD');
-  }),
-  goalsExist: computed('scenario.template.goals.length', function() {
-    return this.get('scenario.template.goals.length') > 0;
   }),
 
   /* tasks */

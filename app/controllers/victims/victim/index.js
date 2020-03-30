@@ -1,12 +1,10 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import { task, all } from 'ember-concurrency';
 
 export default Controller.extend({
   /* computed properties */
-  busy: computed('reloadEventsTask.isRunning', function() {
-    return this.reloadEventsTask.isRunning;
-  }),
+  busy: readOnly('reloadEventsTask.isRunning'),
 
   /* tasks */
   reloadEventsTask: task(function * () {

@@ -1,3 +1,5 @@
+/* eslint ember/no-observers: "off" */
+
 import Helper from '@ember/component/helper';
 import { defineProperty } from '@ember/object';
 import { filter } from '@ember/object/computed';

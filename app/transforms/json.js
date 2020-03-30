@@ -1,7 +1,8 @@
-import { isNone } from '@ember/utils';
-import DS from 'ember-data';
+import Transform from '@ember-data/serializer/transform';
 
-export default DS.Transform.extend({
+import { isNone } from '@ember/utils';
+
+export default Transform.extend({
   escapeUnicodeControl: function(string) {
     return string
       .replace("\u061c", "\\u061c")

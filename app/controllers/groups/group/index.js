@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
-import { alias } from '@ember/object/computed';
+import { alias, readOnly } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 import { task, all, timeout } from 'ember-concurrency';
 
@@ -24,9 +23,7 @@ export default Controller.extend({
   quicksearch: '',
 
   /* computed properties */
-  busy: computed('reloadTargetsTask.isRunning', function() {
-    return this.get('reloadTargetsTask.isRunning');
-  }),
+  busy: readOnly('reloadTargetsTask.isRunning'),
 
   /* tasks */
   reloadTargetsTask: task(function * () {

@@ -1,3 +1,5 @@
+/* eslint ember/no-observers: "off" */
+
 import { scheduleOnce } from '@ember/runloop';
 import { observer } from '@ember/object';
 import Component from '@ember/component';
@@ -14,7 +16,7 @@ export default Component.extend({
   disabled: false,
   invokePageChangedAction: function() {
     if (this.pageChanged) {
-      this.pageChanged(this.get('currentPage'));
+      this.pageChanged(this.currentPage);
     }
   },
   updateComponent: function() {
@@ -28,7 +30,7 @@ export default Component.extend({
       visiblePages: this.visiblePages,
       startPage: this.currentPage,
       onPageClick: function(event, page) {
-        if (page != self.get('currentPage')) {
+        if (page != self.currentPage) {
           self.set('currentPage', page);
           scheduleOnce('actions', self, 'invokePageChangedAction');
         }

@@ -1,7 +1,8 @@
-import { isNone } from '@ember/utils';
-import DS from 'ember-data';
+import Transform from '@ember-data/serializer/transform';
 
-export default DS.Transform.extend({
+import { isNone } from '@ember/utils';
+
+export default Transform.extend({
   serialize: function(value) {
     return isNone(value) ? '' : String(value);
   },

@@ -1,3 +1,5 @@
+/* eslint ember/no-observers: "off" */
+
 import { scheduleOnce } from '@ember/runloop';
 import { observer } from '@ember/object';
 import Component from '@ember/component';
@@ -25,17 +27,17 @@ export default Component.extend({
 
     target.unbind('change');
 
-    target.prop('checked', this.getWithDefault('checked', defaults.checked)).change();
+    target.prop('checked', this.checked || defaults.checked).change();
 
     target.bootstrapToggle({
-      on: this.getWithDefault('onText', defaults.onText),
-      off: this.getWithDefault('offText', defaults.offText),
-      size: this.getWithDefault('size', defaults.size),
-      onstyle: this.getWithDefault('onStyle', defaults.onStyle),
-      offstyle: this.getWithDefault('offStyle', defaults.offStyle),
-      style: this.getWithDefault('style', defaults.style),
-      width: this.getWithDefault('width', defaults.width),
-      height: this.getWithDefault('height', defaults.height),
+      on: this.onText || defaults.onText,
+      off: this.offText || defaults.offText,
+      size: this.size || defaults.size,
+      onstyle: this.onStyle || defaults.onStyle,
+      offstyle: this.offStyle || defaults.offStyle,
+      style: this.style || defaults.style,
+      width: this.width || defaults.width,
+      height: this.height || defaults.height
     });
 
     let self = this;

@@ -1,8 +1,7 @@
 import ENV from '../../../config/environment';
 import Controller from '@ember/controller';
 import ConfirmationModalController from 'pompa/mixins/confirmation-modal-controller';
-import { computed } from '@ember/object';
-import { sort, alias } from '@ember/object/computed';
+import { sort, alias, readOnly } from '@ember/object/computed';
 import { task, all, timeout } from 'ember-concurrency';
 
 const MAX_EVENTS = 10;
@@ -18,9 +17,7 @@ export default Controller.extend(ConfirmationModalController, {
   sortedScenarios: sort('scenarios', 'scenariosSorting'),
 
   /* computed properties */
-  busy: computed('reloadScenariosTask.isRunning', function() {
-    return this.get('reloadScenariosTask.isRunning');
-  }),
+  busy: readOnly('reloadScenariosTask.isRunning'),
 
   /* tasks */
   reloadScenariosTask: task(function * () {

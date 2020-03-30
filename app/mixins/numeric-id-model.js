@@ -3,7 +3,7 @@ import { computed } from '@ember/object';
 
 export default Mixin.create({
   numericId: computed('id', function() {
-    return Number(this.get('id'));
+    return Number(this.id);
   }),
 });
 

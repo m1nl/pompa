@@ -1,15 +1,17 @@
-import DS from 'ember-data';
+import Model from '@ember-data/model';	
+import { attr, belongsTo } from '@ember-data/model';	
+
 import { computed } from '@ember/object';
 
-export default DS.Model.extend({
-  firstName: DS.attr('string'),
-  lastName: DS.attr('string'),
+export default Model.extend({
+  firstName: attr('string'),
+  lastName: attr('string'),
   displayName: computed('firstName', 'lastName', function() {
     return this.firstName + " " + this.lastName;
   }),
-  gender: DS.attr('string'),
-  department: DS.attr('string'),
-  email: DS.attr('string'),
-  comment: DS.attr('string'),
-  group: DS.belongsTo('group', { async: true }),
+  gender: attr('string'),
+  department: attr('string'),
+  email: attr('string'),
+  comment: attr('string'),
+  group: belongsTo('group', { async: true }),
 });

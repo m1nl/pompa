@@ -1,18 +1,20 @@
-import DS from 'ember-data';
+import Model from "@ember-data/model";
+import { attr, hasMany } from '@ember-data/model';
+
 import NumericIdModel from 'pompa/mixins/numeric-id-model';
 import Moment from 'moment';
 import { computed } from '@ember/object';
 
-export default DS.Model.extend(NumericIdModel, {
-  name: DS.attr('string'),
-  description: DS.attr('string'),
-  state: DS.attr('string'),
-  stateOrder: DS.attr('number'),
-  startDate: DS.attr('date'),
-  startedDate: DS.attr('date'),
-  finishDate: DS.attr('date'),
-  finishedDate: DS.attr('date'),
-  scenarios: DS.hasMany('scenario', { async: true }),
+export default Model.extend(NumericIdModel, {
+  name: attr('string'),
+  description: attr('string'),
+  state: attr('string'),
+  stateOrder: attr('number'),
+  startDate: attr('date'),
+  startedDate: attr('date'),
+  finishDate: attr('date'),
+  finishedDate: attr('date'),
+  scenarios: hasMany('scenario', { async: true }),
   startedDateString: computed('startedDate', function() {
     if (this.startedDate) {
       return String(Moment(this.startedDate).calendar());

@@ -1,12 +1,9 @@
 import Ember from 'ember';
-import DS from 'ember-data';
 import { pluralize } from 'ember-inflector';
 
-const {
-  InvalidError,
-  errorsHashToArray,
-  RESTAdapter
-} = DS;
+import RESTAdapter from "@ember-data/adapter/rest";
+import { InvalidError } from '@ember-data/adapter/error';
+import { errorsHashToArray } from '@ember-data/adapter/error';
 
 const {
   decamelize,
@@ -25,7 +22,7 @@ const {
   Ruby gem. This Adapter expects specific settings using ActiveModel::Serializers,
   `embed :ids, embed_in_root: true` which sideloads the records.
 
-  This adapter extends the DS.RESTAdapter by making consistent use of the camelization,
+  This adapter extends the RESTAdapter by making consistent use of the camelization,
   decamelization and pluralization methods to normalize the serialized JSON into a
   format that is compatible with a conventional Rails backend and Ember Data.
 
@@ -34,9 +31,9 @@ const {
   The ActiveModelAdapter expects the JSON returned from your server to follow
   the REST adapter conventions substituting underscored keys for camelcased ones.
 
-  Unlike the DS.RESTAdapter, async relationship keys must be the singular form
-  of the relationship name, followed by "_id" for DS.belongsTo relationships,
-  or "_ids" for DS.hasMany relationships.
+  Unlike the RESTAdapter, async relationship keys must be the singular form
+  of the relationship name, followed by "_id" for belongsTo relationships,
+  or "_ids" for hasMany relationships.
 
   ### Conventional Names
 
@@ -46,10 +43,10 @@ const {
   For example, if you have a `Person` model:
 
   ```js
-  App.FamousPerson = DS.Model.extend({
-    firstName: DS.attr('string'),
-    lastName: DS.attr('string'),
-    occupation: DS.attr('string')
+  App.FamousPerson = Model.extend({
+    firstName: attr('string'),
+    lastName: attr('string'),
+    occupation: attr('string')
   });
   ```
 
@@ -69,16 +66,16 @@ const {
   Let's imagine that `Occupation` is just another model:
 
   ```js
-  App.Person = DS.Model.extend({
-    firstName: DS.attr('string'),
-    lastName: DS.attr('string'),
-    occupation: DS.belongsTo('occupation')
+  App.Person = Model.extend({
+    firstName: attr('string'),
+    lastName: attr('string'),
+    occupation: belongsTo('occupation')
   });
 
-  App.Occupation = DS.Model.extend({
-    name: DS.attr('string'),
-    salary: DS.attr('number'),
-    people: DS.hasMany('person')
+  App.Occupation = Model.extend({
+    name: attr('string'),
+    salary: attr('number'),
+    people: hasMany('person')
   });
   ```
 
@@ -105,7 +102,7 @@ const {
   @class ActiveModelAdapter
   @constructor
   @namespace DS
-  @extends DS.RESTAdapter
+  @extends RESTAdapter
 **/
 
 const ActiveModelAdapter = RESTAdapter.extend({
@@ -131,7 +128,7 @@ const ActiveModelAdapter = RESTAdapter.extend({
 
   /**
     The ActiveModelAdapter overrides the `handleResponse` method
-    to format errors passed to a DS.InvalidError for all
+    to format errors passed to a InvalidError for all
     422 Unprocessable Entity responses.
 
     A 422 HTTP response from the server generally implies that the request
@@ -145,7 +142,7 @@ const ActiveModelAdapter = RESTAdapter.extend({
     @param  {Number} status
     @param  {Object} headers
     @param  {Object} payload
-    @return {Object | DS.AdapterError} response
+    @return {Object | AdapterError} response
   */
   handleResponse: function(status, headers, payload) {
     if (this.isInvalid(status, headers, payload)) {

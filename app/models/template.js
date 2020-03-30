@@ -1,22 +1,24 @@
-import DS from 'ember-data';
+import Model from '@ember-data/model';	
+import { attr, hasMany } from '@ember-data/model';	
+
 import NumericIdModel from 'pompa/mixins/numeric-id-model';
 
-export default DS.Model.extend(NumericIdModel, {
-  name: DS.attr('string'),
-  description: DS.attr('string'),
-  senderEmail: DS.attr('nstring'),
-  senderName: DS.attr('nstring'),
-  baseUrl: DS.attr('nstring'),
-  landingUrl: DS.attr('nstring'),
-  reportUrl: DS.attr('nstring'),
-  staticResourceUrl: DS.attr('nstring'),
-  dynamicResourceUrl: DS.attr('nstring'),
-  subject: DS.attr('nstring'),
-  plaintext: DS.attr('nstring'),
-  html: DS.attr('nstring'),
-  goals: DS.hasMany('goal', { async: true }),
-  resources: DS.hasMany('resource', { async: true }),
-  attachments: DS.hasMany('attachment', { async: true }),
+export default Model.extend(NumericIdModel, {
+  name: attr('string'),
+  description: attr('string'),
+  senderEmail: attr('nstring'),
+  senderName: attr('nstring'),
+  baseUrl: attr('nstring'),
+  landingUrl: attr('nstring'),
+  reportUrl: attr('nstring'),
+  staticResourceUrl: attr('nstring'),
+  dynamicResourceUrl: attr('nstring'),
+  subject: attr('nstring'),
+  plaintext: attr('nstring'),
+  html: attr('nstring'),
+  goals: hasMany('goal', { async: true }),
+  resources: hasMany('resource', { async: true }),
+  attachments: hasMany('attachment', { async: true }),
   duplicate: function() {
     let modelName = this.constructor.modelName;
     let adapter = this.store.adapterFor(modelName);

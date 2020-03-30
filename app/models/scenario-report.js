@@ -1,7 +1,8 @@
-import DS from 'ember-data';
+import Model from '@ember-data/model';
+import { attr, belongsTo } from '@ember-data/model';	
 
-export default DS.Model.extend({
-  scenario: DS.belongsTo('scenario', { async: true }),
-  goals: DS.attr('raw'),
-  victims: DS.attr('raw'),
+export default Model.extend({
+  scenario: belongsTo('scenario', { async: true }),
+  goals: attr('raw'),
+  victims: attr('raw'),
 });

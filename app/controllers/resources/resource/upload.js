@@ -1,15 +1,19 @@
 import { isNone } from '@ember/utils';
+import { readOnly } from '@ember/object/computed';
 import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
+  /* computed properties */
   fileNotEmpty: computed('file', function() {
     return !isNone(this.file);
   }),
-  progress: computed('file.queue.progress', function() {
-    return this.get('file.queue.progress');
-  }),
+
+  progress: readOnly('file.queue.progress'),
+
   actions: {
+
+    /* actions */
     enqueue: function(file) {
       this.set('file', file);
     },

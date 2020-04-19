@@ -7,7 +7,7 @@ export default Ajax.extend({
   /* properties */
   namespace: ENV.APP.apiNamespace,
   host: ENV.APP.apiHost,
-  headers: computed('authManager.token', {
+  headers: computed('authManager.{isAuthenticated,token}', {
     get() {
       let headers = {};
 

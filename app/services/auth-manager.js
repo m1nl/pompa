@@ -55,10 +55,10 @@ export default Service.extend({
     },
   }),
 
-  payload: computed('token', {
+  payload: computed('token', 'isAuthenticated', {
     get() {
       if (this.isAuthenticated) {
-        let promise = this.ajax.request('/auth').catch(this.invalidate.bind(this));
+        let promise = this.ajax.request('/auth').catch(() => this.invalidate());
         return DS.PromiseObject.create({ promise: promise });
       } else {
         return null;

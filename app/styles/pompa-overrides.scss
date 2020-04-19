@@ -156,6 +156,10 @@ div.tooltip-inner {
   pointer-events: none;
 }
 
+.dropdown-menu > li.disabled > a {
+  pointer-events: none;
+}
+
 .center-screen {
   position: absolute;
   top: 50%;

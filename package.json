@@ -68,15 +68,14 @@
     "eslint-plugin-node": "^11.1.0",
     "file-saver": "^2.0.2",
     "google-palette": "^1.1.0",
+    "jquery": "3.4.1",
     "loader.js": "^4.7.0",
-    "moment": "^2.24.0",
+    "moment": "2.24.0",
     "moment-timezone": "^0.5.28",
     "pace-js": "^1.0.2",
     "postcss-scss": "^2.0.0",
     "qunit-dom": "^1.2.0",
-    "twbs-pagination": "github:josecebe/twbs-pagination#tags/v1.4.2",
-    "uglify-es": "^3.3.9",
-    "jquery": "3.4.1"
+    "twbs-pagination": "github:josecebe/twbs-pagination#tags/v1.4.2"
   },
   "engines": {
     "node": "8.* || >= 10.*"

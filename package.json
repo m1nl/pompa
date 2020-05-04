@@ -69,7 +69,7 @@
     "file-saver": "^2.0.2",
     "google-palette": "^1.1.0",
     "loader.js": "^4.7.0",
-    "moment": "^2.24.0",
+    "moment": "^2.25.1",
     "moment-timezone": "^0.5.28",
     "pace-js": "^1.0.2",
     "postcss-scss": "^2.0.0",

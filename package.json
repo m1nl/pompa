@@ -27,7 +27,7 @@
     "bootstrap-toggle": "^2.2.2",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-clean-css": "^2.0.1",
-    "broccoli-funnel": "^3.0.2",
+    "broccoli-funnel": "^3.0.3",
     "broccoli-sass-source-maps": "^4.0.0",
     "broccoli-uglify-sourcemap": "^3.2.0",
     "chart.js": "^2.9.3",

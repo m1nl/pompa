@@ -73,7 +73,7 @@
     "moment": "^2.25.3",
     "moment-timezone": "^0.5.28",
     "pace-js": "^1.0.2",
-    "postcss-scss": "^2.0.0",
+    "postcss-scss": "^2.1.1",
     "qunit-dom": "^1.2.0",
     "twbs-pagination": "github:josecebe/twbs-pagination#tags/v1.4.2"
   },

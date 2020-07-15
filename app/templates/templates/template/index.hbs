@@ -2,10 +2,12 @@
   <div class="row">
     <div class="col-sm-6">
       {{#validation-group label="Sender e-mail" for="senderEmail" errors=model.errors.senderEmail}}
-        {{input value=model.senderEmail id="senderEmail" class="form-control" placeholder="leave blank for default value"}}
+        <div class="pull-right text-muted"><small>This field accepts <b>liquid</b> syntax.</small></div>
+        {{input value=model.senderEmail id="senderEmail" class="form-control text-mono" placeholder="leave blank for default value"}}
       {{/validation-group}}
       {{#validation-group label="Sender name" for="senderName" errors=model.errors.senderName}}
-        {{input value=model.senderName id="senderName" class="form-control" placeholder="leave blank for default value"}}
+        <div class="pull-right text-muted"><small>This field accepts <b>liquid</b> syntax.</small></div>
+        {{input value=model.senderName id="senderName" class="form-control text-mono" placeholder="leave blank for default value"}}
       {{/validation-group}}
     </div>
     <div class="col-sm-6">

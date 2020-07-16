@@ -10,5 +10,6 @@
   </select>
 {{/validation-group}}
 {{#validation-group label="File name" for="filename" errors=model.errors.filename}}
-  {{input value=model.filename id="filename" class="form-control"}}
+  <div class="pull-right text-muted"><small>This field accepts <b>liquid</b> syntax.</small></div>
+  {{input value=model.filename id="filename" class="form-control text-mono"}}
 {{/validation-group}}

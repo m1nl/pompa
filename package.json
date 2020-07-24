@@ -64,7 +64,7 @@
     "ember-source": "^3.20.1",
     "ember-truth-helpers": "^2.1.0",
     "eonasdan-bootstrap-datetimepicker": "github:Eonasdan/bootstrap-datetimepicker#5a991bf",
-    "eslint-plugin-ember": "^8.9.1",
+    "eslint-plugin-ember": "^8.9.2",
     "eslint-plugin-node": "^11.1.0",
     "file-saver": "^2.0.2",
     "google-palette": "^1.1.0",

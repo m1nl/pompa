@@ -27,12 +27,29 @@
         {{#if goalsExist}}
           {{#bootstrap-collapse label="Advanced filtering" collapsed=(not advancedFiltering) triggered=(action "toggleAdvancedFiltering")}}
             <div class="container-fluid">
-              {{#each (sort-by 'score' scenario.template.goals) as |goal|}}
-                <div class="row no-gutters pad-top">
-                  <div class="col-lg-8 col-sm-7 col-xs-8 ellipsis">
-                    {{goal.name}}
+              <div class="row no-gutters pad-top">
+                <div class="col-lg-3 col-sm-2 col-xs-3 vertical-align">
+                  State
+                </div><!--
+                --><div class="col-lg-9 col-sm-10 col-xs-9 text-right vertical-align">
+                  <div class="btn-group">
+                    {{bootstrap-button-radio value="any" groupValue=requestedStateFilter label="Any" class="btn-xs btn-default" changed=(action "stateFilterChanged" "any")}}
+                    {{bootstrap-button-radio value="pending" groupValue=requestedStateFilter label="Pending" class="btn-xs btn-default" changed=(action "stateFilterChanged" "pending")}}
+                    {{bootstrap-button-radio value="queued" groupValue=requestedStateFilter label="Queued" class="btn-xs btn-default" changed=(action "stateFilterChanged" "queued")}}
+                    {{bootstrap-button-radio value="sent" groupValue=requestedStateFilter label="Sent" class="btn-xs btn-default" changed=(action "stateFilterChanged" "sent")}}
+                    {{bootstrap-button-radio value="error" groupValue=requestedStateFilter label="Error" class="btn-xs btn-default" changed=(action "stateFilterChanged" "error")}}
                   </div>
-                  <div class="col-lg-4 col-sm-5 col-xs-4 text-right">
+                </div>
+              </div>
+              {{#each (sort-by 'score' scenario.template.goals) as |goal index|}}
+                <div class="row no-gutters">
+                  {{#if (eq index 0)}}
+                    <hr/>
+                  {{/if}}
+                  <div class="col-lg-8 col-sm-7 col-xs-8 ellipsis vertical-align">
+                    {{goal.name}}
+                  </div><!--
+                  --><div class="col-lg-4 col-sm-5 col-xs-4 text-right vertical-align">
                     <div class="btn-group">
                       {{#let (get requestedGoalFilter goal.id) as |filter|}}
                         {{bootstrap-button-radio value="hit" groupValue=filter label="Hit" class="btn-xs btn-default" changed=(action "goalFilterChanged" goal.id)}}

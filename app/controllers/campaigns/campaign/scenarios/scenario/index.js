@@ -31,6 +31,7 @@ export default Controller.extend(ConfirmationModalController, {
   requestedPage: 1,
   requestedQuicksearch: '',
   requestedGoalFilter: null,
+  requestedStateFilter: null,
   requestedDateFrom: null,
   requestedDateTo: null,
   currentPage: 1,
@@ -78,7 +79,15 @@ export default Controller.extend(ConfirmationModalController, {
       }
     });
 
+    let stateFilter = ANY;
+    let requestedStateFilter = this.requestedStateFilter || '';
+
+    if (!isBlank(requestedStateFilter)) {
+      stateFilter = requestedStateFilter;
+    }
+
     this.set('requestedGoalFilter', goalFilter);
+    this.set('requestedStateFilter', stateFilter);
   }).restartable(),
   reloadVictimsTask: task(function * () {
     if (!this.model) {
@@ -86,6 +95,7 @@ export default Controller.extend(ConfirmationModalController, {
     }
 
     let goalFilter = this.requestedGoalFilter || {};
+    let stateFilter = this.requestedStateFilter || '';
 
     let hitGoals = [];
     let missGoals = [];
@@ -113,6 +123,10 @@ export default Controller.extend(ConfirmationModalController, {
       filter['!events'] = { goal_id: missGoals.join(',') };
     }
 
+    if (stateFilter != ANY) {
+      filter['state'] = stateFilter;
+    }
+
     victimsFilter['filter'] = filter;
 
     this.set('victimsFilter', victimsFilter);
@@ -138,7 +152,7 @@ export default Controller.extend(ConfirmationModalController, {
     this.set('goalFilter', this.requestedGoalFilter);
 
     let goalFilterValues = Object.values(this.goalFilter);
-    this.set('advancedFiltering', goalFilterValues.includes(HIT) || goalFilterValues.includes(MISS));
+    this.set('advancedFiltering', stateFilter != ANY || goalFilterValues.includes(HIT) || goalFilterValues.includes(MISS));
   }).restartable(),
   reloadReportTask: task(function * () {
     if (!this.model) {
@@ -271,6 +285,12 @@ export default Controller.extend(ConfirmationModalController, {
     },
     pageChanged: function(page) {
       this.set('requestedPage', page);
+
+      this.reloadVictimsTask.perform();
+    },
+    stateFilterChanged: function(value) {
+      this.set(`requestedStateFilter`, value);
+      this.set('requestedPage', 1);
 
       this.reloadVictimsTask.perform();
     },

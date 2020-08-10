@@ -59,7 +59,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-model-validator": "^3.10.0",
     "ember-qunit": "^4.6.0",
-    "ember-resolver": "^8.0.0",
+    "ember-resolver": "^8.0.2",
     "ember-route-action-helper": "^2.0.8",
     "ember-source": "^3.20.3",
     "ember-truth-helpers": "^2.1.0",

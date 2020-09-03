@@ -1,4 +1,4 @@
-import ENV from '../../../config/environment';
+import ENV from 'pompa/config/environment';
 import Controller from '@ember/controller';
 import ConfirmationModalController from 'pompa/mixins/confirmation-modal-controller';
 import { sort, alias, readOnly } from '@ember/object/computed';

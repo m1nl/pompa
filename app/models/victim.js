@@ -4,6 +4,11 @@ import { attr, belongsTo, hasMany } from '@ember-data/model';
 import Moment from 'moment';
 import { computed } from '@ember/object';
 
+export const STATE_PENDING = 'pending';
+export const STATE_QUEUED = 'queued';
+export const STATE_SENT = 'sent';
+export const STATE_ERROR = 'error';
+
 export default Model.extend({
   firstName: attr('string'),
   lastName: attr('string'),

@@ -3,7 +3,7 @@
 import Service from '@ember/service';
 import Moment from 'moment';
 import DS from 'ember-data';
-import ENV from "../config/environment"
+import ENV from "pompa/config/environment"
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';

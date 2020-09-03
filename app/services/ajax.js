@@ -1,5 +1,5 @@
 import Ajax from 'ember-ajax/services/ajax';
-import ENV from "../config/environment";
+import ENV from "pompa/config/environment";
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 

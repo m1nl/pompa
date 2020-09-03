@@ -1,5 +1,5 @@
 import ActiveModelAdapter from 'pompa/adapters/active-model-adapter';
-import ENV from "../config/environment";
+import ENV from "pompa/config/environment";
 import { inject as service } from '@ember/service';
 
 export default ActiveModelAdapter.extend({

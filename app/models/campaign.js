@@ -1,5 +1,3 @@
-/* eslint no-unused-vars: "off" */
-
 import Model from "@ember-data/model";
 import { attr, hasMany } from '@ember-data/model';
 
@@ -7,10 +5,10 @@ import NumericIdModel from 'pompa/mixins/numeric-id-model';
 import Moment from 'moment';
 import { computed } from '@ember/object';
 
-const STATE_CREATED = 'created';
-const STATE_STARTED = 'started';
-const STATE_PAUSED = 'paused';
-const STATE_FINISHED = 'finished';
+export const STATE_CREATED = 'created';
+export const STATE_STARTED = 'started';
+export const STATE_PAUSED = 'paused';
+export const STATE_FINISHED = 'finished';
 
 export default Model.extend(NumericIdModel, {
   name: attr('string'),

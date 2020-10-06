@@ -70,7 +70,7 @@
     "google-palette": "^1.1.0",
     "jquery": "^3.5.1",
     "loader.js": "^4.7.0",
-    "moment": "^2.29.0",
+    "moment": "^2.29.1",
     "moment-timezone": "^0.5.31",
     "pace-js": "^1.0.2",
     "postcss-scss": "^3.0.2",

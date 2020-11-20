@@ -66,7 +66,7 @@
     "eonasdan-bootstrap-datetimepicker": "github:Eonasdan/bootstrap-datetimepicker#5a991bf",
     "eslint-plugin-ember": "^8.14.0",
     "eslint-plugin-node": "^11.1.0",
-    "file-saver": "^2.0.2",
+    "file-saver": "^2.0.5",
     "google-palette": "^1.1.0",
     "jquery": "^3.5.1",
     "loader.js": "^4.7.0",

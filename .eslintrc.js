@@ -18,6 +18,7 @@ module.exports = {
     'ember/no-new-mixins': 'off',
     'ember/no-mixins': 'off',
     'ember/no-jquery': 'off',
+    'ember/no-controller-access-in-routes': 'off',
     'ember/no-get': ['error', { 'ignoreNestedPaths': true }],
   },
   overrides: [

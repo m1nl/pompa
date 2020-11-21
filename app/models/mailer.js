@@ -13,6 +13,7 @@ const validations = {
   },
   port: {
     numericality: {
+      allowBlank: true,
       onlyInteger: true,
     },
   },

@@ -14,7 +14,7 @@
     {{input value=model.host id="host" class="form-control"}}
   {{/validation-group}}
   {{#validation-group label="Port" for="port" errors=model.errors.port class="col-sm-6"}}
-    {{input value=model.port id="port" class="form-control"}}
+    {{input value=model.port id="port" class="form-control" placeholder="optional (587 by default)"}}
   {{/validation-group}}
 </div>
 <div class="checkbox">

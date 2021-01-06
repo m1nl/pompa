@@ -274,7 +274,7 @@ var ActiveModelSerializer = RESTSerializer.extend({
         extractPolymorphicRelationships(key, relationshipMeta, resourceHash, relationshipKey);
       }
       // If the preferred format is not found, use {relationship_name_id, relationship_name_type}
-      if (resourceHash.hasOwnProperty(relationshipKey) && typeof resourceHash[relationshipKey] !== 'object') {
+      if (Object.prototype.hasOwnProperty.call(resourceHash, relationshipKey) && typeof resourceHash[relationshipKey] !== 'object') {
         var polymorphicTypeKey = this.keyForRelationship(key) + '_type';
         if (resourceHash[polymorphicTypeKey] && relationshipMeta.options.polymorphic) {
           let id = resourceHash[relationshipKey];

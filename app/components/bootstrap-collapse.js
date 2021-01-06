@@ -26,6 +26,7 @@ export default Component.extend({
     scheduleOnce('render', this, 'updateComponent', true);
   }),
   didInsertElement: function() {
+    this._super(...arguments);
     scheduleOnce('render', this, 'updateComponent', false);
   },
   actions: {

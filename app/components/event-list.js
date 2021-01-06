@@ -20,6 +20,7 @@ export default Component.extend({
     });
   },
   didReceiveAttrs: function() {
+    this._super(...arguments);
     scheduleOnce('render', this, 'updateComponent');
   },
 });

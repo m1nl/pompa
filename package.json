@@ -24,7 +24,7 @@
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.1.4",
     "acorn": "^6.4.2",
-    "autoprefixer": "^10.2.0",
+    "autoprefixer": "^10.2.1",
     "bootstrap-sass": "^3.4.1",
     "bootstrap-toggle": "^2.2.2",
     "broccoli-asset-rev": "^3.0.0",

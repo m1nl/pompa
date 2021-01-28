@@ -27,8 +27,8 @@
       <td class="col-sm-3 col-xs-4">{{mailer.host}}</td>
       <td class="col-sm-4 hidden-xs">{{when-empty mailer.senderEmail "None"}}</td>
       <td class="col-sm-1 col-xs-2 text-center">
-        {{#link-to "mailers.mailer.edit" mailer}}{{fa-icon "edit"}}{{/link-to}}
-        {{#link-to "mailers.mailer.delete" mailer}}{{fa-icon "trash"}}{{/link-to}}
+        {{#link-to "mailers.mailer.edit" mailer}}{{fa-icon icon="edit"}}{{/link-to}}
+        {{#link-to "mailers.mailer.delete" mailer}}{{fa-icon icon="trash-alt"}}{{/link-to}}
       </td>
     </tr>
   {{/each}}

@@ -28,10 +28,10 @@
       <td class="col-lg-5 col-sm-4 col-xs-9">{{#link-to "templates.template.index" template}}{{template.name}}{{/link-to}}</td>
       <td class="col-lg-6 col-sm-6 hidden-xs">{{when-empty template.description "None"}}</td>
       <td class="col-lg-1 col-sm-2 col-xs-3 text-center">
-        {{#link-to "templates.template.edit" template}}{{fa-icon "edit" title="Edit"}}{{/link-to}}
-        {{#link-to "templates.template.duplicate" template}}{{fa-icon "clone" title="Duplicate"}}{{/link-to}}
-        <a href {{ action "download" template }}>{{fa-icon "cloud-download"}}</a>
-        {{#link-to "templates.template.delete" template}}{{fa-icon "trash" title="Delete"}}{{/link-to}}
+        {{#link-to "templates.template.edit" template}}{{fa-icon icon="edit" title="Edit"}}{{/link-to}}
+        {{#link-to "templates.template.duplicate" template}}{{fa-icon icon="clone" title="Duplicate"}}{{/link-to}}
+        <a href {{ action "download" template }}>{{fa-icon icon="file-archive"}}</a>
+        {{#link-to "templates.template.delete" template}}{{fa-icon icon="trash-alt" title="Delete"}}{{/link-to}}
       </td>
     </tr>
   {{/each}}

@@ -16,10 +16,10 @@
       <td class="col-md-1 col-sm-2 col-xs-2"><span class="label {{resource-type-class resource.type}}">{{resource.type}}</span></td>
       <td class="col-md-2 col-sm-3 hidden-xs text-mono">{{resource.code}}</td>
       <td class="col-md-1 col-sm-2 col-xs-3 text-center">
-        {{#link-to "templates.template.resources.resource.upload" resource}}{{fa-icon "upload"}}{{/link-to}}
-        {{#link-to "templates.template.resources.resource.edit" resource}}{{fa-icon "edit"}}{{/link-to}}
-        <a href {{action "download" resource}}>{{fa-icon "cloud-download"}}</a>
-        {{#link-to "templates.template.resources.resource.delete" resource}}{{fa-icon "trash"}}{{/link-to}}
+        {{#link-to "templates.template.resources.resource.upload" resource}}{{fa-icon icon="arrow-alt-circle-up"}}{{/link-to}}
+        <a href {{action "download" resource}}>{{fa-icon icon="arrow-alt-circle-down"}}</a>
+        {{#link-to "templates.template.resources.resource.edit" resource}}{{fa-icon icon="edit"}}{{/link-to}}
+        {{#link-to "templates.template.resources.resource.delete" resource}}{{fa-icon icon="trash-alt"}}{{/link-to}}
       </td>
     </tr>
   {{/each}}

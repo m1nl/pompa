@@ -25,8 +25,8 @@
       <td class="col-sm-5 col-xs-10">{{#link-to "groups.group.index" group}}{{group.name}}{{/link-to}}</td>
       <td class="col-sm-6 hidden-xs">{{when-empty group.description "None"}}</td>
       <td class="col-sm-1 col-xs-2 text-center">
-        {{#link-to "groups.group.edit" group}}{{fa-icon "edit"}}{{/link-to}}
-        {{#link-to "groups.group.delete" group}}{{fa-icon "trash"}}{{/link-to}}
+        {{#link-to "groups.group.edit" group}}{{fa-icon icon="edit"}}{{/link-to}}
+        {{#link-to "groups.group.delete" group}}{{fa-icon icon="trash-alt"}}{{/link-to}}
       </td>
     </tr>
   {{/each}}

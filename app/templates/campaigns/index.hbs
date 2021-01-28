@@ -31,8 +31,8 @@
       <td class="col-md-2 col-sm-3 hidden-xs">{{when-empty campaign.finishedDateString "-"}}</td>
       <td class="col-md-1 col-sm-2 col-xs-4 text-center"><div class={{campaign-state-class campaign.state}}>{{campaign.state}}</div></td>
       <td class="col-md-1 col-sm-1 col-xs-2 text-center">
-        {{#link-to "campaigns.campaign.edit" campaign}}{{fa-icon "edit"}}{{/link-to}}
-        {{#link-to "campaigns.campaign.delete" campaign}}{{fa-icon "trash"}}{{/link-to}}
+        {{#link-to "campaigns.campaign.edit" campaign}}{{fa-icon icon="edit"}}{{/link-to}}
+        {{#link-to "campaigns.campaign.delete" campaign}}{{fa-icon icon="trash-alt"}}{{/link-to}}
       </td>
     </tr>
   {{/each}}

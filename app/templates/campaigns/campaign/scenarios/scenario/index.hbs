@@ -21,7 +21,7 @@
         <div class="pad-bottom">
           <div class="btn-group-justified relative">
             {{input value=quicksearch class="form-control input-sm" placeholder="quicksearch" input=(action "quicksearchChanged")}}
-            {{fa-icon "times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
+            {{fa-icon icon="times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
           </div>
         </div>
         {{#if goalsExist}}
@@ -94,8 +94,8 @@
             <td class="col-md-3 col-sm-4 hidden-xs">{{when-empty victim.details "None"}}</td>
             <td class="col-md-1 col-sm-1 hidden-xs text-center">{{victim.report.total_score}}</td>
             <td class="col-md-1 col-sm-1 col-xs-2 text-center">
-              <a href {{action "resetVictimState" victim}}>{{fa-icon "repeat"}}</a>
-              {{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.delete" victim}}{{fa-icon "trash"}}{{/link-to}}
+              <a href {{action "resetVictimState" victim}}>{{fa-icon icon="redo" prefix="fas"}}</a>
+              {{#link-to "campaigns.campaign.scenarios.scenario.victims.victim.delete" victim}}{{fa-icon icon="trash-alt"}}{{/link-to}}
             </td>
           </tr>
         {{/each}}
@@ -104,11 +104,11 @@
   </div>
   <div id="timeseries" class="tab-pane fade">
     <div class="pad text-center text-muted">
-      <a href {{action 'seriesDelta' 'min'}}>{{fa-icon "angle-double-left" tagName="span" size="lg"}}</a>&nbsp;
-      <a href {{action 'seriesDelta' -1}}>{{fa-icon "angle-left" tagName="span" size="lg"}}</a>
+      <a href {{action 'seriesDelta' 'min'}}>{{fa-icon icon="angle-double-left" prefix="fas"}}</a>&nbsp;
+      <a href {{action 'seriesDelta' -1}}>{{fa-icon icon="angle-left" prefix="fas"}}</a>
       &nbsp;<strong>{{chartDate}}</strong>&nbsp;
-      <a href {{action 'seriesDelta' 1}}>{{fa-icon "angle-right" tagName="span" size="lg"}}</a>&nbsp;
-      <a href {{action 'seriesDelta' 'max'}}>{{fa-icon "angle-double-right" tagName="span" size="lg"}}</a>
+      <a href {{action 'seriesDelta' 1}}>{{fa-icon icon="angle-right" prefix="fas"}}</a>&nbsp;
+      <a href {{action 'seriesDelta' 'max'}}>{{fa-icon icon="angle-double-right" prefix="fas"}}</a>
     </div>
     <div class="chart-series-container">
       {{chart-series series=chartSeries data=chartData xMin=dateFrom xMax=dateTo}}

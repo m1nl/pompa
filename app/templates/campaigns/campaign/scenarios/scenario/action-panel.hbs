@@ -1,20 +1,20 @@
 <div class="btn-group pull-right-sm">
   <div class="btn-group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Scenario&nbsp;{{fa-icon "caret-down"}}</button>
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Scenario&nbsp;{{fa-icon icon="caret-down" prefix="fas"}}</button>
     <ul class="dropdown-menu">
-      <li><a href {{action "victimsSummary"}}>{{fa-icon "pie-chart" fixedWidth=true}}&nbsp;Download summary</a></li>
-      <li>{{#link-to "campaigns.campaign.scenarios.scenario.targets.from-victims" (query-params filter=(json-stringify victimsFilter))}}{{fa-icon "reply" fixedWidth=true}}&nbsp;Copy victims to a group{{/link-to}}</li>
+      <li><a href {{action "victimsSummary"}}>{{fa-icon icon="chart-pie" prefix="fas" fixedWidth=true}}&nbsp;Download summary</a></li>
+      <li>{{#link-to "campaigns.campaign.scenarios.scenario.targets.from-victims" (query-params filter=(json-stringify victimsFilter))}}{{fa-icon icon="reply" prefix="fas" fixedWidth=true}}&nbsp;Copy victims to a group{{/link-to}}</li>
       <li role="separator" class="divider"></li>
-      <li>{{#link-to "campaigns.campaign.scenarios.scenario.edit" scenario}}{{fa-icon "edit" fixedWidth=true}}&nbsp;Edit scenario{{/link-to}}</li>
-      <li><a href {{action "showConfirmation" "Synchronize group" "Are you sure you want to <b>sychronize</b> the scenario victims with the current group?<br>This may remove pending victims from current the scenario queue." (action "synchronizeGroup")}}>{{fa-icon "exchange" fixedWidth=true}}&nbsp;Synchronize group</a></li>
-      <li>{{#link-to "campaigns.campaign.scenarios.scenario.delete" scenario}}{{fa-icon "trash" fixedWidth=true}}&nbsp;Delete scenario{{/link-to}}</li>
+      <li>{{#link-to "campaigns.campaign.scenarios.scenario.edit" scenario}}{{fa-icon icon="edit" prefix="fas" fixedWidth=true}}&nbsp;Edit scenario{{/link-to}}</li>
+      <li><a href {{action "showConfirmation" "Synchronize group" "Are you sure you want to <b>sychronize</b> the scenario victims with the current group?<br>This may remove pending victims from current the scenario queue." (action "synchronizeGroup")}}>{{fa-icon icon="exchange-alt" prefix="fas" fixedWidth=true}}&nbsp;Synchronize group</a></li>
+      <li>{{#link-to "campaigns.campaign.scenarios.scenario.delete" scenario}}{{fa-icon icon="trash-alt" prefix="fas" fixedWidth=true}}&nbsp;Delete scenario{{/link-to}}</li>
     </ul>
   </div>
   <div class="btn-group">
     <button type="button" class="btn btn-default {{if busy 'disabled' ''}}" {{action "refresh"}} disabled={{busy}}>Refresh</button>
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{fa-icon "caret-down"}}</button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{fa-icon icon="caret-down" prefix="fas"}}</button>
     <ul class="dropdown-menu dropdown-menu-right-sm" role="menu">
-      <li><a href {{action "toggleAutoRefresh"}}>{{fa-icon (if autoRefresh "check" "check-empty") fixedWidth=true}}&nbsp;Auto-refresh</a></li>
+      <li><a href {{action "toggleAutoRefresh"}}>{{fa-icon icon=(if autoRefresh "check-square" "square") prefix="fas" fixedWidth=true}}&nbsp;Auto-refresh</a></li>
     </ul>
   </div>
 </div>

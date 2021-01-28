@@ -1,19 +1,19 @@
 <div class="btn-group pull-right-sm">
   <div class="btn-group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Campaign&nbsp;{{fa-icon "caret-down"}}</button>
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Campaign&nbsp;{{fa-icon icon="caret-down" prefix="fas"}}</button>
     <ul class="dropdown-menu" role="menu">
-      <li>{{#link-to "campaigns.campaign.scenarios.new"}}{{fa-icon "plus" fixedWidth=true}}&nbsp;Add scenario{{/link-to}}</li>
+      <li>{{#link-to "campaigns.campaign.scenarios.new"}}{{fa-icon icon="plus" prefix="fas" fixedWidth=true}}&nbsp;Add scenario{{/link-to}}</li>
       <li role="separator" class="divider"></li>
-      <li class="{{if campaign.canStart '' 'disabled'}}"><a href {{action "showConfirmation" "Start campaign" "Are you sure you want to <b>start</b> the campaign?" (action "startCampaign") campaignChallenge}}>{{fa-icon "play" fixedWidth=true}}&nbsp;Start</a></li>
-      <li class="{{if campaign.canPause '' 'disabled'}}"><a href {{action "showConfirmation" "Pause campaign" "Are you sure you want to <b>pause</b> the campaign?" (action "pauseCampaign")}}>{{fa-icon "pause" fixedWidth=true}}&nbsp;Pause</a></li>
-      <li class="{{if campaign.canFinish '' 'disabled'}}"><a href {{action "showConfirmation" "Finish campaign" "Are you sure you want to <b>finish</b> the campaign?<br>This will definitely end the processing of the campaign." (action "finishCampaign")}}>{{fa-icon "stop" fixedWidth=true}}&nbsp;Finish</a></li>
+      <li class="{{if campaign.canStart '' 'disabled'}}"><a href {{action "showConfirmation" "Start campaign" "Are you sure you want to <b>start</b> the campaign?" (action "startCampaign") campaignChallenge}}>{{fa-icon icon="play" prefix="fas" fixedWidth=true}}&nbsp;Start</a></li>
+      <li class="{{if campaign.canPause '' 'disabled'}}"><a href {{action "showConfirmation" "Pause campaign" "Are you sure you want to <b>pause</b> the campaign?" (action "pauseCampaign")}}>{{fa-icon icon="pause" prefix="fas" fixedWidth=true}}&nbsp;Pause</a></li>
+      <li class="{{if campaign.canFinish '' 'disabled'}}"><a href {{action "showConfirmation" "Finish campaign" "Are you sure you want to <b>finish</b> the campaign?<br>This will definitely end the processing of the campaign." (action "finishCampaign")}}>{{fa-icon icon="stop" prefix="fas" fixedWidth=true}}&nbsp;Finish</a></li>
     </ul>
   </div>
   <div class="btn-group">
     <button type="button" class="btn btn-default {{if busy 'disabled' ''}}" {{action "refresh"}} disabled={{busy}}>Refresh</button>
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{fa-icon "caret-down"}}</button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{fa-icon icon="caret-down" prefix="fas"}}</button>
     <ul class="dropdown-menu dropdown-menu-right-sm" role="menu">
-      <li><a href {{action "toggleAutoRefresh"}}>{{fa-icon (if autoRefresh "check" "check-empty") fixedWidth=true}}&nbsp;Auto-refresh</a></li>
+      <li><a href {{action "toggleAutoRefresh"}}>{{fa-icon icon=(if autoRefresh "check-square" "square") prefix="fas" fixedWidth=true}}&nbsp;Auto-refresh</a></li>
     </ul>
   </div>
 </div>

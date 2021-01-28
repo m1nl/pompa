@@ -20,7 +20,7 @@
   <div class="col-sm-5 col-md-4 col-xs-12 small pad vertical-align">
     <div class="btn-group-justified relative">
       {{input value=quicksearch class="form-control input-sm" placeholder="quicksearch" input=(action "quicksearchChanged")}}
-      {{fa-icon "times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
+      {{fa-icon icon="times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
     </div>
   </div><!--
   --><div class="col-sm-7 col-md-8 col-xs-12 vertical-align text-right-sm">
@@ -51,8 +51,8 @@
       <td class="col-md-1 hidden-sm hidden-xs text-center">{{when-empty target.gender "-"}}</td>
       <td class="col-md-3 hidden-sm hidden-xs">{{when-empty target.department "None"}}</td>
       <td class="col-md-1 col-sm-1 col-xs-2 text-center">
-        {{#link-to "groups.group.targets.target.edit" target}}{{fa-icon "edit"}}{{/link-to}}
-        {{#link-to "groups.group.targets.target.delete" target}}{{fa-icon "trash"}}{{/link-to}}
+        {{#link-to "groups.group.targets.target.edit" target}}{{fa-icon icon="edit"}}{{/link-to}}
+        {{#link-to "groups.group.targets.target.delete" target}}{{fa-icon icon="trash-alt"}}{{/link-to}}
       </td>
     </tr>
   {{/each}}

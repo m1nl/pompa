@@ -3,7 +3,6 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-const Autoprefixer = require('autoprefixer');
 const Funnel = require('broccoli-funnel');
 const UnwatchedDir = require('broccoli-source').UnwatchedDir;
 
@@ -18,12 +17,11 @@ module.exports = function(defaults) {
           {
             module: require('@csstools/postcss-sass'),
             options: {
-            includePaths: [
+              includePaths: [
                 'node_modules/bootstrap-sass/assets/stylesheets',
                 'node_modules/eonasdan-bootstrap-datetimepicker/src/sass',
                 'node_modules/bootstrap-toggle/css',
                 'node_modules/pace-js/themes/blue',
-                'node_modules/font-awesome/scss',
               ],
             },
           },
@@ -31,9 +29,10 @@ module.exports = function(defaults) {
       },
       filter: {
         enabled: true,
+        include: ['*.css'],
         plugins: [
           {
-            module: Autoprefixer,
+            module: require('autoprefixer'),
           },
         ],
       },
@@ -54,12 +53,8 @@ module.exports = function(defaults) {
       modes: ['liquid'],
       workers: [],
     },
-    'ember-font-awesome': {
-      useScss: true,
-      fontFormats: ['woff', 'woff2']
-    },
-    minifyCSS: { enabled: EmberApp.env() !== 'development', relativeTo: 'app/styles' },
     minifyJS: { enabled: EmberApp.env() !== 'development' },
+    minifyCSS: { enabled: EmberApp.env() !== 'development' },
     sourcemaps: {
       enabled: EmberApp.env() !== 'production',
       extensions: ['js']

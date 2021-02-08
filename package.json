@@ -74,7 +74,7 @@
     "jquery": "^3.5.1",
     "loader.js": "^4.7.0",
     "moment": "^2.29.1",
-    "moment-timezone": "^0.5.32",
+    "moment-timezone": "^0.5.33",
     "pace-js": "^1.0.2",
     "postcss-scss": "^3.0.4",
     "precss": "^4.0.0",

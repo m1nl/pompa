@@ -15,6 +15,7 @@ export default Route.extend({
   /* services */
   authManager: service(),
   transitionHistory: service(),
+  router: service(),
 
   /* methods */
   renderTemplate: function() {
@@ -49,8 +50,11 @@ export default Route.extend({
   _authenticate: function() {
     let returnUrl = `${location.protocol}//${location.host}${location.pathname}`;
 
+    let failedUrl = `${location.protocol}//${location.host}`;
+    failedUrl += this.router.urlFor('forbidden');
+
     scheduleOnce('afterRender', this.authManager, 'authenticate', returnUrl,
-      this._redirect.bind(this), this._forbidden.bind(this));
+      failedUrl, this._redirect.bind(this), this._forbidden.bind(this));
   },
   _commit: function(code) {
     scheduleOnce('afterRender', this.authManager, 'commit', code,

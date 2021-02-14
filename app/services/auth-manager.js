@@ -119,11 +119,11 @@ export default Service.extend({
   }).drop(),
 
   /* methods */
-  authenticate: function(returnUrl, success, failed) {
+  authenticate: function(returnUrl, failedUrl, success, failed) {
     window.sessionStorage.removeItem(nonceKey);
 
     let promise = this.ajax.post('/auth/init', {
-      data: { return_url: returnUrl }
+      data: { return_url: returnUrl, failed_url: failedUrl }
     }).then(response => {
       window.sessionStorage.setItem(nonceKey, response.nonce);
       success(response.redirect_url);

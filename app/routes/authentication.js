@@ -65,7 +65,10 @@ export default Route.extend({
   },
   _redirect: function(redirectUrl) {
     this.transitionHistory.commit();
-    window.location.assign(redirectUrl);
+
+    setTimeout(function () {
+      window.location.assign(redirectUrl);
+    }, 0);
   },
   _clear: function() {
     this.replaceWith({ queryParams: { code: null } });

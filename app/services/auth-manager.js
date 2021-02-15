@@ -126,7 +126,7 @@ export default Service.extend({
       data: { return_url: returnUrl, failed_url: failedUrl }
     }).then(response => {
       window.sessionStorage.setItem(nonceKey, response.nonce);
-      success(response.redirect_url);
+      setTimeout(() => success(response.redirect_url), 0);
     }).catch(failed);
 
     return this.invalidate().then(promise);

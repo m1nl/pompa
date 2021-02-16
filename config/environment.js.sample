@@ -19,6 +19,7 @@ module.exports = function(environment) {
 
     APP: {
       tokenRefreshMargin: 60, // in seconds
+      localStorageCompatiblityMode: false, // whether to use localStorage instead of sessionStorage
     },
   };
 

@@ -10,6 +10,7 @@ export default Service.extend({
 
   /* services */
   router: service(),
+  storageWrapper: service(),
 
   /* methods */
   save: function(transition) {
@@ -19,14 +20,14 @@ export default Service.extend({
   },
   commit: function() {
     if (!isEmpty(this.transitionUrl)) {
-      window.sessionStorage.setItem(transitionUrlKey, this.transitionUrl);
+      this.storageWrapper.setItem(transitionUrlKey, this.transitionUrl);
     }
 
     this.transitionUrl = null;
   },
   retry: function(fallback) {
-    let savedTransitionUrl = window.sessionStorage.getItem(transitionUrlKey);
-    window.sessionStorage.removeItem(transitionUrlKey);
+    let savedTransitionUrl = this.storageWrapper.getItem(transitionUrlKey);
+    this.storageWrapper.removeItem(transitionUrlKey);
 
     if (isEmpty(savedTransitionUrl)) {
       return this.router.transitionTo(fallback || 'index');

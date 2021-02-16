@@ -1,5 +1,5 @@
 import Mixin from '@ember/object/mixin';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 
 export default Mixin.create({
   actions: {

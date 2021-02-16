@@ -36,13 +36,13 @@ export default Service.extend({
 
   token: computed({
     get() {
-      return window.sessionStorage.getItem(tokenKey);
+      return this.storageWrapper.getItem(tokenKey);
     },
     set(key, value) {
       if (isEmpty(value)) {
-        window.sessionStorage.removeItem(tokenKey);
+        this.storageWrapper.removeItem(tokenKey);
       } else { 
-        window.sessionStorage.setItem(tokenKey, value);
+        this.storageWrapper.setItem(tokenKey, value);
       }
  
       return value;
@@ -74,6 +74,7 @@ export default Service.extend({
 
   /* services */
   ajax: service(),
+  storageWrapper: service(),
 
   /* tasks */
   refreshTokenTask: task(function * () {
@@ -120,20 +121,20 @@ export default Service.extend({
 
   /* methods */
   authenticate: function(returnUrl, failedUrl, success, failed) {
-    window.sessionStorage.removeItem(nonceKey);
+    this.storageWrapper.removeItem(nonceKey);
 
     let promise = this.ajax.post('/auth/init', {
       data: { return_url: returnUrl, failed_url: failedUrl }
     }).then(response => {
-      window.sessionStorage.setItem(nonceKey, response.nonce);
+      this.storageWrapper.setItem(nonceKey, response.nonce);
       success(response.redirect_url);
     }).catch(failed);
 
     return this.invalidate().then(promise);
   },
   commit: function(code, success, failed) {
-    let nonce = window.sessionStorage.getItem(nonceKey);
-    window.sessionStorage.removeItem(nonceKey);
+    let nonce = this.storageWrapper.getItem(nonceKey);
+    this.storageWrapper.removeItem(nonceKey);
 
     if (isEmpty(nonce) || isEmpty(code)) {
       failed(new Error('Neither nonce nor code can be empty'));

@@ -71,7 +71,7 @@
     "eslint-plugin-node": "^11.1.0",
     "file-saver": "^2.0.5",
     "google-palette": "^1.1.0",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.0",
     "loader.js": "^4.7.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",

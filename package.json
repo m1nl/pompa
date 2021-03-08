@@ -63,7 +63,7 @@
     "ember-qunit": "^5.1.2",
     "ember-resolver": "^8.0.2",
     "ember-route-action-helper": "^2.0.8",
-    "ember-source": "^3.25.1",
+    "ember-source": "^3.25.3",
     "ember-truth-helpers": "^3.0.0",
     "eonasdan-bootstrap-datetimepicker": "github:Eonasdan/bootstrap-datetimepicker#5a991bf",
     "eslint": "^7.20.0",

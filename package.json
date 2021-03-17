@@ -80,7 +80,7 @@
     "precss": "^4.0.0",
     "qunit": "^2.14.1",
     "qunit-dom": "^1.6.0",
-    "twbs-pagination": "github:josecebe/twbs-pagination#tags/v1.4.2"
+    "twbs-pagination": "^1.4.2"
   },
   "engines": {
     "node": "8.* || >= 10.*"

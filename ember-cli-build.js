@@ -43,6 +43,7 @@ module.exports = function(defaults) {
       'node_modules/bootstrap-toggle/js',
       'node_modules/eonasdan-bootstrap-datetimepicker/src/js',
       'node_modules/chart.js/dist',
+      'node_modules/chartjs-adapter-moment/dist',
       'node_modules/file-saver/dist',
       new Funnel(new UnwatchedDir('node_modules/google-palette'), { files: ['palette.js'] }),
       new Funnel(new UnwatchedDir('node_modules/twbs-pagination'), { files: ['jquery.twbsPagination.js'] }),
@@ -69,7 +70,8 @@ module.exports = function(defaults) {
   app.import('vendor/bootstrap/glyphicons-halflings-regular.woff', { destDir: 'fonts' });
   app.import('vendor/bootstrap/glyphicons-halflings-regular.woff2', { destDir: 'fonts' });
 
-  app.import('vendor/Chart.js', { using: [{ transformation: 'amd', as: 'chart-js' }] });
+  app.import('vendor/chart.js', { using: [{ transformation: 'amd', as: 'chart.js' }] });
+  app.import('vendor/chartjs-adapter-moment.js', { using: [{ transformation: 'amd', as: 'chartjs-adapter-moment' }] });
   app.import('vendor/pace.js', { using: [{ transformation: 'amd', as: 'pace' }] });
  
   app.import('node_modules/google-palette/palette.js', { using: [{ transformation: 'cjs', as: 'palette' }] });

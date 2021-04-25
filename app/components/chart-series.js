@@ -5,8 +5,10 @@ import { observer } from '@ember/object';
 import { isBlank, isEqual } from '@ember/utils';
 import Component from '@ember/component';
 import Moment from 'moment';
-import Chart from 'chart-js';
 import Palette from 'palette';
+
+import { Chart } from 'chart.js';
+import 'chartjs-adapter-moment';
 
 const defaultOptions = {
   type: 'line',
@@ -21,7 +23,7 @@ const defaultOptions = {
       enabled: false,
     },
     scales: {
-      xAxes: [{
+      x: {
         type: 'time',
         time: {
           bounds: 'ticks',
@@ -40,15 +42,17 @@ const defaultOptions = {
         scaleLabel: {
           display: false,
         }
-      }],
-      yAxes: [{
+      },
+      y: {
+        min: 0,
+        suggestedMax: 10,
         ticks: {
-          beginAtZero: true,
+          stepSize: 1
         },
         scaleLabel: {
           display: false,
         }
-      }]
+      }
     }
   }
 };
@@ -77,16 +81,16 @@ export default Component.extend({
 
     options.legend.position = this.legendPosition;
 
-    options.scales.xAxes[0].time.unit = this.timeUnit;
-    options.scales.xAxes[0].time.round = this.timeUnit;
-    options.scales.xAxes[0].ticks.min = this.xMin;
-    options.scales.xAxes[0].ticks.max = this.xMax;
+    options.scales.x.time.unit = this.timeUnit;
+    options.scales.x.time.round = this.timeUnit;
+    options.scales.x.min = this.xMin;
+    options.scales.x.max = this.xMax;
 
-    options.scales.xAxes[0].scaleLabel.display = !isBlank(this.xLabel);
-    options.scales.xAxes[0].scaleLabel.labelString = this.xLabel;
+    options.scales.x.scaleLabel.display = !isBlank(this.xLabel);
+    options.scales.x.scaleLabel.labelString = this.xLabel;
 
-    options.scales.yAxes[0].scaleLabel.display = !isBlank(this.yLabel);
-    options.scales.yAxes[0].scaleLabel.labelString = this.yLabel;
+    options.scales.y.scaleLabel.display = !isBlank(this.yLabel);
+    options.scales.y.scaleLabel.labelString = this.yLabel;
 
     scheduleOnce('afterRender', this, 'updateChart');
   },

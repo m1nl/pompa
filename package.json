@@ -33,7 +33,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-funnel": "^3.0.5",
     "broccoli-uglify-sourcemap": "^4.0.0",
-    "chart.js": "^3.2.1",
+    "chart.js": "^3.3.2",
     "chartjs-adapter-moment": "^1.0.0",
     "ember-ace": "^2.0.1",
     "ember-ajax": "^5.0.0",

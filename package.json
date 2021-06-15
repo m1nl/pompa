@@ -81,7 +81,7 @@
     "patch-package": "^6.4.7",
     "postcss-scss": "^3.0.5",
     "precss": "^4.0.0",
-    "qunit": "^2.15.0",
+    "qunit": "^2.16.0",
     "qunit-dom": "^1.6.0",
     "twbs-pagination": "^1.4.2"
   },

@@ -16,7 +16,8 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
-    "test": "ember test"
+    "test": "ember test",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@csstools/postcss-sass": "^4.0.0",
@@ -77,6 +78,7 @@
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "pace-js": "^1.2.4",
+    "patch-package": "^6.4.7",
     "postcss-scss": "^3.0.5",
     "precss": "^4.0.0",
     "qunit": "^2.15.0",

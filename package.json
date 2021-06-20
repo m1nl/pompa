@@ -32,7 +32,7 @@
     "bootstrap-sass": "^3.4.1",
     "bootstrap-toggle": "^2.2.2",
     "broccoli-asset-rev": "^3.0.0",
-    "broccoli-funnel": "^3.0.7",
+    "broccoli-funnel": "^3.0.8",
     "broccoli-uglify-sourcemap": "^4.0.0",
     "chart.js": "^3.3.2",
     "chartjs-adapter-moment": "^1.0.0",

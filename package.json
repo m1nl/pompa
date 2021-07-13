@@ -28,7 +28,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "acorn": "^8.4.0",
-    "autoprefixer": "^10.2.6",
+    "autoprefixer": "^10.3.1",
     "bootstrap-sass": "^3.4.1",
     "bootstrap-toggle": "^2.2.2",
     "broccoli-asset-rev": "^3.0.0",

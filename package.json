@@ -69,7 +69,7 @@
     "ember-truth-helpers": "^3.0.0",
     "eonasdan-bootstrap-datetimepicker": "git+https://github.com/Eonasdan/tempus-dominus#5b97d5b",
     "eslint": "^7.29.0",
-    "eslint-plugin-ember": "^10.5.0",
+    "eslint-plugin-ember": "^10.5.2",
     "eslint-plugin-node": "^11.1.0",
     "file-saver": "^2.0.5",
     "google-palette": "^1.1.0",

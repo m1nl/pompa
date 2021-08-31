@@ -82,7 +82,7 @@
     "postcss-scss": "^4.0.0",
     "precss": "^4.0.0",
     "qunit": "^2.16.0",
-    "qunit-dom": "^1.6.0",
+    "qunit-dom": "^2.0.0",
     "twbs-pagination": "^1.4.2"
   },
   "engines": {

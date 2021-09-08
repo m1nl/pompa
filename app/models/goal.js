@@ -1,8 +1,8 @@
 import Model from "@ember-data/model";
 import { attr, belongsTo } from '@ember-data/model';
 
-import NumericIdModel from 'pompa/mixins/numeric-id-model';
-import Validator from 'ember-model-validator/mixins/model-validator';
+import NumericIdModel from 'pompa/decorators/numeric-id-model';
+import Validator from 'ember-model-validator/decorators/object-validator';
 
 const validations = {
   name: {
@@ -15,12 +15,12 @@ const validations = {
   }
 };
 
+export default @Validator @NumericIdModel class GoalModel extends Model {
+  @attr('string') name;
+  @attr('string') description;
+  @attr('number') score;
+  @attr('string') code;
+  @belongsTo('template', { async: true }) template;
 
-export default Model.extend(NumericIdModel, Validator, {
-  name: attr('string'),
-  description: attr('string'),
-  score: attr('number'),
-  code: attr('string'),
-  template: belongsTo('template', { async: true }),
-  validations: validations,
-});
+  validations = validations;
+}

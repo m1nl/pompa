@@ -1,7 +1,8 @@
 module.exports = {
   root: true,
+  parser: "babel-eslint",
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 12,
     sourceType: 'module'
   },
   plugins: [
@@ -41,7 +42,7 @@ module.exports = {
       ],
       parserOptions: {
         sourceType: 'script',
-        ecmaVersion: 2015
+        ecmaVersion: 6
       },
       env: {
         browser: false,

@@ -1,8 +1,8 @@
 import Model from "@ember-data/model";
 import { attr } from '@ember-data/model';
 
-import NumericIdModel from 'pompa/mixins/numeric-id-model';
-import Validator from 'ember-model-validator/mixins/model-validator';
+import NumericIdModel from 'pompa/decorators/numeric-id-model';
+import Validator from 'ember-model-validator/decorators/object-validator';
 
 const validations = {
   name: {
@@ -31,16 +31,17 @@ const validations = {
   }
 };
 
-export default Model.extend(NumericIdModel, Validator, {
-  name: attr('string'),
-  host: attr('string'),
-  port: attr('number'),
-  senderEmail: attr('string'),
-  senderName: attr('string'),
-  username: attr('string'),
-  password: attr('string'),
-  perMinute: attr('number'),
-  burst: attr('number'),
-  ignoreCertificate: attr('boolean'),
-  validations: validations,
-});
+export default @Validator @NumericIdModel class MailerModel extends Model {
+  @attr('string') name;
+  @attr('string') host;
+  @attr('number') port;
+  @attr('string') senderEmail;
+  @attr('string') senderName;
+  @attr('string') username;
+  @attr('string') password;
+  @attr('number') perMinute;
+  @attr('number') burst;
+  @attr('boolean') ignoreCertificate;
+
+  validations = validations;
+}

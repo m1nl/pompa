@@ -78,7 +78,7 @@
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "pace-js": "^1.2.4",
-    "postcss-scss": "^4.0.0",
+    "postcss-scss": "^4.0.1",
     "precss": "^4.0.0",
     "qunit": "^2.17.2",
     "qunit-dom": "^2.0.0",

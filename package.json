@@ -27,7 +27,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "acorn": "^8.5.0",
-    "autoprefixer": "^10.3.6",
+    "autoprefixer": "^10.3.7",
     "babel-eslint": "^10.1.0",
     "bootstrap-sass": "^3.4.1",
     "bootstrap-toggle": "^2.2.2",

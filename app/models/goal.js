@@ -24,6 +24,10 @@ export default @Validator @NumericIdModel class GoalModel extends Model {
   @belongsTo('template', { async: true }) template;
 
   get isPhishingReportGoal() {
+    if (this.isNew) {
+      return false;
+    }
+
     return get(this, 'template.phishingReportGoal.id') == this.id;
   }
 

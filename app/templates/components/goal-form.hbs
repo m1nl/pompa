@@ -10,6 +10,6 @@
 <hr>
 <div class="checkbox">
   <label>
-    {{#bootstrap-toggle size="mini" width="50" checked=model.isPhishingReportGoal changed=(action "phishingReportGoalChanged")}} Score this goal, when victim reports phishing{{/bootstrap-toggle}}
+    {{#bootstrap-toggle size="mini" width="50" checked=(is-equal model.template.phishingReportGoal.id model.id) changed=(action "phishingReportGoalChanged")}} Score this goal when a phish is reported{{/bootstrap-toggle}}
   </label>
 </div>

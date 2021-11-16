@@ -28,7 +28,7 @@ export default @Validator @NumericIdModel class GoalModel extends Model {
       return false;
     }
 
-    return get(this, 'template.phishingReportGoal.id') == this.id;
+    return get(this, 'template.phishingReportGoal.id').then(id => id == this.id);
   }
 
   validations = validations;

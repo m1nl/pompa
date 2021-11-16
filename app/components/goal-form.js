@@ -17,7 +17,7 @@ export default Component.extend({
 
     /* actions */
     phishingReportGoalChanged: function(state) {
-      this.attrs.phishingReportGoalChanged(state);
+      this.phishingReportGoalChanged(state);
     },
   }
 });

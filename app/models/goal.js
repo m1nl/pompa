@@ -1,6 +1,6 @@
 import Model from "@ember-data/model";
 import { attr, belongsTo } from '@ember-data/model';
-import { computed } from '@ember/object';
+import { get } from '@ember/object';
 
 import NumericIdModel from 'pompa/decorators/numeric-id-model';
 import Validator from 'ember-model-validator/decorators/object-validator';
@@ -23,9 +23,8 @@ export default @Validator @NumericIdModel class GoalModel extends Model {
   @attr('string') code;
   @belongsTo('template', { async: true }) template;
 
-  @computed('template.phishingReportGoal.id')
   get isPhishingReportGoal() {
-    return this.get('template.phishingReportGoal.id') == this.id;
+    return get(this, 'template.phishingReportGoal.id') == this.id;
   }
 
   validations = validations;

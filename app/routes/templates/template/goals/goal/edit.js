@@ -21,4 +21,9 @@ export default Route.extend({
   model: function() {
     return this.modelFor('templates.template.goals.goal');
   },
+  setupController: function(controller) {
+    this._super(...arguments);
+
+    controller.set('hasPhishingReportGoalChanged', false);
+  },
 });

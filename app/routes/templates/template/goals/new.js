@@ -22,4 +22,9 @@ export default Route.extend({
     let template = this.modelFor('templates.template');
     return this.store.createRecord('goal', { template: template });
   },
+  setupController: function(controller) {
+    this._super(...arguments);
+
+    controller.set('hasPhishingReportGoalChanged', false);
+  },
 });

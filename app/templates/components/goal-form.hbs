@@ -7,3 +7,9 @@
 {{#validation-group label="Score" for="score" errors=model.errors.score}}
   {{input value=model.score id="score" class="form-control" placeholder=""}}
 {{/validation-group}}
+<hr>
+<div class="checkbox">
+  <label>
+    {{#bootstrap-toggle size="mini" width="50" checked=model.isPhishingReportGoal changed=(action "phishingReportGoalChanged")}} Score this goal, when victim reports phishing{{/bootstrap-toggle}}
+  </label>
+</div>

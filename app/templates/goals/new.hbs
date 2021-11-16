@@ -1,5 +1,5 @@
 {{#bootstrap-modal title="New goal" actionTitle="Create" cancel=(action "cancel") action=(action "save") close=(route-action "back")}}
-  {{#goal-form model=model}}
+  {{#goal-form model=model phishingReportGoalChanged=(action "phishingReportGoalChanged")}}
   {{/goal-form}}
 {{/bootstrap-modal}}
 

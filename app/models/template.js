@@ -1,5 +1,5 @@
 import Model from '@ember-data/model';	
-import { attr, hasMany } from '@ember-data/model';	
+import { attr, hasMany, belongsTo } from '@ember-data/model';
 
 import NumericIdModel from 'pompa/mixins/numeric-id-model';
 
@@ -19,6 +19,7 @@ export default Model.extend(NumericIdModel, {
   goals: hasMany('goal', { async: true }),
   resources: hasMany('resource', { async: true }),
   attachments: hasMany('attachment', { async: true }),
+  phishingReportGoal: belongsTo('goal', { inverse: null, async: true }),
   duplicate: function() {
     let modelName = this.constructor.modelName;
     let adapter = this.store.adapterFor(modelName);

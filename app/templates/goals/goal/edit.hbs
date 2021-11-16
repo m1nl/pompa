@@ -1,4 +1,4 @@
 {{#bootstrap-modal title="Edit goal" actionTitle="Save" cancel=(action "cancel") action=(action "save") close=(route-action "back")}}
-  {{#goal-form model=model phishingReportGoalChanged=(action "phishingReportGoalChanged")}}
+  {{#goal-form model=model isPhishingReportGoal=isPhishingReportGoal phishingReportGoalChanged=(action "phishingReportGoalChanged")}}
   {{/goal-form}}
 {{/bootstrap-modal}}

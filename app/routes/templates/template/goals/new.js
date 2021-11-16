@@ -26,5 +26,6 @@ export default Route.extend({
     this._super(...arguments);
 
     controller.set('hasPhishingReportGoalChanged', false);
+    controller.set('isPhishingReportGoal', false);
   },
 });

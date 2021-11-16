@@ -19,7 +19,7 @@ export default Controller.extend(EditModalController, {
 
     let self = this;
 
-    this.model.belongsTo('template').reload().then(function(template) {
+    this.get('model.template').then(function(template) {
       if (self.isPhishingReportGoal) {
         template.phishingReportGoal = self.model;
       } else {

@@ -21,9 +21,10 @@ export default Route.extend({
   model: function() {
     return this.modelFor('templates.template.goals.goal');
   },
-  setupController: function(controller) {
+  setupController: function(controller, model) {
     this._super(...arguments);
 
     controller.set('hasPhishingReportGoalChanged', false);
+    model.isPhishingReportGoal.then(is => controller.set('isPhishingReportGoal', is));
   },
 });

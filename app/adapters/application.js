@@ -1,25 +1,35 @@
-import ActiveModelAdapter from 'pompa/adapters/active-model-adapter';
+import ActiveModelAdapter from 'active-model-adapter';
+
 import ENV from "pompa/config/environment";
 import { inject as service } from '@ember/service';
 
-export default ActiveModelAdapter.extend({
-  namespace: ENV.APP.apiNamespace,
-  host: ENV.APP.apiHost,
-
+export default class ApplicationAdapter extends ActiveModelAdapter {
   /* properties */
+  get namespace() {
+    return ENV.APP.apiNamespace;
+  }
+
+  get host() {
+    return ENV.APP.apiHost;
+  }
+
   get headers() {
     if (this.authManager.isAuthenticated) {
       return { 'Authorization': `Bearer ${this.authManager.token}` }
     }
 
     return { };
-  },
+  }
+
+  get urlForAuthenticateUrlAction() {
+    return `${this.buildURL()}/auth/url`;
+  }
 
   /* services */
-  authManager: service(),
+  @service authManager;
 
   /* response code handling */
-  handleResponse: function(status, headers, payload) {
+  handleResponse(status, headers, payload) {
     if (this.isSuccess(status, headers, payload)) {
       this.authManager.refresh();
     }
@@ -34,8 +44,8 @@ export default ActiveModelAdapter.extend({
       return this.ajax(`${url}?sync=true`, 'GET');
     }
 
-    return this._super(...arguments);
-  },
+    return super.handleResponse(...arguments);
+  }
 
   /* methods */
   authenticateUrl(url) {
@@ -48,8 +58,5 @@ export default ActiveModelAdapter.extend({
         resolve(url);
       }
     });
-  },
-  urlForAuthenticateUrlAction() {
-    return `${this.buildURL()}/auth/url`;
-  },
-});
+  }
+}

@@ -13,5 +13,5 @@ export default Route.extend({
   },
   model: function() {
     return this.modelFor('templates.template').get('goals');
-  },
+  }
 });

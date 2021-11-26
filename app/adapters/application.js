@@ -52,7 +52,7 @@ export default class ApplicationAdapter extends ActiveModelAdapter {
     let self = this;
     return new Promise(resolve => {
       if (self.authManager.isAuthenticated) {
-        return self.ajax(self.urlForAuthenticateUrlAction(), 'POST',
+        return self.ajax(self.urlForAuthenticateUrlAction, 'POST',
           { data: { url: url } }).then(r => resolve(r.url));
       } else {
         resolve(url);

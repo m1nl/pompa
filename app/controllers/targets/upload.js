@@ -24,6 +24,7 @@ export default Controller.extend({
     upload: function(deferred) {
       let adapter = this.store.adapterFor('target');
       let self = this;
+
       adapter.upload(this.file, this.params).then(function() {
         deferred.resolve();
       }, function(response) {

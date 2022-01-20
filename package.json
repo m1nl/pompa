@@ -51,7 +51,7 @@
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-cli-moment-shim": "^3.8.0",
     "ember-cli-node-modules-to-vendor": "^0.3.0",
-    "ember-cli-postcss": "^7.1.0",
+    "ember-cli-postcss": "^8.0.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-template-lint": "^2.0.2",
     "ember-cli-uglify": "^3.0.0",

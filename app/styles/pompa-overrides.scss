@@ -106,8 +106,11 @@ div.tooltip-inner {
   height: 1em;
   margin: auto;
   font-size: 1.2em;
-  cursor: pointer;
   color: #ccc;
+}
+
+.input-icon > svg {
+  vertical-align: 0!important;
 }
 
 .no-margin-bottom {

@@ -21,7 +21,11 @@
         <div class="pad-bottom">
           <div class="btn-group-justified relative">
             {{input value=quicksearch class="form-control input-sm" placeholder="quicksearch" input=(action "quicksearchChanged")}}
-            {{fa-icon icon="times-circle" click=(action "clearQuicksearch") tagName="span" class="input-icon"}}
+            <a href {{action "clearQuicksearch"}}>
+              <span class="input-icon">
+                {{fa-icon icon="times-circle"}}
+              </span>
+            </a>
           </div>
         </div>
         {{#if goalsExist}}

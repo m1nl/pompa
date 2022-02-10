@@ -57,7 +57,7 @@
     "ember-cli-template-lint": "^2.0.2",
     "ember-cli-uglify": "^3.0.0",
     "ember-composable-helpers": "^5.0.0",
-    "ember-concurrency": "^2.2.0",
+    "ember-concurrency": "^2.2.1",
     "ember-data": "~3.28.8",
     "ember-export-application-global": "^2.0.1",
     "ember-file-upload": "^4.0.3",

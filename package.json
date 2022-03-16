@@ -30,7 +30,7 @@
     "@glimmer/component": "^1.0.4",
     "acorn": "^8.7.0",
     "active-model-adapter": "^3.0.1",
-    "autoprefixer": "^10.4.2",
+    "autoprefixer": "^10.4.3",
     "babel-eslint": "^10.1.0",
     "bootstrap-sass": "^3.4.1",
     "bootstrap-toggle": "^2.2.2",

@@ -84,7 +84,7 @@
     "pace-js": "^1.2.4",
     "postcss-scss": "^4.0.3",
     "precss": "^4.0.0",
-    "qunit": "^2.18.1",
+    "qunit": "^2.18.2",
     "qunit-dom": "^2.0.0",
     "twbs-pagination": "^1.4.2"
   },

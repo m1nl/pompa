@@ -33,6 +33,7 @@ module.exports = {
     'ember/no-component-lifecycle-hooks': 'off',
     'ember/require-tagless-components': 'off',
     'ember/no-get': ['error', { 'ignoreNestedPaths': true }],
+    'ember/ember-glimmer.link-to.positional-arguments': 'off',
   },
   overrides: [
     // node files

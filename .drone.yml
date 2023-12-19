@@ -1,20 +1,21 @@
 ---
 kind: pipeline
+type: kubernetes
 name: ci
 
 steps:
-- name: perform_tests
-  image: registry.nalewajski.pl/node-chrome
-  commands:
-  - npm install -g ember-cli@latest
-  - npm ci --no-audit
-  - cp config/environment.js.sample config/environment.js
-  - npm run lint:hbs
-  - npm run lint:js
-  - npm test ci
-
+  - name: perform_tests
+    image: registry.nalewajski.pl/node-chrome
+    commands:
+      - npm install -g ember-cli@latest
+      - npm ci --no-audit
+      - cp config/environment.js.sample config/environment.js
+      - npm run lint:hbs
+      - npm run lint:js
+      - npm test ci
 ---
 kind: pipeline
+type: kubernetes
 name: cd
 
 clone:
@@ -24,37 +25,37 @@ concurrency:
   limit: 1
 
 steps:
-- name: update_docker
-  image: docker:git
-  environment:
-    POMPA_DOCKER_DEPLOY_KEY:
-      from_secret: pompa_docker_deploy_key
-  commands:
-  - export SHORT_COMMIT="$(echo $DRONE_COMMIT | cut -c1-7)"
-  - mkdir -p ~/.ssh
-  - echo -ne "$POMPA_DOCKER_DEPLOY_KEY" > ~/.ssh/id_rsa
-  - ssh-keyscan -H github.com > ~/.ssh/known_hosts
-  - chmod 600 ~/.ssh/id_rsa ~/.ssh/known_hosts
-  - git clone git@github.com:m1nl/pompa-docker.git
-  - cd pompa-docker
-  - git config user.email "drone@nalewajski.pl"
-  - git config user.name "Drone CI"
-  - git submodule init -- facade/pompa
-  - git submodule update --checkout -- facade/pompa
-  - cd facade/pompa
-  - git checkout $DRONE_COMMIT
-  - cd ../..
-  - git add facade/pompa
-  - git commit --allow-empty -m "update pompa with $SHORT_COMMIT ($DRONE_COMMIT_MESSAGE) by $DRONE_COMMIT_AUTHOR"
-  - git push origin master
+  - name: update_docker
+    image: docker:git
+    environment:
+      POMPA_DOCKER_DEPLOY_KEY:
+        from_secret: pompa_docker_deploy_key
+    commands:
+      - export SHORT_COMMIT="$(echo $DRONE_COMMIT | cut -c1-7)"
+      - mkdir -p ~/.ssh
+      - echo -ne "$POMPA_DOCKER_DEPLOY_KEY" > ~/.ssh/id_rsa
+      - ssh-keyscan -H github.com > ~/.ssh/known_hosts
+      - chmod 600 ~/.ssh/id_rsa ~/.ssh/known_hosts
+      - git clone git@github.com:m1nl/pompa-docker.git
+      - cd pompa-docker
+      - git config user.email "drone@nalewajski.pl"
+      - git config user.name "Drone CI"
+      - git submodule init -- facade/pompa
+      - git submodule update --checkout -- facade/pompa
+      - cd facade/pompa
+      - git checkout $DRONE_COMMIT
+      - cd ../..
+      - git add facade/pompa
+      - git commit --allow-empty -m "update pompa with $SHORT_COMMIT ($DRONE_COMMIT_MESSAGE) by $DRONE_COMMIT_AUTHOR"
+      - git push origin master
 
 trigger:
   status:
-  - success
+    - success
   branch:
-  - master
+    - master
   event:
-  - push
+    - push
 
 depends_on:
-- ci
+  - ci

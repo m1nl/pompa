@@ -13,6 +13,9 @@ steps:
       - npm run lint:hbs
       - npm run lint:js
       - npm test ci
+
+image_pull_secrets:
+  - registry_secret
 ---
 kind: pipeline
 type: kubernetes

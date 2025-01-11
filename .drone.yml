@@ -7,7 +7,6 @@ steps:
   - name: perform_tests
     image: registry.nalewajski.pl/node-chrome
     commands:
-      - npm install -g ember-cli@latest
       - npm ci --no-audit
       - cp config/environment.js.sample config/environment.js
       - npm run lint:hbs

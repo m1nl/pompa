@@ -1,0 +1,56 @@
+diff --git a/node_modules/broccoli/dist/load_brocfile.js b/node_modules/broccoli/dist/load_brocfile.js
+index 6af31e5..13440e9 100644
+--- a/node_modules/broccoli/dist/load_brocfile.js
++++ b/node_modules/broccoli/dist/load_brocfile.js
+@@ -4,8 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
+ };
+ const path_1 = __importDefault(require("path"));
+ const findup_sync_1 = __importDefault(require("findup-sync"));
+-const esm_1 = __importDefault(require("esm"));
+-const esmRequire = esm_1.default(module);
+ /**
+  * Require a brocfile via either ESM or TypeScript
+  *
+@@ -14,28 +12,22 @@ const esmRequire = esm_1.default(module);
+  */
+ function requireBrocfile(brocfilePath) {
+     let brocfile;
+-    if (brocfilePath.match(/\.ts$/)) {
+-        try {
+-            require.resolve('ts-node');
+-        }
+-        catch (e) {
+-            throw new Error(`Cannot find module 'ts-node', please install`);
+-        }
+-        try {
+-            require.resolve('typescript');
+-        }
+-        catch (e) {
+-            throw new Error(`Cannot find module 'typescript', please install`);
+-        }
+-        // Register ts-node typescript compiler
+-        require('ts-node').register(); // eslint-disable-line node/no-unpublished-require
+-        // Load brocfile via ts-node
+-        brocfile = require(brocfilePath);
++    try {
++        require.resolve('ts-node');
+     }
+-    else {
+-        // Load brocfile via esm shim
+-        brocfile = esmRequire(brocfilePath);
++    catch (e) {
++        throw new Error(`Cannot find module 'ts-node', please install`);
++    }
++    try {
++        require.resolve('typescript');
++    }
++    catch (e) {
++        throw new Error(`Cannot find module 'typescript', please install`);
+     }
++    // Register ts-node typescript compiler
++    require('ts-node').register(); // eslint-disable-line node/no-unpublished-require
++    // Load brocfile via ts-node
++    brocfile = require(brocfilePath);
+     // ESM `export default X` is represented as module.exports = { default: X }
+     // eslint-disable-next-line no-prototype-builtins
+     if (brocfile !== null && typeof brocfile === 'object' && brocfile.hasOwnProperty('default')) {

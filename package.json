@@ -16,15 +16,16 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
-    "test": "ember test"
+    "test": "ember test",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.19.1",
-    "@csstools/postcss-sass": "^5.0.1",
+    "@babel/eslint-parser": "^7.26.5",
+    "@csstools/postcss-sass": "^5.1.1",
     "@ember/jquery": "^2.0.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.9.3",
-    "@fortawesome/ember-fontawesome": "^0.4.1",
+    "@fortawesome/ember-fontawesome": "0.4.2",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@glimmer/component": "^1.1.2",
@@ -82,10 +83,11 @@
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.46",
     "pace-js": "^1.2.4",
+    "patch-package": "^8.0.0",
     "postcss-scss": "^4.0.9",
     "precss": "^4.0.0",
-    "qunit": "^2.19.4",
-    "qunit-dom": "^2.0.0",
+    "qunit": "^2.23.1",
+    "qunit-dom": "^3.4.0",
     "twbs-pagination": "^1.4.2"
   },
   "engines": {

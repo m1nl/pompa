@@ -1,0 +1,104 @@
+diff --git a/node_modules/@ember-data/private-build-infra/src/deprecations.js b/node_modules/@ember-data/private-build-infra/src/deprecations.js
+index 039de7a..d9dceb0 100644
+--- a/node_modules/@ember-data/private-build-infra/src/deprecations.js
++++ b/node_modules/@ember-data/private-build-infra/src/deprecations.js
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-const requireEsm = require('esm')(module, { cache: false });
++const requireModule = require('./utilities/require-module');
+ const semver = require('semver');
+ 
+ function deprecationIsResolved(deprecatedSince, compatVersion) {
+@@ -8,7 +8,7 @@ function deprecationIsResolved(deprecatedSince, compatVersion) {
+ }
+ 
+ function getDeprecations(compatVersion, isProd) {
+-  const { default: CURRENT_DEPRECATIONS } = requireEsm('@ember-data/private-build-infra/addon/current-deprecations.ts');
++  const { default: CURRENT_DEPRECATIONS } = requireModule('@ember-data/private-build-infra/addon/current-deprecations.ts');
+   const flags = {};
+ 
+   Object.keys(CURRENT_DEPRECATIONS).forEach((flag) => {
+diff --git a/node_modules/@ember-data/private-build-infra/src/features.js b/node_modules/@ember-data/private-build-infra/src/features.js
+index b73e4ea..dfdcdde 100644
+--- a/node_modules/@ember-data/private-build-infra/src/features.js
++++ b/node_modules/@ember-data/private-build-infra/src/features.js
+@@ -1,13 +1,13 @@
+ 'use strict';
+ 
+-const requireEsm = require('esm')(module, { cache: false });
++const requireModule = require('./utilities/require-module');
+ 
+ const version = require('../package.json').version;
+ 
+ const isCanary = version.includes('alpha');
+ 
+ function getFeatures(isProd) {
+-  const { default: features } = requireEsm('@ember-data/canary-features/addon/default-features.ts');
++  const { default: features } = requireModule('@ember-data/canary-features/addon/default-features.ts');
+ 
+   if (!isCanary) {
+     // disable all features with a current value of `null`
+diff --git a/node_modules/@ember-data/private-build-infra/src/packages.js b/node_modules/@ember-data/private-build-infra/src/packages.js
+index 8ca8299..96bcffc 100644
+--- a/node_modules/@ember-data/private-build-infra/src/packages.js
++++ b/node_modules/@ember-data/private-build-infra/src/packages.js
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-const requireEsm = require('esm')(module, { cache: false });
++const requireModule = require('./utilities/require-module');
+ 
+ function detectPackage(dep, packageName, seen) {
+   let isFirst = !seen;
+@@ -34,7 +34,7 @@ function detectPackage(dep, packageName, seen) {
+ }
+ 
+ function getPackages(app) {
+-  const { default: POSSIBLE_PACKAGES } = requireEsm('@ember-data/private-build-infra/addon/available-packages.ts');
++  const { default: POSSIBLE_PACKAGES } = requireModule('@ember-data/private-build-infra/addon/available-packages.ts');
+   const flags = {};
+   const excludeDebugInProduction =
+     app && app.options && app.options.emberData && app.options.emberData.includeDataAdapterInProduction === false;
+diff --git a/node_modules/@ember-data/private-build-infra/src/utilities/require-module.js b/node_modules/@ember-data/private-build-infra/src/utilities/require-module.js
+new file mode 100644
+index 0000000..295fb36
+--- /dev/null
++++ b/node_modules/@ember-data/private-build-infra/src/utilities/require-module.js
+@@ -0,0 +1,36 @@
++const fs = require('fs');
++const path = require('path');
++
++const PGK_ROOT = path.join(__dirname, '../../');
++
++module.exports = function requireModule(modulePath) {
++  if (modulePath.startsWith('@ember-data/private-build-infra/')) {
++    modulePath = modulePath.replace('@ember-data/private-build-infra/', PGK_ROOT);
++  } else if (modulePath.startsWith('@ember-data/private-build-infra')) {
++    modulePath = modulePath.replace('@ember-data/private-build-infra', PGK_ROOT);
++  }
++  const path = require.resolve(modulePath);
++  const fileContents = fs.readFileSync(path, { encoding: 'utf8' });
++  let newContents;
++
++  if (fileContents.includes('export default')) {
++    newContents = fileContents.replace('export default ', 'return ');
++  } else {
++    newContents = replaceAll(fileContents, 'export const ', 'module.exports.');
++    newContents = `const module = { exports: {} };\n${newContents}\nreturn module.exports;`;
++  }
++  try {
++    const func = new Function(newContents);
++    return { default: func() };
++  } catch (e) {
++    // eslint-disable-next-line no-console
++    console.log(e);
++  }
++};
++
++function replaceAll(str, pattern, replacement) {
++  if (str.replaceAll) {
++    return str.replaceAll(pattern, replacement);
++  }
++  return str.replace(new RegExp(pattern, 'g'), replacement);
++}
